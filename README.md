@@ -1,5 +1,5 @@
 # react-ele
-react仿饿了么app    
+react仿饿了么app    
 技术：`react`+`react-router`+`redux`+`create-react-app`+`智能组件`+`木偶组件`    
 ******************************************************
 ### 一、准备阶段：    
