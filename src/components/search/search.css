@@ -1,0 +1,26 @@
+.search{
+	padding: 15px 28px;
+	background-image: linear-gradient(90deg,#0af,#0085ff);
+	.search_content{
+		display: flex;
+		height: 72px;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		background: #fff;
+		color: #000;
+	}
+	.search_placeholder{
+		font-family: simsun;
+		font-size: 24px;
+		font-weight: bold;
+		color: #666;
+	}
+	.search_icon{
+		width: 26px;
+		height: 26px;
+		margin-right: 8px; 
+		background: url('./search.png') no-repeat center;
+		background-size: cover; 
+	}
+}

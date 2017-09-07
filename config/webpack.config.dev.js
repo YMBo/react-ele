@@ -186,17 +186,9 @@ module.exports = {
                       ],
                       flexbox: 'no-2009',
                     }),
+                      px2rem({remUnit: 75})
                   ],
                 },
-              },
-              {
-                 loader: require.resolve('postcss-loader'), 
-                 options:{
-                  ident:'postcss',
-                  plugins:()=>[
-                    px2rem({remUnit: 37.5})
-                  ]
-                 }
               },
               {
                   loader: require.resolve('less-loader')

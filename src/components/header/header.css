@@ -1,6 +1,55 @@
-
-	.mm{
-		width:20px;
-		height: 20px;
-		background:#000;
+.index_header{
+	padding: 20px 20px 0;
+	color: #fff;
+	background-image: linear-gradient(90deg,#0af,#0085ff);
+	.header_title{
+		display: flex;
+		justify-content: space-between;
+		height: 69px;
+		align-items: center;
 	}
+}
+.index-address{
+	width: 60%;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	.address_icon{
+		width: 30px;
+		height: 35px;
+		background: url('./address.png') no-repeat center; 
+		background-size: cover;
+	}
+	.sj{
+		border-style: solid;
+		border-width: 6px;
+		border-color: transparent;
+		border-top-color: #fff;
+
+	}
+}
+.index-word{
+	margin: 0 10px;
+	font-size: .48rem;
+	max-width: 80%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.weather{
+	display: flex;
+	text-align: right;
+	align-items: center;
+	.weather_today{
+		font-size: 24px;
+		transform: scale(0.8);
+	}
+	.weather_num{
+		font-size: 28px; 
+	}
+	.weather-icon{
+		margin-left: 5px;
+		width: 55px;
+		height: 55px;
+	}
+}

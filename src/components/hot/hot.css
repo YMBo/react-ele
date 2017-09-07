@@ -1,0 +1,21 @@
+.hot{
+	padding: 4px 30px 28px;
+	background-image: linear-gradient(90deg,#0af,#0085ff);
+	::-webkit-scrollbar {
+		display: none;
+	}
+	.list{
+		width:100%;
+		color: #fff;
+		white-space: nowrap;
+		overflow-x: auto;
+		font-size: 0;
+	}
+	.list a{
+		color: #fff;
+		font-size: 24px;
+	}
+	.list a:not(:last-child){
+		margin-right: 30px;
+	}
+}

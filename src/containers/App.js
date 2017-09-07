@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import {hot_search} from '../data/hot_search.js'
-import {shuffle} from '../data/shuffle.js'
-import Header from '../components/header/header.js'
+import Headersmart from './header.js'
+import Search from '../components/search/search.js'
+import Hot from './hot.js'
 
 class App extends Component{
 	render(){
 		return(
 			<div className='wrapper'>
-				<Header/>
+				<Headersmart/>
+				<Search/>
+				<Hot/>
 			</div>
 		)
 	}
