@@ -10,13 +10,15 @@ class Hot extends Component{
 	}
 	componentWillMount(){
 		if(this.props.hot_data){
-			this.state.listData=this.props.hot_data;
+			this.setState({
+				listData:[...this.props.hot_data]
+			})
 		}
 	}
 	render(){
 		let currentListData=this.state.listData;
 		let listData=currentListData.map((value,index)=>{
-			return <a href="javascript:;" key={index}>{value.word}</a>
+			return <a href="/" key={index}>{value.word}</a>
 		})
 		return(
 			<div className='hot'>

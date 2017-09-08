@@ -115,7 +115,7 @@ export const address={
 
 /*banner*/
 
-export const banner=[
+export const bannerData=[
     {
         "entries": [
             {

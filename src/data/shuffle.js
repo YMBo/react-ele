@@ -7,3 +7,15 @@ export const shuffle=(arr)=>{
 	}
 	return arr;
 }
+
+/*切割数组*/
+// arr 数组
+// len 每一份长度
+export const splitArr=(arr,len)=>{
+	let arr_len=arr.length;
+	let resultArr=[];
+	for(let i=0;i<arr_len;i+=len){
+		resultArr.push(arr.slice(i,i+len))
+	}
+	return resultArr;
+}
