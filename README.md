@@ -1,6 +1,11 @@
 # react-ele
 react仿饿了么app    
-技术：`react`+`react-router`+`redux`+`create-react-app`+`智能组件`+`木偶组件`    
+技术：`react`+`react-router`+`redux`+`create-react-app`+`智能组件`+`木偶组件`    
+```markdown
+git clone git@github.com:YMBo/react-ele.git    
+npm install    
+npm start    
+```
 ******************************************************
 ### 一、准备阶段：    
 因为用的是`create-react-app`创建的项目，在项目中用到了less、rem，所以添加在`webpack`中添加这两个功能    
