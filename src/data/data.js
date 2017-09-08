@@ -348,7 +348,7 @@ export const bannerData=[
                 "name": "麻辣烫",
                 "name_color": "",
                 "title_image_hash": ""
-            }
+            },
         ],
         "group_name": "",
         "group_type": 1,
