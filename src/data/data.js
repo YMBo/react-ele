@@ -357,5 +357,5 @@ export const bannerData=[
     }
 ]
 
-/*z主内容*/
-/*const https://mainsite-restapi.ele.me/shopping/restaurants?latitude=39.9846542&longitude=116.4566272&offset=10&limit=1&extras[]=activities&terminal=h5;*/
+/*主内容*/
+/*https://restapi.ele.me/shopping/v2/entries?latitude=39.98592&longitude=116.45852&templates[]=main_template*/

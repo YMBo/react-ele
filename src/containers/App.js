@@ -3,6 +3,8 @@ import Headersmart from './header.js'
 import Search from '../components/search/search.js'
 import Hotsmart from './hot.js'
 import Bannersmart from './banner.js'
+import H3title from '../components/title/h3title.js'
+import ListItem from '../components/listItem/listItem'
 
 class App extends Component{
 	render(){
@@ -12,6 +14,8 @@ class App extends Component{
 				<Search/>
 				<Hotsmart/>
 				<Bannersmart/>
+				<H3title/>
+				<ListItem/>
 			</div>
 		)
 	}

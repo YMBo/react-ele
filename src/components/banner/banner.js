@@ -81,7 +81,7 @@ class Banner extends Component{
 			}
 		}
 		return (
-			<div>
+			<div className='banner'>
 				<ReactSwipe className="carousel" ref={(reactSwipe)=>{this.reactSwipe=reactSwipe}} swipeOptions={opt}>
 				{this.state.list}
 				</ReactSwipe>

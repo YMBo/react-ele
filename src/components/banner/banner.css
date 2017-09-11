@@ -1,3 +1,4 @@
+.banner{position: relative;}
 .banner_list{
 	height: 354px;
 	background: #fff;
@@ -29,14 +30,18 @@
 	}
 }
 .baner_dd{
+	position: absolute;
+	left: 50%;
+	bottom: 10px;
+	transform: translateX(-50%);
 	width: 100%;
 	text-align: center;
 	font-size: 0;
 	li{
 		display: inline-block;
-		width: 10px;
-		height: 10px;
-		margin: 0 10px;
+		width: 8px;
+		height: 8px;
+		margin: 0 5px;
 		background: #000;
 		opacity: .2;
 		border-radius: 50%;

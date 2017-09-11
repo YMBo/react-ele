@@ -1,0 +1,137 @@
+.shoplist_item{
+	display: flex;
+	position: relative;
+	justify-content: space-between;
+	background-color: #fff;
+	color: #666;
+	list-style: none;
+	font-size: .10px;
+	.shoplist_img{
+		padding: 30px 20px;
+	}
+	.shoplist_logo{
+		width:130px;
+		height: 130px;
+		img{
+			max-width: 100%;
+			width: 100%;
+			height: 100%;
+			border-radius: 3px;
+		}
+	}
+}
+.shoplist_main{
+	display: flex;
+	width: 580px;
+	flex-direction: column;
+	padding: 30px 20px 30px 0;
+	user-select:none;
+	
+	.show_line2{
+		margin-top: 15px;
+	}
+	.line{
+		width: 100%;
+		margin: 15px 0;
+		height: 1px;
+		border-bottom: 1px solid #f5efef;
+	}
+	.show_money{
+		transform: scale(.9);
+		span:nth-of-type(2) {
+		    overflow: hidden;
+		    max-width: 2.666667rem;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		}
+		span:nth-of-type(2)::before{
+				content: "|";
+				margin:0 3px;
+				color: #ddd;
+		}
+
+	}
+	.show_line{
+		display: flex;
+		justify-content: space-between;
+		font-size: 10px;
+		h3{
+			display: flex;
+			align-items: center;
+			color: #333;
+			font-weight: 700;
+			max-width: 375px;
+			height: 32px;
+			font-size: 30px;
+			align-items: center;
+			span{
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			::before{
+				content: "\54C1\724C";
+				margin-right: 10px;
+				padding: 0 5px;
+				width: 44px;
+				height: 30px;
+				line-height: 30px;
+				border-radius: 3px;
+				color: #6f3f15;
+				background-image: linear-gradient(-139deg,#fff100,#ffe339);
+				text-align: center;
+				white-space: nowrap;
+				font-weight: 700;
+				font-size: 10px;
+			}
+		}
+		.show_time{
+			transform: scale(.9);
+			span:nth-of-type(2)::before{
+					content: "|";
+					margin:0 3px;
+					color: #ddd;
+			}
+		}
+		.show_kd{
+			display: flex;
+			width: 102px;
+			height: 30px;
+			padding: 0 1px;
+			border-radius: 4px;
+			line-height: 24px;
+			border: 1px solid #44a5ff;
+			background-image: linear-gradient(45deg,#0085ff,#0af);
+			span{
+				color: #fff;
+				font-size: 10px;
+				text-align: center;
+				transform: scale(0.8);
+			}
+		}
+		.show_rateWrap{
+			display: flex;
+			align-items: center;
+			transform: scale(.9);
+			.show_num{
+				font-size: 10px;
+				margin-left:8px;
+			}
+		}
+	}
+	.show_supportWrap{
+		display: flex;
+		li{
+			font-size: 10px;
+			height: 36px;
+			width: 36px;
+			border-radius: 4px;
+			color: #999;
+			border:1px solid #ddd;
+			margin-left: 4px;
+			line-height: 36px;
+			text-align: center;
+			transform: scale(0.8);
+		}
+	}
+}
