@@ -23,5 +23,6 @@ banner区域：
 * 比如图片的hash值为'asdfghh'，需要的图片地址需要进行格式上的转变为'a/sd/fghh',不明白为啥饿了么要这么做，直接用不可以么，我实现的方法是字符串转换为数组，进行插入，转换为字符串，详情看`src/components/banner/banner.js`文件，数据格式请看  `src/data/data.js`
 * 轮播图下面的控制按钮，我是用操作dom对象来实现的，因为用这几个小按钮是我循环出来的，`this.state` 用不了,希望能找到更好的办法    
 #### 3.首页预览    
-![首页预览](https://github.com/YMBo/react-ele/blob/master/preview/1.png)
+![首页预览](https://github.com/YMBo/react-ele/blob/master/preview/1.png)    
+其中深红色部分为随机打乱数据并展现，红色部分为模仿请求来的数据进行操作并展现，现在还没有下拉刷新和无限滚动
 
