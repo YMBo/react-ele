@@ -19,6 +19,26 @@
 			border-radius: 3px;
 		}
 	}
+	.show_new_logo{
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 50;
+		width: 64px;
+		height: 64px;
+		background-image: -webkit-linear-gradient(315deg,#26ce61,#26ce61 50%,transparent 0);
+		background-image: linear-gradient(135deg,#26ce61,#26ce61 50%,transparent 0);
+		font-size: 12px;
+		span{
+			position: absolute;
+			top: 3px;
+			left: 0px;
+			display: block;
+			color: #fff;
+			font-weight: 700;
+			transform: rotate(-45deg) scale(.8);
+		}
+	}
 }
 .shoplist_main{
 	display: flex;
@@ -69,7 +89,9 @@
 				white-space: nowrap;
 				text-overflow: ellipsis;
 			}
-			::before{
+		}
+		.is_premium{
+			&::before{
 				content: "\54C1\724C";
 				margin-right: 10px;
 				padding: 0 5px;

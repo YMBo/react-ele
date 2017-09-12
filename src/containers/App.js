@@ -4,7 +4,7 @@ import Search from '../components/search/search.js'
 import Hotsmart from './hot.js'
 import Bannersmart from './banner.js'
 import H3title from '../components/title/h3title.js'
-import ListItem from '../components/listItem/listItem'
+import ListItem from './listItem'
 
 class App extends Component{
 	render(){

@@ -6,7 +6,18 @@ class Active extends Component{
 		super()
 		this.handleShowMore=this.handleShowMore.bind(this)
 		this.state={
-			hide:true
+			hide:true,
+			is_active:false,
+			num:0
+		}
+	}
+	componentWillMount(){
+		if(this.props.data){
+			let num=this.props.data.length;
+			this.setState({
+				is_active:true,
+				num
+			})
 		}
 	}
 	handleShowMore(event){
@@ -15,32 +26,18 @@ class Active extends Component{
 		})
 	}
 	render(){
+		let activitiesDOM=this.props.data.map((value,index)=>
+			<div className='active_item' key={index} style={index>1?this.state.hide?{display:'none'}:{}:null}>
+				<i className='active_logo' style={{color:'rgb(255, 255, 255)',backgroundColor:`#${value.icon_color}`}}>{value.icon_name}</i>
+				<span>{value.description}</span>
+			</div>);
 		return(
 			<div>
 				<div className='active_itemAll'>
-					<div className='active_item'>
-						<i className='active_logo' style={{background:'green',color:'#fff'}}>首</i>
-						<span>新用户下单立减17.0元</span>
-					</div>
-					<div className='active_item'>
-						<i className='active_logo' style={{background:'green',color:'#fff'}}>首</i>
-						<span>新用户下单立减17.0元</span>
-					</div>
-					<div className='active_item' style={this.state.hide?{display:'none'}:{}}>
-						<i className='active_logo' style={{background:'green',color:'#fff'}}>首</i>
-						<span>新用户下单立减17.0元</span>
-					</div>
-					<div className='active_item' style={this.state.hide?{display:'none'}:{}}>
-						<i className='active_logo' style={{background:'green',color:'#fff'}}>首</i>
-						<span>新用户下单立减17.0元</span>
-					</div>
-					<div className='active_item' style={this.state.hide?{display:'none'}:{}}>
-						<i className='active_logo' style={{background:'green',color:'#fff'}}>首</i>
-						<span>新用户下单立减17.0元</span>
-					</div>
+					{activitiesDOM}
 				</div>
 				<div className={`show_more ${this.state.hide?'':'on'}`} onClick={this.handleShowMore}>
-					<span>6个活动</span>
+					<span>{this.state.num}个活动</span>
 				</div>
 			</div>
 		)
