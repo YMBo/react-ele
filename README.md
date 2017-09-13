@@ -27,4 +27,6 @@ banner区域：
 ![首页预览](https://github.com/YMBo/react-ele/blob/master/preview/1.png)    
 其中深红色部分为随机打乱数据并展现，红色部分为模仿请求来的数据进行操作并展现，现在还没有下拉刷新和无限滚动    
 #### 4.搜索框采用position：fixed与position：sticky结合的方式，达到顶部吸附功能    
-![搜索框吸附](https://github.com/YMBo/react-ele/blob/master/preview/2.gif)    
+![搜索框吸附](https://github.com/YMBo/react-ele/blob/master/preview/2.gif)    
+#### 5.回到顶部    
+回到顶部按钮是判断滚动高度来计算的，采用了`函数节流`的模式，提高效率
