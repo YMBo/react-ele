@@ -1,0 +1,12 @@
+.returnTop{
+	width: 85px;
+	height: 85px;
+	position: fixed;
+	right: .4rem;
+	bottom: 2rem;
+	background: #fff;
+	border-radius: 50%;
+	background: #fff;
+	border:1PX solid #999;
+	transition: opacity .8s;
+}
