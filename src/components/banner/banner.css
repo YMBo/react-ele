@@ -26,7 +26,7 @@
 		display: block;
 		margin-top: 10px;
 		color: #666;
-		font-size: 12px;
+		font-size: 24px;
 	}
 }
 .baner_dd{
@@ -39,8 +39,8 @@
 	font-size: 0;
 	li{
 		display: inline-block;
-		width: 8px;
-		height: 8px;
+		width: 8PX;
+		height: 8PX;
 		margin: 0 5px;
 		background: #000;
 		opacity: .2;

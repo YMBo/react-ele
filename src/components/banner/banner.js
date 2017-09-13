@@ -33,7 +33,6 @@ class Banner extends Component{
 		})
 	}
 	render(){
-		console.log(this.state.actualSum)
 		/*先分成几个数组,也就是几个div盒子*/
 		let bannerDiv=splitArr(this.props.data,8);
 		/*控制器dd*/

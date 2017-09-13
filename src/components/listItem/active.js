@@ -36,7 +36,7 @@ class Active extends Component{
 				<div className='active_itemAll'>
 					{activitiesDOM}
 				</div>
-				<div className={`show_more ${this.state.hide?'':'on'}`} onClick={this.handleShowMore}>
+				<div className={`show_more ${this.state.hide?'':'on'} ${this.state.num<=2?'':'active_num'}`} onClick={this.handleShowMore}>
 					<span>{this.state.num}个活动</span>
 				</div>
 			</div>

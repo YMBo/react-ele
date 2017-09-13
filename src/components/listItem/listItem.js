@@ -32,7 +32,6 @@ class ListItem extends Component{
 		}
 	}
 	componentWillMount(){
-		console.log(this.props.data)
 		/*蜂鸟*/
 		if(this.props.data.delivery_mode){
 			this.setState({
@@ -103,7 +102,7 @@ class ListItem extends Component{
 							</div>:null}
 							
 						</section>
-						<section className="show_line">
+						<section className="show_line show_line2">
 							<div className='show_money'>
 								<span>¥{this.state.float_minimum_order_amount}起送</span>
 								<span>配送费¥{this.state.float_delivery_fee}</span>

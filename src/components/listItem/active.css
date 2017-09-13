@@ -6,7 +6,7 @@
 	display: flex;
 	align-items: center;
 	line-height:36px;
-	font-size: 12px;
+	font-size: 20px;
 	span{
 		flex: 1;
 		overflow: hidden;
@@ -19,7 +19,7 @@
 		height: 28px;
 		align-items: center;
 		justify-content: center;
-		font-size: 10px;
+		font-size: 20px;
 		margin-right: 12px;
 		font-style: normal;
 		box-sizing: border-box;
@@ -37,16 +37,7 @@
 	.active_item:not(:first-child){
 		margin-top: 2.5px;
 	}
-	.show_more{
-		position: absolute;
-		right: 0;
-		top: 0;
-		padding: 3px 20px 7.5px 0;
-		height: 100%;
-		color: #999;
-		text-align: right;
-		font-size: 10px;
-		line-height: 1;
+	.active_num{
 		&::after{
 			content:'';
 			position: absolute;
@@ -58,6 +49,17 @@
 			transform-origin: center;
 			transition: all .3s ease-in-out;
 		}
+	}
+	.show_more{
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding: 3px 20px 7.5px 0;
+		height: 100%;
+		color: #999;
+		text-align: right;
+		font-size: 20px;
+		line-height: 1;
 		span{
 			display: inline-block;
 			transform: scale(0.85);
