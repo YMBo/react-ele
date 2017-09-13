@@ -24,6 +24,7 @@ banner区域：
 * 轮播图下面的控制按钮，我是用操作dom对象来实现的，因为用这几个小按钮是我循环出来的，`this.state` 用不了,希望能找到更好的办法 。     
   （这个今天找到了解决办法，上面说到按钮是循环出来的，是在`componentDidMount`生命周期操作的，然后我将循环后的数组保存在this.state中，然后render的时候就不行了，我把循环的过程放到render中，this.state控制按钮行为的操作是成功的，所以`如果需要循环数据并展现在页面中时，要在render中操作`）
 #### 3.首页预览    
-![首页预览](https://github.com/YMBo/react-ele/blob/master/preview/1.png)    
-其中深红色部分为随机打乱数据并展现，红色部分为模仿请求来的数据进行操作并展现，现在还没有下拉刷新和无限滚动
-
+![首页预览](https://github.com/YMBo/react-ele/blob/master/preview/1.png)    
+其中深红色部分为随机打乱数据并展现，红色部分为模仿请求来的数据进行操作并展现，现在还没有下拉刷新和无限滚动    
+#### 4.搜索框采用position：fixed与position：sticky结合的方式，达到顶部吸附功能    
+![搜索框吸附](https://github.com/YMBo/react-ele/blob/master/preview/2.gif)    
