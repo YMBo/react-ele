@@ -10,9 +10,13 @@ class ReturnTop extends Component{
 		}
 	}
 	componentDidMount(){
-		document.addEventListener('scroll',()=>{
-				this._throttle(this.resizeTop,this);
-		})
+		document.addEventListener('scroll',this._move.bind(this))
+	}
+	componentWillUnmount(){
+		document.removeEventListener('scroll',this._move.bind(this))
+	}
+	_move(){
+		this._throttle(this.resizeTop,this);
 	}
 	handleGoBack(){
 		document.body.scrollTop =0;

@@ -62,6 +62,7 @@ class ListItem extends Component{
 			supportsDOM:supportsDOM
 		})
 	}
+	
 	/*图片格式化*/
 	_formatImg(){
 		let img=this.props.data.image_path

@@ -161,3 +161,20 @@
 		}
 	}
 }
+.noMore,.loadMore{
+	display: flex;
+	justify-content: center;
+	align-items:center;
+	min-height: 1.066667rem;
+	background-color: #fff;
+	color: #555;
+	font-size: .346667rem;
+}
+@keyframes loadding{
+	from{transform:rotate(0)}
+	to{transform:rotate(360deg);}
+}
+.loadMore svg{
+	margin-right: 10px;
+	animation: loadding .8s linear infinite;
+}
