@@ -1,4 +1,7 @@
 .returnTop{
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 85px;
 	height: 85px;
 	position: fixed;
@@ -7,6 +10,11 @@
 	background: #fff;
 	border-radius: 50%;
 	background: #fff;
-	border:1PX solid #999;
+	border:1PX solid #eee;
 	transition: opacity .8s;
+	svg{
+		width: .533333rem;
+		height: .533333rem;
+		fill: #999;
+	}
 }

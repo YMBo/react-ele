@@ -130,11 +130,21 @@
 		.show_rateWrap{
 			display: flex;
 			align-items: center;
-			transform: scale(.9);
 			.show_num{
+				transform: scale(.9);
 				font-size: 20px;
 				margin-left:8px;
 			}
+			.show_star{
+				overflow: hidden;
+				    svg{
+				    	width: 1.493333rem;
+				    	height: .266667rem;
+				    	display: inline-block;
+				    	vertical-align: middle;
+				    }
+			}
+
 		}
 	}
 	.show_supportWrap{
