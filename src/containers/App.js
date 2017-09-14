@@ -6,6 +6,7 @@ import Bannersmart from './banner.js'
 import H3title from '../components/title/h3title.js'
 import ListItem from './listItem'
 import ReturnTop from '../components/returnTop/returnTop.js'
+import Footer from '../components/footer/footer.js'
 
 class App extends Component{
 	render(){
@@ -18,6 +19,7 @@ class App extends Component{
 				<H3title/>
 				<ListItem/>
 				<ReturnTop/>
+				<Footer/>
 			</div>
 		)
 	}

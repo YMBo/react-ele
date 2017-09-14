@@ -1,0 +1,35 @@
+.index_footer{
+	height: 120px;
+	.index_footer_con{
+		position:fixed;
+		left:0;
+		right: 0;
+		bottom:0;
+		z-index: 999;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background: #fff;
+		height: 100px;
+		box-shadow: 0 -1PX 1PX rgba(0, 0, 0, 0.1);
+		font-size: 0;
+	}
+	.index_footer_a{
+		flex:1;
+		text-align: center;
+	}
+	.index_footer_icon{
+		width: 40px;
+		height: 40px;
+	}
+	.index_footer_word{
+		display: block;
+		font-size: 12PX;
+		color: #666;
+		margin-top: 1PX;
+		transform: scale(.9);
+	}
+	.current_word{
+		color: #0089dc;
+	}
+}
