@@ -29,4 +29,7 @@ banner区域：
 #### 4.搜索框采用position：fixed与position：sticky结合的方式，达到顶部吸附功能    
 ![搜索框吸附](https://github.com/YMBo/react-ele/blob/master/preview/2.gif)    
 #### 5.回到顶部    
-回到顶部按钮是判断滚动高度来计算的，采用了`函数节流`的模式，提高效率
+回到顶部按钮是判断滚动高度来计算的，采用了`函数节流`的模式，提高效率    
+#### 6.下拉加载更多功能    
+由于数据都是本地的，所以利用`setTimeout`模拟网络请求延迟，如果所示:    
+![加载更多](https://github.com/YMBo/react-ele/blob/master/preview/3.gif)    
