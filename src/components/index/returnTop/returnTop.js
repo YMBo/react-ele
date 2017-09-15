@@ -24,13 +24,13 @@ class ReturnTop extends Component{
 	resizeTop(){
 		if(window.scrollY>500){
 			this.setState({
-				dis:false
+				dis:false,
 			});
 			setTimeout(()=>{
 				this.setState({
 					opa:false
 				})
-			})
+			},100)
 		}else{
 			this.setState({
 				opa:true

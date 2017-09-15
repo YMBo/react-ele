@@ -37,19 +37,6 @@
 	.active_item:not(:first-child){
 		margin-top: 2.5px;
 	}
-	.active_num{
-		&::after{
-			content:'';
-			position: absolute;
-			border-style: solid;
-			border-width: 8px;
-			border-color: transparent;
-			border-top-color: #999;
-			transform: translate(5px,10px);
-			transform-origin: center;
-			transition: all .3s ease-in-out;
-		}
-	}
 	.show_more{
 		position: absolute;
 		right: 0;
@@ -63,6 +50,25 @@
 		span{
 			display: inline-block;
 			transform: scale(0.85);
+		}
+		.show_num{
+			display: flex;
+			align-items: center;
+		}
+		svg{
+			width: .173333rem;
+			height: .173333rem;
+			opacity: .9;
+			-webkit-transition: all .3s ease-in-out;
+			transition: all .3s ease-in-out;
+			-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
+			fill: currentColor;
+			will-change: transform;
+			transition: all .3s ease-in-out; 
+		}
+		.nowSvg{
+			transform: rotate(180deg);
 		}
 	}
 	.on {

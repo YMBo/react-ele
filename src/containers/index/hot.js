@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
-import { hot_data } from '../data/data.js'
-import {shuffle} from '../data/shuffle.js'
-import Hot from '../components/hot/hot.js'
+import { hot_data } from '../../data/data.js'
+import {shuffle} from '../../data/shuffle.js'
+import Hot from '../../components/index/hot/hot.js'
 
 class Hotsmart extends Component{
 	constructor(){

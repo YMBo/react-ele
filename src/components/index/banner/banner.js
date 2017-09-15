@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import ReactSwipe from 'react-swipe';
-import {splitArr} from '../../data/shuffle.js'
+import {splitArr} from '../../../data/shuffle.js'
 import './banner.css';
 
 class Banner extends Component{

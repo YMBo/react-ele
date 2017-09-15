@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
-import Banner from '../components/banner/banner.js'
-import { bannerData } from '../data/data.js'
+import Banner from '../../components/index/banner/banner.js'
+import { bannerData } from '../../data/data.js'
 
 class Bannersmart extends Component{
 	constructor(){

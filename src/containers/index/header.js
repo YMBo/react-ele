@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
-import Header from '../components/header/header.js'
-import { weather,address } from '../data/data.js'
+import Header from '../../components/index/header/header.js'
+import { weather,address } from '../../data/data.js'
 
 class Headersmart extends Component{
 	constructor(){

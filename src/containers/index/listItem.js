@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
-import { body } from '../data/data.js'
-import ListItem from '../components/listItem/listItem.js'
+import { body } from '../../data/data.js'
+import ListItem from '../../components/index/listItem/listItem.js'
 
 class ListItemsmart extends Component{
 	constructor(){
@@ -28,10 +28,10 @@ class ListItemsmart extends Component{
 	_more(){
 		/**/
 		if(this.flag){return}
+		if(this.state.noMore){return;}
 		if(window.document.body.offsetHeight-document.body.scrollTop<window.screen.height+200){
 			/*正常情况下这应该是一个网络请求*/
 			this.flag=true;
-			console.log(this.state.page+1)
 			setTimeout(()=>{
 				if(body[this.state.page+1]){
 					this.setState({
