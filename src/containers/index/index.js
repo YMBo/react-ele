@@ -6,7 +6,6 @@ import Bannersmart from './banner.js'
 import H3title from '../../components/index/title/h3title.js'
 import ListItem from './listItem'
 import ReturnTop from '../../components/index/returnTop/returnTop.js'
-import Footer from '../../components/index/footer/footer.js'
 
 class Index extends Component{
 	render(){
@@ -19,7 +18,6 @@ class Index extends Component{
 				<H3title/>
 				<ListItem/>
 				<ReturnTop/>
-				<Footer/>
 			</div>
 		)
 	}

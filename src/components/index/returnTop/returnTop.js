@@ -8,12 +8,15 @@ class ReturnTop extends Component{
 			opa:true,
 			dis:true
 		}
+		this._move=this._move.bind(this)
 	}
 	componentDidMount(){
-		document.addEventListener('scroll',this._move.bind(this))
+		this.isUnmount=false;
+		document.addEventListener('scroll',this._move)
 	}
 	componentWillUnmount(){
-		document.removeEventListener('scroll',this._move.bind(this))
+		this.isUnmount=true;
+		document.removeEventListener('scroll',this._move)
 	}
 	_move(){
 		this._throttle(this.resizeTop,this);
@@ -27,6 +30,7 @@ class ReturnTop extends Component{
 				dis:false,
 			});
 			setTimeout(()=>{
+			if(this.isUnmount){return;}
 				this.setState({
 					opa:false
 				})
@@ -36,6 +40,7 @@ class ReturnTop extends Component{
 				opa:true
 			});
 			setTimeout(()=>{
+			if(this.isUnmount){return;}
 				this.setState({
 					dis:true
 				})

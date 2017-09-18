@@ -18,9 +18,11 @@ class ListItemsmart extends Component{
 		})
 	}
 	componentDidMount(){
+		this.isUnmount=false;
 		document.addEventListener('scroll',this._more.bind(this))
 	}
 	componentWillUnmount(){
+		this.isUnmount=true;
 		document.removeEventListener('scroll',this._more.bind(this))
 	}
 	/*加载更多*/
@@ -33,6 +35,8 @@ class ListItemsmart extends Component{
 			/*正常情况下这应该是一个网络请求*/
 			this.flag=true;
 			setTimeout(()=>{
+				/*如果已经销毁*/
+				if(this.isUnmount){return;}
 				if(body[this.state.page+1]){
 					this.setState({
 						listData:[...body[this.state.page+1],...this.state.listData],
