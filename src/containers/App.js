@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Find from '../components/find/find.js'
-import {BrowserRouter,Route,Link} from 'react-router-dom'
+import {BrowserRouter,Route} from 'react-router-dom'
 
 import Footer from '../components/footer/footer.js'
 import Index from './index/index.js'

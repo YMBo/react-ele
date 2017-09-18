@@ -9,7 +9,6 @@ class Search extends Component{
 			css:null,
 			height:0
 		}
-		this._scrollTop=this._scrollTop.bind(this)
 	}
 	componentDidMount(){
 		if (CSS.supports("position", "sticky") || CSS.supports("position", "-webkit-sticky")) {
@@ -19,8 +18,14 @@ class Search extends Component{
 			})
 		}else{
 			let offsetY=this.searchDOM.offsetTop;
-			document.addEventListener('scroll',this._scrollTop.bind(this,offsetY))
+			/*为了传递参数和配合解绑事件*/
+			this._scrollTop=this._scrollTop.bind(this,offsetY);
+			document.addEventListener('scroll',this._scrollTop)
 		}
+	}
+
+	componentWillUnmount(){
+			document.removeEventListener('scroll',this._scrollTop)
 	}
 	_scrollTop(offsetY){
 		let css=null;
