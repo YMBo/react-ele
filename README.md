@@ -33,3 +33,15 @@ banner区域：
 #### 6.下拉加载更多功能    
 由于数据都是本地的，所以利用`setTimeout`模拟网络请求延迟，如果所示:    
 ![加载更多](https://github.com/YMBo/react-ele/blob/master/preview/3.gif)    
+#### 7.底部导航（路由）    
+用的是`react-router 4`，效果：    
+![footer](https://github.com/YMBo/react-ele/blob/master/preview/4.gif)    
+注意因为首页的路由是`/`，所以匹配任何一个路由都会匹配到它，因此给它加一个精确匹配即可解决``    
+``` javascript
+<NavLink  to="/" exact activeClassName='active'>
+	<svg className='index_footer_icon first' viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" >....</svg>
+	<span className='index_footer_word'>外卖</span>
+</NavLink >
+```    
+其中`activeClassName`表示如果在当前路由的话就添加上`active`的class，或者用`activeStyle`是添加style。    
+最后`react-router 4`的改动很大，不清楚的地方可以百度、google查找
