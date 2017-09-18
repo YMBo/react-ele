@@ -34,19 +34,21 @@ banner区域：
 由于数据都是本地的，所以利用`setTimeout`模拟网络请求延迟，如果所示:    
 ![加载更多](https://github.com/YMBo/react-ele/blob/master/preview/3.gif)    
 #### 7.底部导航（路由）    
-用的是`react-router 4`，效果：    
-![footer](https://github.com/YMBo/react-ele/blob/master/preview/4.gif)   
-使用路由带来的问题及解决办法：    
-1.注意因为首页的路由是`/`，所以匹配任何一个路由都会匹配到它，因此给它加一个精确匹配即可解决    
+用的是`react-router 4`，效果：    
+![footer](https://github.com/YMBo/react-ele/blob/master/preview/4.gif)    
+使用路由带来的问题及解决办法：    
+1. 注意因为首页的路由是`/`，所以匹配任何一个路由都会匹配到它，因此给它加一个精确匹配即可解决    
 ``` javascript
 <NavLink  to="/" exact activeClassName='active'>
 	<svg className='index_footer_icon first' viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" >....</svg>
 	<span className='index_footer_word'>外卖</span>
 </NavLink >
-```    
-2.路由的改变会触发组件的`销毁、渲染`等，所以要注意，如果绑定了事件，那么要在`componentWillUnmount`阶段解除绑定
-3.因为首页的`回到顶部、模拟数据延迟加载`都用到了`setTimeout`，所以在开始setTimeout事件到真正执行setTimeout事件阶段触发了路由，那么将会报错，因为此时的state销毁了，我的解决办法为，定义一个变量，在`componentWillUnmount`这个阶段改变变量的状态，执行`setTimeout`时进行判断，即可解决：    
-```javascript
+```    
+其中`activeClassName`表示如果在当前路由的话就添加上`active`的class，或者用`activeStyle`是添加style。       
+
+2. 路由的改变会触发组件的`销毁、渲染`等，所以要注意，如果绑定了事件，那么要在`componentWillUnmount`阶段解除绑定    
+3. 因为首页的`回到顶部、模拟数据延迟加载`都用到了`setTimeout`，所以在开始setTimeout事件到真正执行setTimeout事件阶段触发了路由，那么将会报错，因为此时的state销毁了，我的解决办法为，定义一个变量，在`componentWillUnmount`这个阶段改变变量的状态，执行`setTimeout`时进行判断，即可解决：    
+``` javascript
 setTimeout(()=>{
 		/*如果已经销毁*/
 		if(this.isUnmount){return;}
@@ -62,7 +64,6 @@ setTimeout(()=>{
 	}
 	this.flag=false;
 },1000)
-```    
+```    
 
-其中`activeClassName`表示如果在当前路由的话就添加上`active`的class，或者用`activeStyle`是添加style。    
-最后`react-router 4`的改动很大，不清楚的地方可以百度、google查找
+ 
