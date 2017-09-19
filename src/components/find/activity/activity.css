@@ -3,11 +3,12 @@
 	font-size: .48rem;
 	text-align: center;
 	font-weight: 700;
-	.activity_icon{
+	svg{
 		position: relative;
 		top: .053333rem;
 		width: .44rem;
 		height: .44rem;
+		margin-right: 5px;
 	}
 	.activity_sub_title{
 		font-size: .293333rem;
