@@ -65,5 +65,6 @@ setTimeout(()=>{
 	this.flag=false;
 },1000)
 ```    
-
- 
+#### 8.发现页   
+![footer](https://github.com/YMBo/react-ele/blob/master/preview/5.gif)    
+问题：其中几个活动是用的一个组件，遇到的问题是活动标题前的图标该怎么弄
