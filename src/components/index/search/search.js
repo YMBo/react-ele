@@ -25,7 +25,7 @@ class Search extends Component{
 	}
 
 	componentWillUnmount(){
-			document.removeEventListener('scroll',this._scrollTop)
+			document.removeEventListener('scroll',this._scrollTop);
 	}
 	_scrollTop(offsetY){
 		let css=null;

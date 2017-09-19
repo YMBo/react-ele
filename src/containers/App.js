@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Find from '../components/find/find.js'
+import Find from './find/find.js'
 import {BrowserRouter,Route} from 'react-router-dom'
 
 import Footer from '../components/footer/footer.js'

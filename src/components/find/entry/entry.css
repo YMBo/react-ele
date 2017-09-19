@@ -1,0 +1,58 @@
+.find_active{
+	display: flex;
+	background: #fff;
+	overflow: hidden;
+	flex-wrap:wrap;
+	& .everyActivity:nth-child(odd){
+		border-right: 1PX solid #ededed;
+	};
+	.everyActivity{
+		display: flex;
+		width: 50%;
+		height: 160px;
+		padding: 0 30px;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1PX solid #ededed;
+		.icon{
+			width: 1.2rem;
+			max-width: 100%;
+		}
+		.content_wrapper{
+			max-width: 3rem;
+			p{
+				line-height: 1.2;
+				font-size: .426667rem;
+				color: #999;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			.tips1{
+				margin-bottom: .16rem;
+			}
+			.tips2{
+				font-size: .32rem;
+			}
+		}
+	}
+}
+.list2{
+	.sub-pic-hash{
+		height: 180px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	img{
+		width: 100%;
+	}
+}
+.parts .find_active:first-child{
+	margin-bottom: .28rem;
+}
+section{
+	margin-bottom: .28rem;
+	border-top: 1PX solid #eee;
+	background: #fff;
+}

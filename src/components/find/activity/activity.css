@@ -1,0 +1,116 @@
+.activity_title{
+	padding-top: .52rem;
+	font-size: .48rem;
+	text-align: center;
+	font-weight: 700;
+	.activity_icon{
+		position: relative;
+		top: .053333rem;
+		width: .44rem;
+		height: .44rem;
+	}
+	.activity_sub_title{
+		font-size: .293333rem;
+		color: #999;
+		text-align: center;
+		padding-bottom: .213333rem;
+	}
+	.line_left,.line_right{
+		display: inline-block;
+		margin: .213333rem .093333rem .173333rem;
+		border: 1PX solid #333;
+		width: .4rem;
+		height: 0;
+		position: relative;
+		&:after{
+			position: absolute;
+			top: -.066667rem;
+			content: "";
+			background: #333;
+			height: .133333rem;
+			width: .133333rem;
+			border-radius: 50%;
+		};
+	}
+	.line_left:after{
+		right: -.066667rem;
+	}
+	.line_right:after{
+		left: -.066667rem;
+	} 
+  
+}
+.activity_body{
+	white-space: nowrap;
+	padding: .32rem 0 .4rem .4rem;
+}
+.activity_body_a{
+	display: inline-block;
+	position: relative;
+	box-sizing: border-box;
+	width: 2.96rem;
+	margin-right: .16rem;
+	font-size: 0;
+	img{
+		    max-width: 100%;
+		width: 4.32rem;
+		height: 2.933333rem;
+		margin-bottom: .253333rem;
+	}
+	.food_name{
+		font-size: .346667rem;
+		color: #333;
+		margin-bottom: .133333rem;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.food_price{
+		height: .64rem;
+		line-height: .64rem;
+		.price{
+			font-size: .346667rem;
+			height: .48rem;
+			line-height: .48rem;
+			color: #ff5339;
+			margin-right: .093333rem;
+			max-width: 1.333333rem;
+			display: inline-block;
+			vertical-align: middle;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		del{
+			font-size: .293333rem;
+			color: #aaa;
+			max-width: 1.066667rem;
+			display: inline-block;
+			vertical-align: middle;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			text-decoration: line-through;
+		}
+	}
+	.discount{
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-size: .293333rem;
+		color: #fff;
+		background: #413d3c;
+		padding: .066667rem;
+	}
+}
+.activity-more{
+	font-size: .346667rem;
+	color: #999;
+	text-align: center;
+	padding: .4rem 0 .48rem;
+	.svg-next {
+	    height: .24rem;
+	    width: .133333rem;
+	    margin-left: .146667rem;
+	}
+}
