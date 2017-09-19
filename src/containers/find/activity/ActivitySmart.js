@@ -62,9 +62,9 @@ class ActivitySmart extends Component{
 		return(
 			<div>
 				<EntrySmart/>
-				<Activity logo={foodsLogo} title={'美食热推'} tj={'折'} sub={'你的口味，我都懂得'} data={this.state.foodsData}/>
-				<Activity logo={dayLogo} title={'天天特价'} tj={'折'} sub={'特价商品，一网打尽'} data={this.state.data}/>
-				<Activity logo={giftLogo} title={'限时好礼'} tj={'折'} sub={'小积分换豪礼'} data={this.state.giftData}/>
+				<Activity logo={foodsLogo} title={'美食热推'} sub={'你的口味，我都懂得'} data={this.state.foodsData}/>
+				<Activity logo={dayLogo} title={'天天特价'} sub={'特价商品，一网打尽'} data={this.state.data}/>
+				<Activity logo={giftLogo} title={'限时好礼'} sub={'小积分换豪礼'} data={this.state.giftData}/>
 			</div>
 		)
 	}
