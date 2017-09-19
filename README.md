@@ -71,17 +71,17 @@ setTimeout(()=>{
 ![footer](https://github.com/YMBo/react-ele/blob/master/preview/6.gif)    
 ``` javascript
 render(){
-		let dayLogo=<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 3 37 35" version="1.1" fill="#ff7e30"></svg>,
-		foodsLogo=<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 33" version="1.1"></svg>,
-		giftLogo=<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 3 30 30" version="1.1" fill="#ff7e30"></svg>;
-		return(
-			<div>
-				<EntrySmart/>
-				<Activity logo={foodsLogo} title={'美食热推'} sub={'你的口味，我都懂得'} data={this.state.foodsData}/>
-				<Activity logo={dayLogo} title={'天天特价'}  sub={'特价商品，一网打尽'} data={this.state.data}/>
-				<Activity logo={giftLogo} title={'限时好礼'}  sub={'小积分换豪礼'} data={this.state.giftData}/>
-			</div>
-		)
-	}
-```    
+	let dayLogo=<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 3 37 35" version="1.1" fill="#ff7e30"></svg>,
+	foodsLogo=<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 33" version="1.1"></svg>,
+	giftLogo=<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 3 30 30" version="1.1" fill="#ff7e30"></svg>;
+	return(
+		<div>
+			<EntrySmart/>
+			<Activity logo={foodsLogo} title={'美食热推'} sub={'你的口味，我都懂得'} data={this.state.foodsData}/>
+			<Activity logo={dayLogo} title={'天天特价'}  sub={'特价商品，一网打尽'} data={this.state.data}/>
+			<Activity logo={giftLogo} title={'限时好礼'}  sub={'小积分换豪礼'} data={this.state.giftData}/>
+		</div>
+	)
+}
+```    
 可是感觉这种办法不太好，但暂时又想不出别的办法
