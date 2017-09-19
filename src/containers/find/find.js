@@ -6,7 +6,7 @@ class Find extends Component{
 	render(){
 		return(
 			<div>
-				<Header/>
+				<Header title={'发现'}/>
 				<ActivitySmart/>
 			</div>
 		)

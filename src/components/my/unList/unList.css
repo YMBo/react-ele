@@ -1,0 +1,34 @@
+.unList{
+	margin-top: .266667rem;
+	border-top: 1PX solid #ddd;
+	border-bottom: 1PX solid #ddd;
+	font-size: .426667rem;
+	line-height: .453333rem;
+	background: #fff;
+	.unList_href{
+		font-size: .426667rem;
+		color: #333;
+		display: flex;
+		align-items: center;
+		padding-left: .666667rem;
+		.unList_icon{
+			margin-left: -.266667rem;
+			margin-right: .266667rem;
+			svg{
+				width: .48rem;
+				height: .48rem;
+			}
+		}
+		.unList_sub{
+			display: flex;
+			width: 100%;
+			align-items: center;
+			justify-content: space-between;
+			padding: .373333rem .266667rem .373333rem 0;
+			.unList_href_go{
+				width: .266667rem;
+				height: .56rem;
+			}
+		}
+	}
+}

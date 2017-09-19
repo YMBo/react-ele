@@ -1,0 +1,79 @@
+.my{
+	.my_unlogin{
+		display: flex;
+		background-image: linear-gradient(90deg,#0af,#0085ff);
+		color: #fff;
+		align-items: center;
+		padding: .666667rem .4rem;
+		.my_unlogin_img{
+			width: 1.6rem;
+			height: 1.6rem;
+			background: #fff;
+			border-radius: 50%;
+			svg{
+				width: 1.6rem;
+				height: 1.6rem;
+			}
+		}
+		.my_unlogin_go{
+			width: .266667rem;
+			height: .56rem;
+			font-size: 0;
+		}
+		.my_unlogin_sub{
+			margin-left: .48rem;
+			flex-grow: 1;
+			.my_unlogin_sub_title{
+				font-size: .56rem;
+				margin-bottom: .213333rem;
+				font-weight: 700;
+				&:extend(.nowrap);
+			}
+			.my_unlogin_sub_more{
+				&:extend(.nowrap);
+				display: flex;
+				align-items: center;
+				font-size: 24px;
+				svg{
+					margin-right: .066667rem;
+					width: .186667rem;
+					height: .293333rem;
+				}
+			}
+		}
+	}
+}
+.nowrap{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.unlogin_activity{
+	display: table;
+	width: 100%;
+	height: 2.24rem;
+	border-bottom: 1PX solid #ddd;
+	background-color: #fff;
+	a{
+		font-size: 0;
+		display: table-cell;
+		width: 33.3333%;
+		vertical-align: middle;
+		text-align: center;
+		&:not(:last-child){
+			border-right: 1PX solid #ddd;
+		};
+		svg{
+			width: .693333rem;
+			height: .693333rem;
+		}
+		.unlogin_activity_word{
+			margin-top: .133333rem;
+			font-size: .32rem;
+			line-height: .373333rem;
+			color: #666;
+			font-weight: 700;
+		}
+	}
+	
+}
