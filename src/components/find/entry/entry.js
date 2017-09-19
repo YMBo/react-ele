@@ -33,7 +33,7 @@ class Entry extends Component{
 			)
 		})
 		return (
-			<section className='parts'>
+			<section className='parts findList'>
 				<div className='find_active'>
 					{listDOM}
 				</div>

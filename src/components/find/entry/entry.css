@@ -51,7 +51,7 @@
 .parts .find_active:first-child{
 	margin-bottom: .28rem;
 }
-section{
+section.findList{
 	margin-bottom: .28rem;
 	border-top: 1PX solid #eee;
 	background: #fff;
