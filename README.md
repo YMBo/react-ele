@@ -88,6 +88,8 @@ render(){
 #### 9.四个主页面完成    
 ![footer](https://github.com/YMBo/react-ele/blob/master/preview/7.gif)    
 #### 10.登录页    
-这块的重点是如果当前为登录页，那怎么让底部导航消失？我的解决办法为用了`Switch`    
+1. 这块的重点是如果当前为登录页，那怎么让底部导航消失？我的解决办法为用了`Switch`    
 ![footer](https://github.com/YMBo/react-ele/blob/master/preview/8.gif)    
+2. 这一部分为表单验证以及存储登录状态，用到了`redux`    
+![footer](https://github.com/YMBo/react-ele/blob/master/preview/9.gif)    
     
