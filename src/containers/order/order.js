@@ -6,7 +6,7 @@ class Order extends Component{
 	render(){
 		return(
 			<div>
-				<Header title={'订单'}/>
+				<Header but={'login'} title={'订单'}/>
 				<UnLogin/>
 			</div>
 		)

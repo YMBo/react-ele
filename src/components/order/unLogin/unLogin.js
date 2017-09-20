@@ -1,8 +1,11 @@
 import React,{Component} from 'react'
+import { connect } from 'react-redux'
 import {Link} from 'react-router-dom'
+import LoginList from '../afterLogin/afterLogin.js'
 import './unLogin.css'
 
-class UnLogin extends Component{
+/*登录前*/
+class UnLoginBefore extends Component{
 	render(){
 		return(
 			<section className='order'>
@@ -13,5 +16,57 @@ class UnLogin extends Component{
 		)
 	}
 }
+/*登录后*/
+class UnLoginAfter extends Component{
+	render(){
+		let listDOM=[1,2,3,5,6,7].map((value,index)=>{return <LoginList key={index}/>})
+		return(
+			<section>
+				{listDOM}
+			</section>
+		)
+	}
+}
 
-export default UnLogin;
+/*是否登录*/
+class UnLogin extends Component{
+	constructor(){
+		super()
+		this.state={
+			islogin:false
+		}
+	}
+	componentWillMount(){
+		let data=this.props.data.islogin;
+		if( data || this._getLocal('islogin')){
+			this.setState({
+				islogin:true
+			})
+			this._saveLocal('true')
+		}
+	}
+	_getLocal(name){
+		return JSON.parse(localStorage.getItem(name))
+	}
+	_saveLocal(obj){
+		try{
+			localStorage.setItem('islogin',JSON.stringify(obj))
+		}catch(e){
+			console.log(e)
+		}
+	}
+	render(){
+		return(
+			<div>{ this.state.islogin?<UnLoginAfter/>:<UnLoginBefore/>}</div>
+		)
+	}
+}
+
+const mapStateToProps=(state)=>{
+	return{
+		data:state.loginPart
+	}
+}
+export default connect(
+	mapStateToProps
+)(UnLogin);

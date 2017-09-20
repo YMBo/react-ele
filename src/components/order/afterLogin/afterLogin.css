@@ -1,0 +1,102 @@
+.afterLogin{
+	display: block;
+	width: 100%;
+	margin-top: .266667rem;
+	background-color: #fff;
+	padding: .373333rem 0 0 .4rem;
+	.afterLogin_body{
+		display: flex;
+		.afterLogin_body_sub{
+			flex: 1;
+			.shop_again{
+				display: flex;
+				border-top: 1PX solid #eee;
+				padding: .266667rem .426667rem;
+				justify-content: flex-end; 
+				button{
+					padding: .133333rem .266667rem;
+					border: 1PX solid #2395ff;
+					border-radius: .053333rem;
+					background-color: transparent;
+					outline: none;
+					font-size: .346667rem;
+					color: #2395ff;
+					margin-left: .2rem;
+				}
+			}
+			.afterLogin_dsc{
+				display: flex;
+				justify-content: space-between;
+				padding: .4rem .346667rem .4rem 0;
+				.afterLogin_dsc_price{
+					flex-basis: 1.6rem;
+					text-align: right;
+					font-size: .346667rem;
+					color: #333;
+					font-weight: 700;
+				}
+				.afterLogin_dsc_foods{
+					font-size: .346667rem;
+					color: #666;
+					display: flex;
+					align-items: center;
+					span:first-child{
+						max-width: 4.266667rem;
+						display: inline-block;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+					};
+					span:last-child{
+						font-size: .346667rem;
+						color: #666;
+					}
+				}
+			}
+			.afterLogin_body_sub_head{
+				border-bottom: 1px solid #eee;
+				padding-right: .346667rem;
+				padding-bottom: .266667rem;
+				.afterLogin_time{
+					font-size: .293333rem;
+					color: #999;
+				}
+				.afterLogin_title{
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+				}
+				.afterLogin_shop{
+					display: inline-block;
+					max-width: 10em;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					font-size: .426667rem;
+					    line-height: 1.5em;
+					    color: #333;
+				}
+				.afterLogin_ok{
+					font-size: .346667rem;
+					text-align: right;
+					color: #333;
+					max-width: 10em;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+			}
+		}
+		.afterLogin_body_head{
+			padding-right: .266667rem;
+			flex: none;
+			img{
+				border-radius: .053333rem;
+				border: 1px solid #eee;
+				width: .853333rem;
+				height: .853333rem;
+				max-width: 100%;
+			}
+		}
+	}
+}

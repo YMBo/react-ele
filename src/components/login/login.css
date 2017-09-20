@@ -107,3 +107,21 @@
 		}
 	}
 }
+.login_wran{
+	position: fixed;
+	bottom: 2.56rem;
+	left: 50%;
+	z-index: 9999;
+	padding: .266667rem .533333rem;
+	border-radius: .533333rem;
+	background: rgba(0,0,0,.6);
+	color: #fff;
+	font-size: .32rem;
+	line-height: 1.2;
+	transition: opacity .5s;
+	transform: translateX(-50%);
+	pointer-events: none;
+}
+.out{
+	opacity:0;
+}
