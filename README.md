@@ -95,5 +95,7 @@ render(){
 3.最后登录页的两种表现形式，分别是从订单页登录后的状态和从我的页登录后的状态，看图（gif时间相对长点，中间有一会儿停顿，这是切换两种状态，耐心看完找区别）    
 第一种：从我的页进行登录    
 第二种：从订单页进行登录    
-![footer](https://github.com/YMBo/react-ele/blob/master/preview/10.gif)    
+![footer](https://github.com/YMBo/react-ele/blob/master/preview/10.gif)    
+#### 11.添加退出功能    
+![footer](https://github.com/YMBo/react-ele/blob/master/preview/11.gif)    
     
