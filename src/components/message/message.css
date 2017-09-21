@@ -1,0 +1,82 @@
+.message{
+	background-color: #fff;
+	width: 100%;
+	font-size: .426667rem;
+	color: #333;
+	list-style: none;
+	cursor: pointer;
+	li{
+		position: relative;
+		padding: .266667rem .373333rem;
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.message_right{
+		display: flex;
+		align-items: center;
+		color: #666;
+		.message_right_img{
+			height: 1.333333rem;
+			width: 1.333333rem;
+			border-radius: .6rem;
+			svg{
+				width: 100%;
+				height: 100%;
+			}
+		}
+		input{
+			display: block;
+			position: absolute;
+			opacity: 0;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			outline: 0;
+			border:0;
+		}
+		svg{
+			fill: #ddd;
+			height: .48rem;
+			width: .48px;
+			display: inline-block;
+			line-height: 1.2rem;
+			padding-top: .133333rem;
+			margin-left: 10px;
+		}
+	}
+	.setPassword{
+		    color: #0097ff;
+	}
+	.message_phone_icon{
+		padding: .053333rem;
+		border-radius: .106667rem;
+		margin-right: .133333rem;
+		vertical-align: middle;
+		svg{
+			height: .426667rem;
+			    width: .426667rem;
+		}
+	}
+}
+.message_fg{
+	margin: .426667rem 0 .186667rem .373333rem;
+	font-size: .32rem;
+	color: #999;
+}
+.log_out{
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding: .373333rem 0;
+	margin: .533333rem 0;
+	color: #ff5339;
+	border-radius: .08rem;
+	font-size: .426667rem;
+	font-weight: 700;
+	background-color: #fff;
+	outline: 0;
+	border: none;
+}

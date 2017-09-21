@@ -6,8 +6,20 @@ import Bannersmart from './banner.js'
 import H3title from '../../components/index/title/h3title.js'
 import ListItem from './listItem'
 import ReturnTop from '../../components/index/returnTop/returnTop.js'
+import { connect } from 'react-redux'
+import { login } from '../../reducers/dataState.js'
 
 class Index extends Component{
+	/*保存登录状态*/
+	componentWillMount(){
+		let localstate=this._getLocal('islogin');
+		if(localstate){
+			this.props.onLogin(localstate)
+		}
+	}
+	_getLocal(name){
+		return JSON.parse(localStorage.getItem(name))
+	}
 	render(){
 		return(
 			<div className='wrapper'>
@@ -23,4 +35,20 @@ class Index extends Component{
 	}
 }
 
-export default Index
+const mapStateToProps=(state)=>{
+	return{
+		data:state.loginPart
+	}
+}
+const mapDispatchToProps=(dispatch)=>{
+	return{
+		onLogin:(data)=>{
+			dispatch(login(data))
+		}
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Index);

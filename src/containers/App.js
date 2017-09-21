@@ -6,6 +6,7 @@ import Login from '../components/login/login.js'
 import {BrowserRouter,Route,Switch} from 'react-router-dom'
 
 import Footer from '../components/footer/footer.js'
+import MessageSmart from './message/message.js'
 import Index from './index/index.js'
 
 
@@ -20,6 +21,7 @@ class App extends Component{
 					<Route  path='/my' component={My}/>
 					<Switch>
 						<Route  path='/login' component={Login}/>
+						<Route  path='/message' component={MessageSmart}/>
 						<Footer/>
 					</Switch>
 				</div>
