@@ -92,4 +92,6 @@ render(){
 ![footer](https://github.com/YMBo/react-ele/blob/master/preview/8.gif)    
 2. 这一部分为表单验证以及存储登录状态，用到了`redux`    
 ![footer](https://github.com/YMBo/react-ele/blob/master/preview/9.gif)    
+3.最后登录页的两种表现形式，分别是从订单页登录后的状态和从我的页登录后的状态，看图（gif时间相对长点，耐心看完找区别）    
+![footer](https://github.com/YMBo/react-ele/blob/master/preview/10.gif)
     
