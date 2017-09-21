@@ -3,13 +3,16 @@ import './header.css'
 
 class Header extends Component{
 	handleBack(){
-		let reg=null;
-		if(this.props.but){reg=new RegExp(this.props.but,'g')}
-		if( reg.test(document.referrer) || document.referrer.length===0){
-			window.location.href='/'
-		}else if(document.referrer.length!==0 ){
-			window.history.back()
+		if(this.props.but){
+			let reg=new RegExp(this.props.but,'g');
+			if( reg.test(document.referrer) || document.referrer.length===0){
+				window.location.href='/'
+			}else if(document.referrer.length!==0 ){
+				window.history.back()
+			}
+			return;
 		}
+		window.history.back()
 	}
 	render(){
 		return(

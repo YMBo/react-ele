@@ -6,7 +6,7 @@ class My extends Component{
 	render(){
 		return(
 			<div>
-				<Header title={'我的'}/>
+				<Header but={'login'} title={'我的'}/>
 				<MyunLogin/>
 			</div>
 		)

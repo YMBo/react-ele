@@ -18,7 +18,7 @@ class AfterLogin extends Component{
 					<p className='my_unlogin_sub_title'>{this.props.name}</p>
 					<p className='my_unlogin_sub_more'>
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 655 1024" version="1.1" fill="#fff"><path d="M0 122.501v778.998C0 968.946 55.189 1024 123.268 1024h408.824c68.52 0 123.268-54.846 123.268-122.501V122.501C655.36 55.054 600.171 0 532.092 0H123.268C54.748 0 0 54.846 0 122.501zM327.68 942.08c-22.622 0-40.96-18.338-40.96-40.96s18.338-40.96 40.96-40.96 40.96 18.338 40.96 40.96-18.338 40.96-40.96 40.96zM81.92 163.84h491.52V819.2H81.92V163.84z"/></svg>
-						<span>{this.props.phone}</span>
+						<span>{this.props.phone.replace(/(\d{3})(\d{4})(\d{4})/g,'$1****$2')}</span>
 					</p>
 				</div>
 				<span className='my_unlogin_go'>
@@ -82,7 +82,6 @@ class MyunLogin extends Component{
 		return JSON.parse(localStorage.getItem(name))
 	}
 	render(){
-		console.log(this.state.isLogin)
 		return(
 			<div>
 				<section className='my'>
