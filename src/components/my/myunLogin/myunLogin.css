@@ -54,6 +54,16 @@
 	height: 2.24rem;
 	border-bottom: 1PX solid #ddd;
 	background-color: #fff;
+	.youhui_num{
+		padding: .453333rem 0 .293333rem;
+		font-size: .693333rem;
+		line-height: .693333rem;
+		font-weight: 700;
+	}
+	.youhui_dw{
+		font-size: .32rem;
+		line-height: .32rem;
+	}
 	a{
 		font-size: 0;
 		display: table-cell;

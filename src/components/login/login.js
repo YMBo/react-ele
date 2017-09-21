@@ -73,19 +73,33 @@ class Login extends Component{
 			this._animate();
 			return;
 		}else if(this.props.onLogin){
+			let name=Math.floor(Math.random()*654187)+651;
 			this.props.onLogin({
 				islogin:true,
-				name:Math.random(0,8000),
+				name:name,
 				phone:this.state.userName
 			});
-			this.props.history.push('/order')
-			return;
+			this._saveLocal({
+				islogin:true,
+				name:name,
+				phone:this.state.userName
+			})
+			/*为了匹配订单页和我的页*/
+			this.props.history.goBack();
 		}else{
 			this.setState({
 				wran:'未知错误！'
 			})
 			this._animate();
 			return;
+		}
+	}
+	/*本地存储*/
+	_saveLocal(obj){
+		try{
+			localStorage.setItem('islogin',JSON.stringify(obj))
+		}catch(e){
+			console.log(e)
 		}
 	}
 	/*验证手机号码*/

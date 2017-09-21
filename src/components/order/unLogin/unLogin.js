@@ -42,18 +42,10 @@ class UnLogin extends Component{
 			this.setState({
 				islogin:true
 			})
-			this._saveLocal('true')
 		}
 	}
 	_getLocal(name){
 		return JSON.parse(localStorage.getItem(name))
-	}
-	_saveLocal(obj){
-		try{
-			localStorage.setItem('islogin',JSON.stringify(obj))
-		}catch(e){
-			console.log(e)
-		}
 	}
 	render(){
 		return(
