@@ -8,6 +8,7 @@ import {BrowserRouter,Route,Switch} from 'react-router-dom'
 import Footer from '../components/footer/footer.js'
 import MessageSmart from './message/message.js'
 import Index from './index/index.js'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 
 class App extends Component{

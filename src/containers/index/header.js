@@ -9,7 +9,8 @@ class Headersmart extends Component{
 			temperature:'',
 			description:'',
 			image_hash:'',
-			address:''
+			address:'',
+			getAddress:false
 		}
 	}
 	componentWillMount(){
@@ -22,7 +23,9 @@ class Headersmart extends Component{
 	}
 	render(){
 		return(
-			<Header data={ this.state } />
+			<div>
+				<Header data={ this.state } />
+			</div>
 		)
 	}
 }
