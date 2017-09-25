@@ -22,7 +22,7 @@ class ReturnTop extends Component{
 		this._throttle(this.resizeTop,this);
 	}
 	handleGoBack(){
-		document.body.scrollTop =0;
+		document.documentElement.scrollTop = document.body.scrollTop =0;
 	}
 	resizeTop(){
 		if(window.scrollY>500){

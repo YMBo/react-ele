@@ -5,9 +5,9 @@ class Header extends Component{
 	handleBack(){
 		if(this.props.but){
 			let reg=new RegExp(this.props.but,'g');
-			if( reg.test(document.referrer) || document.referrer.length===0){
+			if( reg.test(document.referrer) ){
 				window.location.href='/'
-			}else if(document.referrer.length!==0 ){
+			}else{
 				window.history.back()
 			}
 			return;

@@ -3,7 +3,6 @@ import './header.css'
 import GetAddress from '../../getAddress/getAddress.js'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-let falg=true
 class Header extends Component{
 	constructor(){
 		super();
@@ -21,28 +20,45 @@ class Header extends Component{
 			let data=this.props.data;
 			this.setState(data)
 		}
-		window.addEventListener("popstate", (event)=>{
-		event.preventDefault()
-		    var currentState = window.history.state;
-		    console.log(currentState)
-		    if(currentState==='address'){
-		    	console.log('666')
-		    	this.setState({
-		    		getAddress:false
-		    	});
-		    }									
-		});
+		window.history.pushState({page:'home'},'',' ');
+		this._isCurrent=this._isCurrent.bind(this);
+		window.addEventListener('popstate',this._isCurrent)
 	}
 	handleClick(){
 		this.setState({
 			getAddress:true
 		});
-		/*if(falg){
-			window.history.pushState('address','','');
-			falg=false
-		}*/
+		this._addHistory()
+		this._bodyoverflow()
 	}
-
+	/*历史判断*/
+	_isCurrent(){
+		if(!window.history.state){return;}
+		if(window.history.state.page==='getAddresss'){
+			this.setState({
+				getAddress:true
+			});
+			this._bodyoverflow()
+			console.log('yo')
+		}else if(window.history.state.page==='home'){
+		    	this.setState({
+		    		getAddress:false
+		    	});
+		    	window.document.body.style.overflow='auto';
+		}	
+	}
+	_bodyoverflow(){
+		window.document.body.style.overflow='hidden';
+		window.document.body.style.height='100vh';
+	}
+	/*添加历史记录*/
+	_addHistory(){
+		window.history.pushState({page:'getAddresss'},'',' ');
+		this._addHistory._isCurrent=true;
+	}
+	componentWillUnmount(){
+		window.removeEventListener('popstate',this._isCurrent)
+	}
 	render(){
 		return(
 			<ReactCSSTransitionGroup 

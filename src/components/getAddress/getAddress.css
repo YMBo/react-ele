@@ -6,7 +6,80 @@
 	bottom: 0;
 	background: red;
 	z-index:9999;
+	background-color: #f4f4f4;
+	font-size: .346667rem;
+	line-height: .48rem;
+	.search_address{
+		h4{
+			padding: .4rem 0 .186667rem .4rem;
+			color: #666;
+		}
+		.address_current{
+			background: #fff;
+			height: 1.173333rem;
+			font-size: .4rem;
+			color: #333;
+			display: flex;
+			padding: 0 .453333rem 0 .4rem;
+			align-items: center;
+			justify-content: space-between;
+			.current_address{
+				font-weight: 700;
+				max-width: 6.666667rem;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			.pos_address{
+				color: #2395ff;
+				font-size: .373333rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				line-height: .4rem;
+				svg{
+					width: .4rem;
+					height: .4rem;
+					margin-right: .133333rem;
+				}
+			}
+		}
+	}
 }
+@keyframes rotate{
+	from{transform: rotate(0)}
+	to{transform: rotate(360deg)}
+}
+.rotate{
+	animation: rotate .8s infinite linear;
+}
+.search_address_form{
+	background: #fff;
+	position: relative;
+	font-size: 0;
+	img{
+		position: absolute;
+		width: .373333rem;
+		height: .373333rem;
+		left: .693333rem;
+		top: .586667rem;
+	}
+	.search_address_form_input{
+		margin: .266667rem .4rem;
+		width: 9.2rem;
+		height: .96rem;
+		color: #999;
+		border-radius: .026667rem;
+		padding: .24rem .48rem .24rem .88rem;
+		background: #f2f2f2;
+		-webkit-appearance: none;
+		font-size: .346667rem;
+		line-height: .48rem;
+		outline: none;
+		border:none;
+	}
+}
+
 
 .example-enter {
 	transform: translate3d(100%,0,0);
@@ -23,5 +96,5 @@
 
 .example-leave.example-leave-active {
 	transform: translate3d(100%,0,0);
-	transition: opacity 300ms ease-in;
+	transition: transform 300ms ease-out;
 }
