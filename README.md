@@ -100,6 +100,7 @@ render(){
 ![footer](https://github.com/YMBo/react-ele/blob/master/preview/11.gif)    
     
 #### 12.获取地址页面    
-这块的难点是：url不变化，但是却可以通过浏览器的前进返回按钮控制动画    
+这块的难点是：url不变化，但是却可以通过浏览器的前进返回按钮控制动画    
 涉及到的知识点请移步：[点我查看](https://ymbo.github.io/2017/09/22/%E8%AE%A4%E8%AF%86pushstate%E3%80%81popstate-%E6%97%A0%E5%88%B7%E6%96%B0%E6%94%B9%E5%8F%98URL/)    
+    
 ![效果](https://github.com/YMBo/react-ele/blob/master/preview/12.gif)
