@@ -28,7 +28,9 @@ class ListItem extends Component{
 			/*保*/
 			supportsDOM:null,
 			/*活动*/
-			activities:[]
+			activities:[],
+			/*商家id*/
+			restaurant_id:0
 		}
 	}
 	componentWillMount(){
@@ -59,10 +61,14 @@ class ListItem extends Component{
 			order_lead_time:this.props.data.order_lead_time,
 			is_premium:this.props.data.is_premium,
 			is_new:this.props.data.is_new,
-			supportsDOM:supportsDOM
+			supportsDOM:supportsDOM,
+			restaurant_id:this.props.data.id
 		})
 	}
-	
+	handleClick(){
+		/*用户的地址hash和商家id*/
+		window.location.href=`/shop/${this.props.address}/${this.state.restaurant_id}`;
+	}
 	/*图片格式化*/
 	_formatImg(){
 		let img=this.props.data.image_path
@@ -76,7 +82,7 @@ class ListItem extends Component{
 	render(){
 		return(
 			<section className='shoplist'>
-				<section className='shoplist_item'>
+				<section className='shoplist_item' onClick={this.handleClick.bind(this)}>
 					<div className='shoplist_img'>
 						<div className='shoplist_logo'>
 							<img src={`//fuss10.elemecdn.com/${this.state.img}?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/`} alt="" />

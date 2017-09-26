@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import { body } from '../../data/data.js'
+import { body,address } from '../../data/data.js'
 import ListItem from '../../components/index/listItem/listItem.js'
 
 class ListItemsmart extends Component{
@@ -55,7 +55,7 @@ class ListItemsmart extends Component{
 	render(){
 		return (
 			<div>
-				{this.state.listData.map((value,index)=>{return <ListItem data={value} key={index}/>})}
+				{this.state.listData.map((value,index)=>{return <ListItem data={value} address={address.geohash} key={index}/>})}
 				{this.state.noMore?<div className='noMore'>没有更多了哦~</div>
 				:<div className="loadMore"> 
 					<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16">

@@ -10,7 +10,6 @@ class Headersmart extends Component{
 			description:'',
 			image_hash:'',
 			address:'',
-			getAddress:false
 		}
 	}
 	componentWillMount(){

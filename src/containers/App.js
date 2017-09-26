@@ -8,9 +8,13 @@ import {BrowserRouter,Route,Switch} from 'react-router-dom'
 import Footer from '../components/footer/footer.js'
 import MessageSmart from './message/message.js'
 import Index from './index/index.js'
+import ShopDetails from '../components/shopdetails/shopDetails.js'
 
 class App extends Component{
 	render(){
+		const Shop=({ match })=>{
+			return <ShopDetails id={match.params.id} address={match.params.geohash}/>
+		}
 		return(
 			<BrowserRouter>
 				<div>
@@ -21,6 +25,7 @@ class App extends Component{
 					<Switch>
 						<Route  path='/login' component={Login}/>
 						<Route  path='/message' component={MessageSmart}/>
+						<Route  path='/shop/:geohash/:id' component={Shop}/>
 						<Footer/>
 					</Switch>
 				</div>
