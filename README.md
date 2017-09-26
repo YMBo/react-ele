@@ -103,4 +103,7 @@ render(){
 这块的难点是：url不变化，但是却可以通过浏览器的前进返回按钮控制动画    
 涉及到的知识点请移步：[点我查看](https://ymbo.github.io/2017/09/22/%E8%AE%A4%E8%AF%86pushstate%E3%80%81popstate-%E6%97%A0%E5%88%B7%E6%96%B0%E6%94%B9%E5%8F%98URL/)    
     
-![效果](https://github.com/YMBo/react-ele/blob/master/preview/12.gif)
+![效果](https://github.com/YMBo/react-ele/blob/master/preview/12.gif)    
+    
+ #### 13.最后一个页面商铺详情页    
+ 从首页的商铺列表进入每个商铺页的时候，会通过 两个参数请求商铺的详情数据，参数分别是，用户所在地理位置的`geohash`值，和 用户`id`值来请求数据，所以我这也没法请求，就只拿永和大王（第一个商家）做例子了
