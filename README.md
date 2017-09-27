@@ -1,6 +1,6 @@
 # react-ele
 react仿饿了么app    
-技术：`react`+`react-router`+`redux`+`create-react-app`+`智能组件`+`木偶组件`    
+技术：`react`+`react-router`+`redux`+`create-react-app`+`fetch`    
 ```markdown
 git clone git@github.com:YMBo/react-ele.git    
 npm install    
@@ -106,4 +106,5 @@ render(){
 ![效果](https://github.com/YMBo/react-ele/blob/master/preview/12.gif)    
     
  #### 13.最后一个页面商铺详情页    
- 从首页的商铺列表进入每个商铺页的时候，会通过 两个参数请求商铺的详情数据，参数分别是，用户所在地理位置的`geohash`值，和 用户`id`值来请求数据，所以我这也没法请求，就只拿永和大王（第一个商家）做例子了
+ 从首页的商铺列表进入每个商铺页的时候，会通过 两个参数请求商铺的详情数据，参数分别是，用户所在地理位置的`geohash`值，和 用户`id`值来请求数据，所以我用了fetch做请求    
+ ![效果](https://github.com/YMBo/react-ele/blob/master/preview/13.gif)    
