@@ -1,0 +1,131 @@
+*{margin: 0;padding:0;}
+.shoplist_header{
+	position: relative;
+	padding-bottom: .8rem;
+	color: #fff;
+	font-size: .293333rem;
+	.activity_cut_box{
+		position: absolute;
+		left: .4rem;
+		right: .4rem;
+		bottom: .133333rem;
+		.activity_cut_more{
+			position: absolute;
+			top: .066667rem;
+			right: 0;
+			&:after{
+				content: "";
+				display: block;
+				border-style: solid;
+				border-width: .066667rem 0 .066667rem .08rem;
+				border-color: transparent transparent transparent #fff;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				right: -.16rem;
+			}
+		}
+		.activity_cut{
+			line-height: .48rem;
+			display: flex;
+			font-size: .346667rem;
+			align-items: center;
+			padding-right: 1.28rem;
+			.activity_cut_icon{
+				margin-right: .16rem;
+				font-size: .293333rem;
+				font-style: normal;
+				height: .373333rem;
+				width: .373333rem;
+				display: inline-block;
+				box-sizing: border-box;
+				text-align: center;
+				border-radius: .053333rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.activity_cut_main{
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				flex: 1;
+				font-size: .293333rem;
+			}
+		}
+	}
+	.shoplist_header_bg{
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background-color: #3190e8;
+		background-size: cover;
+		background-repeat: no-repeat;
+		&:before{
+			content: "";
+			    position: absolute;
+			    left: 0;
+			    right: 0;
+			    top: 0;
+			    bottom: 0;
+			    background-color: rgba(119,103,137,.43);
+		};
+	}
+	nav{
+		position: relative;
+		padding: .106667rem .266667rem;
+		.back{
+			display: inline-block;
+			svg{
+				width: .666667rem;
+				height: .666667rem;
+			}
+		}
+	}
+	.shoplist_header_main{
+		padding: .266667rem .4rem 0;
+		    position: relative;
+		    display: flex;
+		 img{
+		 	width: 1.733333rem;
+		 	height: 1.733333rem;
+		 	border: 1px solid #fff;
+		 	border-radius: .053333rem;
+		 	margin: 0 .266667rem 0 0;
+		 }
+		.shoplist_header_content{
+			flex: 1;
+			width: 7.2rem;
+			.shoplist_header_name{
+				margin: 0;
+				font-size: .466667rem;
+				line-height: 1.2em;
+				font-weight: 700;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.shop_header_delivery{
+				white-space: nowrap;
+				height: .666667rem;
+				line-height: .666667rem;
+				.shop_header_deliveryItem{
+					line-height: .32rem;
+				}
+				span:not(:last-child):after{
+					content: " / ";
+					opacity: .5;
+				};
+			}
+			.shop_header_notice{
+				height: .533333rem;
+				line-height: .533333rem;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+	}
+}
