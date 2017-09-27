@@ -31,7 +31,13 @@ class ListItemsmart extends Component{
 		/**/
 		if(this.flag){return}
 		if(this.state.noMore){return;}
-		if(window.document.body.offsetHeight-document.body.scrollTop<window.screen.height+200){
+		let scrollTop=null;
+		if(document.documentElement&&document.documentElement.scrollTop){
+			scrollTop=document.documentElement.scrollTop;
+		}else if(document.body){
+			scrollTop=document.body.scrollTop;
+		}
+		if(window.document.body.offsetHeight-scrollTop<window.screen.height+200){
 			/*正常情况下这应该是一个网络请求*/
 			this.flag=true;
 			setTimeout(()=>{
