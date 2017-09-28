@@ -1,0 +1,38 @@
+.tabs_border_box{
+	display: flex;
+	align-items: center;
+}
+.tabs_body{
+	display: flex;
+	div{
+		width: 100%;
+	}
+}
+.tabs_border{
+	position: relative;
+	flex: 1;
+	text-align: center;
+	font-size: .373333rem;
+	color: #666;
+	border-bottom: 1px solid #ddd;
+	line-height: 1.066667rem;
+	.tabs_border_tag{
+		position: relative;
+	}
+}
+.tabs_border_active{
+	color: #3190e8;
+	font-weight: 700;
+	.tabs_border_tag{
+		&::after{
+			content: "";
+			position: absolute;
+			bottom: -.266667rem;
+			left: 0;
+			right: 0;
+			height: .08rem;
+			background-color: #2395ff;
+		};
+		position: relative;
+	}
+}

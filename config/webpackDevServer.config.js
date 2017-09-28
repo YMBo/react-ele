@@ -77,7 +77,14 @@ module.exports = function(proxy, allowedHost) {
       disableDotRule: true,
     },
     public: allowedHost,
-    proxy,
+    proxy: {
+      "/api": {
+          target: "https://restapi.ele.me",
+          secure: false,
+          pathRewrite: {"^/api" : ""},
+          changeOrigin : true
+        }
+    },
     setup(app) {
       // This lets us open files from the runtime error overlay.
       app.use(errorOverlayMiddleware());

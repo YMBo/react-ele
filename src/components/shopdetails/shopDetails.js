@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import ListHeader from './listHeader/listHeader.js'
+import ListMain from './listMain/listMain.js'
 import 'es6-promise'
 import 'whatwg-fetch'
 
@@ -59,6 +60,7 @@ class ShopDetails extends Component{
 	render(){
 		return <div>
 			<ListHeader data={this.state.headerData}/>
+			<ListMain/>
 		</div>
 	}
 }
