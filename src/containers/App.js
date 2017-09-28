@@ -8,7 +8,7 @@ import {BrowserRouter,Route,Switch} from 'react-router-dom'
 import Footer from '../components/footer/footer.js'
 import MessageSmart from './message/message.js'
 import Index from './index/index.js'
-import ShopDetails from '../components/shopdetails/shopDetails.js'
+import ShopDetails from './shopdetails/shopDetails.js'
 
 class App extends Component{
 	render(){
