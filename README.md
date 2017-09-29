@@ -108,3 +108,30 @@ render(){
  #### 13.最后一个页面商铺详情页    
  从首页的商铺列表进入每个商铺页的时候，会通过 两个参数请求商铺的详情数据，参数分别是，用户所在地理位置的`geohash`值，和 用户`id`值来请求数据，所以我用了fetch做请求    
  ![效果](https://github.com/YMBo/react-ele/blob/master/preview/13.gif)    
+ #### 14.上商铺详情页的第一个tab商品页    
+用了`better scroll` 插件，要注意的是，这里的数据全是真实的饿了么数据（实时取过来的）所以要依靠网络，那么就会有DOM高度变化的情况，
+ 初始化 `better-scroll` 后，一定要 `componentDidUpdate`这个生命周期里进行更新    
+ ```` javascript
+ /*注意，要更新一下，因为dom的高度发生了变化*/
+componentDidUpdate(){
+	this.state.scroll.refresh();
+}
+componentDidMount() {
+	/*初始化*/
+	this.body.style.height=window.screen.height-this.body.offsetTop+'px';
+	let scroll = new BScroll(document.querySelector('.commodity_main'),{//初始化BScroll对象
+		scrollY:true,
+		probeType:3,
+		bounce: false,
+		momentum:true,
+		HWCompositing: true ,
+		click: true
+	});
+	this.setState({
+		scroll
+	});
+}
+ ```   
+ 目前小加号的抛物线动画还没有做    
+  ![效果](https://github.com/YMBo/react-ele/blob/master/preview/14.gif)     
+  
