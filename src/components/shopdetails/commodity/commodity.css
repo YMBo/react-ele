@@ -1,0 +1,193 @@
+.commodity{
+	overflow: hidden;
+	display: flex;
+	.list_cont{
+		flex: none;
+		width: 2.266667rem;
+		overflow-y: auto;
+		li{
+			background-color: #fff;
+			border-right-color: #fff;
+			font-weight: bolder;
+			position: relative;
+			padding: .466667rem .2rem;
+			border-bottom: 1px solid #ededed;
+			font-size: .346667rem;
+			color: #666;
+			img{
+				width: .24rem;
+				height: .333333rem;
+				max-width: 100%;
+				margin-right: 6px;
+			}
+		}
+	}
+	.commodity_main{
+	width: 7.733333rem;
+		height: 100%;
+		.commodity_main_menu{
+			.commodity_main_menu_more{
+				.popup{
+					position: absolute;
+					background-color: #39373a;
+					opacity: .97;
+					transform: scale(1);
+					transform-origin: top right;
+					width: 63%;
+					right: .133333rem;
+					z-index: 3;
+					color: #eee;
+					font-size: .32rem;
+					border-radius: .106667rem;
+					padding: .24rem .266667rem;
+					transition: all .3s ease;
+					cursor: pointer;
+					&::before{
+						content: "";
+						position: absolute;
+						top: 0;
+						transform: translateY(-100%);
+						right: .266667rem;
+						border: .133333rem solid transparent;
+						border-bottom-color: #39373a;
+					};
+				}
+				.more_icon{
+					position: absolute;
+					right: 0;
+					top: 0;
+					bottom: 0;
+					width: .933333rem;
+					z-index: 2;
+					background: #f1f1f1 url(./icon_more.png) 50% no-repeat;
+					background-size: .32rem auto;
+				}
+			}
+			dt{
+				position: relative;
+				padding: .2rem .8rem .2rem .266667rem;
+				background-color: #f1f1f1;
+				.commodity_main_menu_title{
+					display: flex;
+					align-items: flex-end;
+					overflow: hidden;
+					strong{
+						margin-right: .133333rem;
+						font-weight: 700;
+						font-size: .373333rem;
+						color: #666;
+						flex: none;
+					}
+					span{
+						flex: 1;
+						color: #999;
+						font-size: .266667rem;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+				}
+			}
+		}
+	}
+}
+.commodity_main_list{
+	position: relative;
+	margin: 0;
+	box-shadow: 0.4rem 1px 0 0 #ddd;
+	min-height: 3.066667rem;
+	.commodity_main_list_c{
+		background-color: #fff;
+		padding: .4rem .266667rem;
+		margin-bottom: 1px;
+		display: flex;
+		min-height: 3.066667rem;
+		position: relative;
+		.commodity_main_list_des{
+			position: relative;
+			width: 100%;
+			padding-bottom: .666667rem;
+			padding-left: 10px;
+			.food_money{
+					position: absolute;
+					bottom: 0;
+					font-weight: 700;
+					font-size: .426667rem;
+					line-height: .426667rem;
+					color: #f60;
+					padding-bottom: .093333rem;
+					display: flex;
+					align-items: baseline;
+					color: #f60;
+					&:before{
+						font-weight: 400;
+						content: "\A5";
+						font-size: .32rem;
+						color: #f60;
+						margin-right: .053333rem;
+						display: inline-block;
+					};
+			}
+			.food_add{
+				position: absolute;
+				right: 0;
+				bottom: -.066667rem;
+				.food_add_box{
+					display: inline-block;
+					font-size: .346667rem;
+					white-space: nowrap;
+					a{
+						display: inline-block;
+						padding: .093333rem;
+						vertical-align: middle;
+						text-decoration: none;
+						svg{
+							width: 40px;
+							height: 40px;
+							vertical-align: middle;
+							fill: #3190e8;
+						}
+					}
+				}
+			}
+			.food_buy{
+				margin: .173333rem 0!important;
+				color: #666;
+				font-size: .293333rem;
+				line-height: 1;
+
+				span{
+					vertical-align: middle;
+					&:not(:first-child){
+						margin-left: .106667rem;
+						vertical-align: middle;
+					};
+				}
+			}
+			.commodity_main_list_des_ev{
+				margin: .133333rem 0!important;
+				font-size: .253333rem;
+				color: #999;
+			}
+			.commodity_main_list_des_title{
+				font-size: .4rem;
+				font-weight: 700;
+				line-height: 1.1;
+				overflow: hidden;
+				display: flex;
+				-webkit-box-pack: justify;
+				-webkit-justify-content: space-between;
+				-ms-flex-pack: justify;
+				justify-content: space-between;
+			}
+		}
+		.commodity_main_list_img{
+			    width: 46%;
+			vertical-align: top;
+			img{
+				width: 100%;
+				border-radius: .053333rem;
+			}
+		}
+	}
+}

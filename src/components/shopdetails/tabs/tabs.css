@@ -4,9 +4,6 @@
 }
 .tabs_body{
 	display: flex;
-	div{
-		width: 100%;
-	}
 }
 .tabs_border{
 	position: relative;

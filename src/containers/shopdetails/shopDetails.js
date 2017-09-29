@@ -59,9 +59,9 @@ class ShopDetails extends Component{
 	}
 	render(){
 		return <div>
-			<ListHeader data={this.state.headerData}/>
-			<TabsSmart/>
-		</div>
+				<ListHeader data={this.state.headerData}/>
+				<TabsSmart id={this.props.id}/>
+			</div>
 	}
 }
 

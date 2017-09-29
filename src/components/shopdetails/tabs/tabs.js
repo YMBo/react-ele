@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import './tabs.css'
-class Tabs_li extends Component{
+class TabsLi extends Component{
 	constructor(){
 		super()
 		this.state={
@@ -25,11 +25,11 @@ class Tabs_li extends Component{
 				{/*注意这个api*/}
 				<div className='tabs_body'>
 					{React.Children.map(this.props.children,(child)=>{
-					    return <div style={{display:`${child.key==this.state.current?'block ':'none'}`}}>{child}</div>
+					    return <div style={{display:`${Number(child.key)===Number(this.state.current)?'block ':'none'}`}}>{child}</div>
 					})}
 				</div>
 			</div>
 		)
 	}
 }
-export default Tabs_li;
+export default TabsLi;

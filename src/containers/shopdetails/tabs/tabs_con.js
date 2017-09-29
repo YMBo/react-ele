@@ -1,11 +1,12 @@
 import React,{Component} from 'react'
-import Tabs_li from '../../../components/shopdetails/tabs/tabs.js'
+import TabsLi from '../../../components/shopdetails/tabs/tabs.js'
 import CommoditySmart from '../commodity/commodity.js'
 class TabsSmart extends Component{
 	constructor(){
 		super()
 		this.state={
-			current:false
+			current:false,
+
 		}
 	}
 	handClick(){
@@ -29,13 +30,11 @@ class TabsSmart extends Component{
 			}
 		]
 		return(
-			<div>
-				<Tabs_li data={data}>
-						<CommoditySmart key={0}/>
-						<div key={1}>2</div>
-						<div key={2}>3</div>
-				</Tabs_li>
-			</div>
+			<TabsLi data={data}>
+					<CommoditySmart id={this.props.id} key={0}/>
+					<div key={1}>2</div>
+					<div key={2}>3</div>
+			</TabsLi>
 		)
 	}
 }
