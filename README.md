@@ -111,7 +111,7 @@ render(){
  #### 14.上商铺详情页的第一个tab商品页    
 用了`better scroll` 插件，要注意的是，这里的数据全是真实的饿了么数据（实时取过来的）所以要依靠网络，那么就会有DOM高度变化的情况，
  初始化 `better-scroll` 后，一定要 `componentDidUpdate`这个生命周期里进行更新    
- ```` javascript
+ ``` javascript
  /*注意，要更新一下，因为dom的高度发生了变化*/
 componentDidUpdate(){
 	this.state.scroll.refresh();
