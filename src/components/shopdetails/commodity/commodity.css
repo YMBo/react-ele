@@ -21,6 +21,15 @@
 				margin-right: 6px;
 			}
 		}
+		.active:after {
+		    content: "";
+		    position: absolute;
+		    left: 0;
+		    top: 0;
+		    bottom: 0;
+		    width: .08rem;
+		    background-color: #3190e8;
+		}
 	}
 	.commodity_main{
 	width: 7.733333rem;

@@ -33,6 +33,7 @@ class ShopDetails extends Component{
 		fetch(`/api/shopping/restaurant/${this.props.id}?extras[]=activities&extras[]=albums&extras[]=license&extras[]=identification&extras[]=qualification`)
 		.then(response=>response.json())
 		.then(dataJson=>{
+		document.title=dataJson.name;
 			this.setState({
 				headerData:{
 					/*名称*/

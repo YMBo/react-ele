@@ -8,7 +8,8 @@ class Commodity extends Component{
 		super()
 		this.state={
 			openMore:false,
-			scroll:null
+			scroll:null,
+			current:0
 		}
 	}
 	/*注意，要更新一下，因为dom的高度发生了变化*/
@@ -29,12 +30,18 @@ class Commodity extends Component{
 		this.setState({
 			scroll
 		});
+		scroll.on('scroll',(pos) => {//商品滚动
+		})
+	}
+	componentWillUnmount(){
+		this.scroll.destroy();
 	}
 	handleClick(){
 		this.setState({
 			openMore:!this.state.openMore
 		})
 	}
+	
 	/*图片格式化*/
 	_formatImg(src){
 		let png=/png/g.test(src);
@@ -47,15 +54,18 @@ class Commodity extends Component{
 	/*点击控制*/
 	_run(id){
 		this.state.scroll.scrollToElement('#menu' + id,400);
+		this.setState({
+			current:id
+		})
 	}
 	render(){
 /*数据处理*/
 		let data=this.props.data?this.props.data:[];
 		/*列表*/
 		let listDomTab=data.map((value,index)=>{
-			return(<li key={index} className='list_con_tags' onClick={this._run.bind(this,index)}>
+			return(<li className={`${this.state.current===index?'active':''}`} key={index} onClick={this._run.bind(this,index)}>
 					{value.icon_url!==''?
-					<img src={`//fuss10.elemecdn.com/${this._formatImg(value.icon_url)}?imageMogr/format/webp/thumbnail/18x/`} />
+					<img alt={value.name} src={`//fuss10.elemecdn.com/${this._formatImg(value.icon_url)}?imageMogr/format/webp/thumbnail/18x/`} />
 					:''
 					}
 					<span>{value.name}</span>
@@ -81,7 +91,7 @@ class Commodity extends Component{
 								</p>
 								<p className='food_buy'>
 									<span>月售{valueDes.month_sales}份</span>
-									<span>好评率{valueDes.satisfy_count/valueDes.month_sales.toFixed(2)}%</span>
+									<span>好评率{100*(valueDes.satisfy_count/valueDes.rating_count).toFixed(2)}%</span>
 								</p>
 								<strong className='food_money'>
 									<span>{valueDes.min_purchase}</span>
@@ -107,7 +117,7 @@ class Commodity extends Component{
 		});
 		return(
 			<div className='commodity'  ref={(body) => { this.body = body; }}>
-				<ul className='list_cont'>
+				<ul className='list_cont' ref={(category)=>{this.category=category}}>
 					{listDomTab}
 				</ul>
 				<div className='commodity_main'>
