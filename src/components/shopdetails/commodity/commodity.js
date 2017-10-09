@@ -15,6 +15,7 @@ class Commodity extends Component{
 	/*注意，要更新一下，因为dom的高度发生了变化*/
 	componentDidUpdate(){
 		this.state.scroll.refresh();
+		this._computListHeight();
 	}
 	componentDidMount() {
 		/*初始化*/
@@ -30,7 +31,14 @@ class Commodity extends Component{
 		this.setState({
 			scroll
 		});
-		scroll.on('scroll',(pos) => {//商品滚动
+		scroll.on('scroll',(pos) => {
+			if(this.isScroll){
+				this._posCalc(this.listHeight,pos.y);
+			}
+		})
+		/*鼠标拖动才会触发*/	
+		scroll.on('scrollStart',(pos) => {
+			this.isScroll=true;
 		})
 	}
 	componentWillUnmount(){
@@ -41,7 +49,47 @@ class Commodity extends Component{
 			openMore:!this.state.openMore
 		})
 	}
-	
+	/*计算右侧每一类别对应高度*/
+	_computListHeight(){
+		if(this._computListHeight.flag){return;}
+		let allDt=this.listHeightDom;
+		if(allDt.getElementsByTagName('dt').length!==0){
+			for(let i=0;i<allDt.getElementsByTagName('dt').length;i++){
+				this.listHeight.push({
+					index:i,
+					pos:allDt.getElementsByTagName('dt')[i].offsetTop
+				})
+			}
+			this._computListHeight.flag=true;
+		}
+	}
+	/*是否手动滚动*/
+	isScroll=false;
+	listHeight=[]
+	/*计算当前分类*/
+	_posCalc(pos,y){
+		if(pos.length < 2){//只有一个分类返回当前位置
+			this._run(pos[0].index);
+			return;
+		}
+		let prevArr=pos.slice(0,parseInt(pos.length/2));
+		let nextArr=pos.slice(parseInt(pos.length/2));
+		let prevArrIndex=prevArr[prevArr.length-1];
+		let nextArrIndex=nextArr[0];
+		if(prevArrIndex.pos>Math.abs(y)){
+			this._posCalc(prevArr,y);
+			return;
+		}else if(nextArrIndex.pos<Math.abs(y)){
+			this._posCalc(nextArr,y);
+			return;
+		}else if(prevArrIndex.pos<=Math.abs(y)+10&&nextArrIndex.pos>Math.abs(y)){
+			if(prevArrIndex.index===this.state.current){return;}
+			this.setState({
+				current:prevArrIndex.index
+			})
+			return;
+		}
+	}
 	/*图片格式化*/
 	_formatImg(src){
 		let png=/png/g.test(src);
@@ -58,12 +106,16 @@ class Commodity extends Component{
 			current:id
 		})
 	}
+	handleClickRun(id){
+		this.isScroll=false;
+		this._run(id);
+	}
 	render(){
-/*数据处理*/
+		/*数据处理*/
 		let data=this.props.data?this.props.data:[];
 		/*列表*/
 		let listDomTab=data.map((value,index)=>{
-			return(<li className={`${this.state.current===index?'active':''}`} key={index} onClick={this._run.bind(this,index)}>
+			return(<li className={`${this.state.current===index?'active':''}`} key={index} onClick={this.handleClickRun.bind(this,index)}>
 					{value.icon_url!==''?
 					<img alt={value.name} src={`//fuss10.elemecdn.com/${this._formatImg(value.icon_url)}?imageMogr/format/webp/thumbnail/18x/`} />
 					:''
@@ -121,7 +173,7 @@ class Commodity extends Component{
 					{listDomTab}
 				</ul>
 				<div className='commodity_main'>
-					<dl className='commodity_main_menu'>
+					<dl ref={(listHeightDom)=>this.listHeightDom=listHeightDom} className='commodity_main_menu'>
 						{listDomMain}
 					</dl>
 				</div>
