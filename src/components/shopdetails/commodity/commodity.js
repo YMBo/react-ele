@@ -57,7 +57,6 @@ class Commodity extends Component{
 	listHeight=[]
 	/*计算当前分类*/
 	_posCalc(pos,y){
-		console.log(3);
 		if(pos.length < 2){//只有一个分类返回当前位置
 			this._run(pos[0].index);
 			return;
@@ -105,14 +104,12 @@ class Commodity extends Component{
 		if(obj.scrollHeight-obj.scrollTop<=obj.offsetHeight+4){
 			obj.scrollTop=(obj.scrollHeight-obj.offsetHeight);
 			/*定时器是因为这个最后的滚动还没有完成就会触发滚动事件*/
-			console.log(1)
 			let timer=setTimeout(()=>{
 				this.isScroll=true;
 				clearTimeout(timer)
 			},50);
 			return;
 		}else if(Math.abs(obj.scrollTop-target)<=4){
-			console.log(2)
 			obj.scrollTop=target;
 			let timer=setTimeout(()=>{
 				this.isScroll=true;
