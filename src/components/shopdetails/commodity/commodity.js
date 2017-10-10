@@ -6,15 +6,12 @@ class Commodity extends Component{
 	constructor(){
 		super()
 		this.state={
-			openMore:false,
 			scroll:null,
 			current:0
 		}
 	}
-	/*注意，要更新一下，因为dom的高度发生了变化*/
 	componentDidUpdate(){
-		/*this.state.scroll.refresh();
-		this._computListHeight();*/
+		this._computListHeight();
 	}
 	componentDidMount() {
 		/*初始化*/
@@ -22,20 +19,24 @@ class Commodity extends Component{
 		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
 		this.body.style.height=window.screen.height-this.body.offsetTop+headerHeight+'px';
 		this._scrollTogether=this._scrollTogether.bind(this);
-		this.main.addEventListener('scroll',this._scrollTogether)
+		this.main.addEventListener('scroll',this._scrollTogether);
 	}
 	componentWillUnmount(){
-		
+		this.main.removeEventListener('scroll',this._scrollTogether)
+	}
+	/*tab点击跳转*/
+	handleClickRun(id){
+		this.isScroll=false;
+		this._animate(this.main,this.main.scrollTop,this.listHeight[id].pos);
+		this._run(id);
 	}
 	_scrollTogether(){
 		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
 		this.main.scrollTop>headerHeight?(document.querySelector('.scrollMain').scrollTop=headerHeight)
-		:(document.querySelector('.scrollMain').scrollTop=this.main.scrollTop)
-	}
-	handleClick(){
-		this.setState({
-			openMore:!this.state.openMore
-		})
+		:(document.querySelector('.scrollMain').scrollTop=this.main.scrollTop);
+		/*tab和列表联动,控制tab*/
+		if(!this.isScroll){return;}
+		this._posCalc(this.listHeight,this.main.scrollTop);
 	}
 	/*计算右侧每一类别对应高度*/
 	_computListHeight(){
@@ -52,10 +53,11 @@ class Commodity extends Component{
 		}
 	}
 	/*是否手动滚动*/
-	isScroll=false;
+	isScroll=true;
 	listHeight=[]
 	/*计算当前分类*/
 	_posCalc(pos,y){
+		console.log(3);
 		if(pos.length < 2){//只有一个分类返回当前位置
 			this._run(pos[0].index);
 			return;
@@ -70,7 +72,7 @@ class Commodity extends Component{
 		}else if(nextArrIndex.pos<Math.abs(y)){
 			this._posCalc(nextArr,y);
 			return;
-		}else if(prevArrIndex.pos<=Math.abs(y)+10&&nextArrIndex.pos>Math.abs(y)){
+		}else if(prevArrIndex.pos<=Math.abs(y)&&nextArrIndex.pos>Math.abs(y)){
 			if(prevArrIndex.index===this.state.current){return;}
 			this.setState({
 				current:prevArrIndex.index
@@ -89,14 +91,40 @@ class Commodity extends Component{
 	}
 	/*点击控制*/
 	_run(id){
-		this.state.scroll.scrollToElement('#menu' + id,400);
 		this.setState({
 			current:id
 		})
 	}
-	handleClickRun(id){
+	/*滚动动画*/
+	// 当前值
+	// 目标值
+	_animate(obj,now,target){
 		this.isScroll=false;
-		this._run(id);
+		/*是否滚动过头了（虽然过头但是显示正常）*/
+		obj.scrollTop=Math.ceil(now+(target-now)/4);
+		if(obj.scrollHeight-obj.scrollTop<=obj.offsetHeight+4){
+			obj.scrollTop=(obj.scrollHeight-obj.offsetHeight);
+			/*定时器是因为这个最后的滚动还没有完成就会触发滚动事件*/
+			console.log(1)
+			let timer=setTimeout(()=>{
+				this.isScroll=true;
+				clearTimeout(timer)
+			},50);
+			return;
+		}else if(Math.abs(obj.scrollTop-target)<=4){
+			console.log(2)
+			obj.scrollTop=target;
+			let timer=setTimeout(()=>{
+				this.isScroll=true;
+				clearTimeout(timer)
+			},50);
+			return;
+		}else{
+			requestAnimationFrame(()=>{
+				this._animate(this.main,obj.scrollTop,target)
+			})
+		}
+		
 	}
 	render(){
 		/*数据处理*/

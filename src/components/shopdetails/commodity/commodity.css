@@ -42,7 +42,8 @@
 		}
 	}
 	.commodity_main{
-	width: 7.733333rem;
+		width: 7.733333rem;
+		position: relative;
 		height: 100%;
 		overflow-y: auto;
 		.commodity_main_menu{
