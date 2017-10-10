@@ -141,6 +141,6 @@ componentDidMount() {
     
 #### 16.商家详情页左右联动添加动画    
 这一块会有些稍微的复杂，不过也就是添加一个动画函数，和在动画发生的时候避免scroll事件的触发    
-  ![效果](https://github.com/YMBo/react-ele/blob/master/preview/15.gif)    
+  ![效果](https://github.com/YMBo/react-ele/blob/master/preview/16.gif)    
 
   
