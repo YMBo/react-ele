@@ -136,7 +136,7 @@ componentDidMount() {
   ![效果](https://github.com/YMBo/react-ele/blob/master/preview/14.gif)    
 
 #### 15.修改商品页的滚动的实现方式    
-上面14说到，我用`better-scroll`实现滚动，但是本着能不用插件就不用插件，能用css就用css的原则（其实是看了ele官网的实现方式，觉得很巧妙），所以这一次修改了滚动的实现方式，注意看header部分和商品列表之间滚动条的联动~    
+上面14说到，我用`better-scroll`实现滚动，但是本着能不用插件就不用插件，能用css就用css的原则（其实是看了ele官网的实现方式，觉得很巧妙），所以这一次修改了滚动的实现方式，注意看header部分和商品列表之间滚动条的联动~（这种方式的体验感觉非常不错）    
 ![效果](https://github.com/YMBo/react-ele/blob/master/preview/15.gif)    
 
   
