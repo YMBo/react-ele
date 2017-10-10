@@ -1,3 +1,13 @@
+.scrollMain{
+	width: 100%;
+	height: 100vh;
+	padding-right: .226667rem;
+	box-sizing: content-box;
+	overflow-y: auto;
+}
+.scrollBox{
+	overflow:hidden;
+}
 .commodity{
 	overflow: hidden;
 	display: flex;
@@ -34,6 +44,7 @@
 	.commodity_main{
 	width: 7.733333rem;
 		height: 100%;
+		overflow-y: auto;
 		.commodity_main_menu{
 			.commodity_main_menu_more{
 				.popup{

@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import BScroll from 'better-scroll';
 import ListCon from '../listCon/listCon.js'
 import './commodity.css'
 /*商品页*/
@@ -14,35 +13,24 @@ class Commodity extends Component{
 	}
 	/*注意，要更新一下，因为dom的高度发生了变化*/
 	componentDidUpdate(){
-		this.state.scroll.refresh();
-		this._computListHeight();
+		/*this.state.scroll.refresh();
+		this._computListHeight();*/
 	}
 	componentDidMount() {
 		/*初始化*/
-		this.body.style.height=window.screen.height-this.body.offsetTop+'px';
-		let scroll = new BScroll(document.querySelector('.commodity_main'),{//初始化BScroll对象
-			scrollY:true,
-			probeType:3,
-			bounce: false,
-			momentum:true,
-			HWCompositing: true ,
-			click: true
-		});
-		this.setState({
-			scroll
-		});
-		scroll.on('scroll',(pos) => {
-			if(this.isScroll){
-				this._posCalc(this.listHeight,pos.y);
-			}
-		})
-		/*鼠标拖动才会触发*/	
-		scroll.on('scrollStart',(pos) => {
-			this.isScroll=true;
-		})
+		/*为了顶部吸附*/
+		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
+		this.body.style.height=window.screen.height-this.body.offsetTop+headerHeight+'px';
+		this._scrollTogether=this._scrollTogether.bind(this);
+		this.main.addEventListener('scroll',this._scrollTogether)
 	}
 	componentWillUnmount(){
-		this.scroll.destroy();
+		
+	}
+	_scrollTogether(){
+		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
+		this.main.scrollTop>headerHeight?(document.querySelector('.scrollMain').scrollTop=headerHeight)
+		:(document.querySelector('.scrollMain').scrollTop=this.main.scrollTop)
 	}
 	handleClick(){
 		this.setState({
@@ -72,8 +60,8 @@ class Commodity extends Component{
 			this._run(pos[0].index);
 			return;
 		}
-		let prevArr=pos.slice(0,parseInt(pos.length/2));
-		let nextArr=pos.slice(parseInt(pos.length/2));
+		let prevArr=pos.slice(0,parseInt(pos.length/2,10));
+		let nextArr=pos.slice(parseInt(pos.length/2,10));
 		let prevArrIndex=prevArr[prevArr.length-1];
 		let nextArrIndex=nextArr[0];
 		if(prevArrIndex.pos>Math.abs(y)){
@@ -161,21 +149,23 @@ class Commodity extends Component{
 				</dd>
 				)
 			})
-			return([
+			return(
 				/*标题*/
-				<ListCon index={index} value={value} />,
-				...listDomDes
-			])
+				<dl key={index}>
+					<ListCon index={index} value={value} />
+					{listDomDes}
+				</dl>
+			)
 		});
 		return(
 			<div className='commodity'  ref={(body) => { this.body = body; }}>
 				<ul className='list_cont' ref={(category)=>{this.category=category}}>
 					{listDomTab}
 				</ul>
-				<div className='commodity_main'>
-					<dl ref={(listHeightDom)=>this.listHeightDom=listHeightDom} className='commodity_main_menu'>
+				<div className='commodity_main' ref={(main)=>{this.main=main}}>
+					<div ref={(listHeightDom)=>this.listHeightDom=listHeightDom} className='commodity_main_menu'>
 						{listDomMain}
-					</dl>
+					</div>
 				</div>
 			</div>
 		)

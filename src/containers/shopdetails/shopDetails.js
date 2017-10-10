@@ -59,10 +59,14 @@ class ShopDetails extends Component{
 		})
 	}
 	render(){
-		return <div>
-				<ListHeader data={this.state.headerData}/>
-				<TabsSmart id={this.props.id}/>
+		return (
+			<div className='scrollBox'>
+				<div className='scrollMain'>
+					<ListHeader data={this.state.headerData}/>
+					<TabsSmart id={this.props.id}/>
+				</div>
 			</div>
+			)
 	}
 }
 
