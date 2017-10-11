@@ -10,7 +10,13 @@
 }
 .commodity{
 	overflow: hidden;
-	display: flex;
+	.commodity_box{
+		height: 100%;
+		padding-bottom: 1.28rem;
+		background-color: #fff;
+		display: flex;
+		box-sizing: border-box;
+	}
 	.list_cont{
 		flex: none;
 		width: 2.266667rem;

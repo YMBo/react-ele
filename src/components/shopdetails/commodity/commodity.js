@@ -97,8 +97,10 @@ class Commodity extends Component{
 	/*滚动动画*/
 	// 当前值
 	// 目标值
+	_isAnimate=null
 	_animate(obj,now,target){
 		this.isScroll=false;
+		window.cancelAnimationFrame(this._isAnimate)
 		/*是否滚动过头了（虽然过头但是显示正常）*/
 		obj.scrollTop=Math.ceil(now+(target-now)/4);
 		if(obj.scrollHeight-obj.scrollTop<=obj.offsetHeight+4){
@@ -117,7 +119,7 @@ class Commodity extends Component{
 			},50);
 			return;
 		}else{
-			requestAnimationFrame(()=>{
+			this._isAnimate=requestAnimationFrame(()=>{
 				this._animate(this.main,obj.scrollTop,target)
 			})
 		}
@@ -159,7 +161,7 @@ class Commodity extends Component{
 									<span>好评率{100*(valueDes.satisfy_count/valueDes.rating_count).toFixed(2)}%</span>
 								</p>
 								<strong className='food_money'>
-									<span>{valueDes.min_purchase}</span>
+									<span>{valueDes.specfoods[0].price}</span>
 								</strong>
 								<div className='food_add'>
 									<span className='food_add_box'>
@@ -184,12 +186,14 @@ class Commodity extends Component{
 		});
 		return(
 			<div className='commodity'  ref={(body) => { this.body = body; }}>
-				<ul className='list_cont' ref={(category)=>{this.category=category}}>
-					{listDomTab}
-				</ul>
-				<div className='commodity_main' ref={(main)=>{this.main=main}}>
-					<div ref={(listHeightDom)=>this.listHeightDom=listHeightDom} className='commodity_main_menu'>
-						{listDomMain}
+				<div className='commodity_box'>
+					<ul className='list_cont' ref={(category)=>{this.category=category}}>
+						{listDomTab}
+					</ul>
+					<div className='commodity_main' ref={(main)=>{this.main=main}}>
+						<div ref={(listHeightDom)=>this.listHeightDom=listHeightDom} className='commodity_main_menu'>
+							{listDomMain}
+						</div>
 					</div>
 				</div>
 			</div>
