@@ -197,7 +197,7 @@ class Commodity extends Component{
 						</div>
 					</div>
 				</div>
-				<Footer/>
+				<Footer data={this.props.basicData}/>
 			</div>
 		)
 	}

@@ -22,7 +22,7 @@ class CommoditySmart extends Component{
 	}
 	render(){
 		return(
-			<Commodity data={this.state.data}/>
+			<Commodity basicData={this.props.data} data={this.state.data}/>
 		)
 	}
 }
