@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import ListCon from '../listCon/listCon.js'
+import Footer from '../footer/footer.js'
 import './commodity.css'
 /*商品页*/
 class Commodity extends Component{
@@ -196,6 +197,7 @@ class Commodity extends Component{
 						</div>
 					</div>
 				</div>
+				<Footer/>
 			</div>
 		)
 	}
