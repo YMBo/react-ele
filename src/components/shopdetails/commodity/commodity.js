@@ -14,6 +14,26 @@ class Commodity extends Component{
 			allPirce:0
 		}
 	}
+	componentWillReceiveProps(){
+		/*初始化*/
+		let id=this.props.basicData.id?this.props.basicData.id:0;
+		let allSelected=this._getLocalStorage();
+		/*总数量*/
+		let allNum=0;
+		/*总价*/
+		let allPirce=0;
+		if(allSelected){
+			if(!allSelected[id]){return;}
+			allSelected[id][0].entities.forEach((value,index)=>{
+				allNum+=value.quantity;
+				allPirce+=value.view_discount_price;
+			});
+			this.setState({
+				num:allNum,
+				allPirce
+			})
+		}
+	}
 	componentDidUpdate(){
 		this._computListHeight();
 	}
@@ -144,41 +164,43 @@ class Commodity extends Component{
 		}
 	}
 	handleSubmitCut(thisIndex,foodIndex){
-		console.log(1)
-		/*总数量*/
-		let allNum=0;
-		/*总价*/
-		let allPirce=0;
-		let id=this.props.basicData.id;
-		let thisData=this.props.data[thisIndex].foods[foodIndex];
-		let alreadySelect=this._getLocalStorage();
-		/*同一商品的数量*/
-		let selectNum=0;
-		/*如果存储过值*/
-		if(alreadySelect){
-			alreadySelect[id][0].entities.forEach((value,index)=>{
-				/*如果选的是同一个*/
-				if(value.id===thisData.category_id){
-					selectNum=--value.quantity;
-					if(selectNum<=0){
-						alreadySelect[id][0].entities.splice(index,1)
-					}else{
-						value.quantity=selectNum;
-						value.view_discount_price=thisData.specfoods[0].price*selectNum;
-				    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
+		if(this.props.deleteSelected){
+			/*总数量*/
+			let allNum=0;
+			/*总价*/
+			let allPirce=0;
+			let id=this.props.basicData.id;
+			let thisData=this.props.data[thisIndex].foods[foodIndex];
+			let alreadySelect=this._getLocalStorage();
+			/*同一商品的数量*/
+			let selectNum=0;
+			/*如果存储过值*/
+			if(alreadySelect){
+				alreadySelect[id][0].entities.forEach((value,index)=>{
+					/*如果选的是同一个*/
+					if(value.id===thisData.category_id){
+						selectNum=--value.quantity;
+						if(selectNum<=0){
+							alreadySelect[id][0].entities.splice(index,1)
+						}else{
+							value.quantity=selectNum;
+							value.view_discount_price=thisData.specfoods[0].price*selectNum;
+					    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
+						}
 					}
-				}
-			})
+				})
+			}
+			alreadySelect[id][0].entities.forEach((value,index)=>{
+				allNum+=value.quantity;
+				allPirce+=value.view_discount_price;
+			});
+			this.props.deleteSelected(alreadySelect);
+			this._saveLocalStorage(alreadySelect);
+			this.setState({
+				num:allNum,
+				allPirce
+			})	
 		}
-		alreadySelect[id][0].entities.forEach((value,index)=>{
-			allNum+=value.quantity;
-			allPirce+=value.view_discount_price;
-		});
-		this._saveLocalStorage(alreadySelect);
-		this.setState({
-			num:allNum,
-			allPirce
-		})
 	}
 	handleSubmit(thisIndex,foodIndex){
 		if(this.props.addSelected){
@@ -266,9 +288,9 @@ class Commodity extends Component{
 		}
 	}
 	render(){
+
 		/*数据处理*/
 		let data=this.props.data?this.props.data:[];
-		console.log(data)
 		/*列表*/
 		let listDomTab=data.map((value,index)=>{
 			return(<li className={`${this.state.current===index?'active':''}`} key={index} onClick={this.handleClickRun.bind(this,index)}>

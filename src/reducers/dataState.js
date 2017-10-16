@@ -35,7 +35,6 @@ export default function(state,action){
 			return{
 				...state,
 				allSelected:{
-					...state.allSelected,
 					...action.selected
 				}
 			}
