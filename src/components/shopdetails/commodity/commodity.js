@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import ListCon from '../listCon/listCon.js'
 import Footer from '../footer/footer.js'
+import Selected from '../selected/selected.js'
 import './commodity.css'
 /*商品页*/
 class Commodity extends Component{
@@ -8,7 +9,8 @@ class Commodity extends Component{
 		super()
 		this.state={
 			scroll:null,
-			current:0
+			current:0,
+			num:0
 		}
 	}
 	componentDidUpdate(){
@@ -126,6 +128,93 @@ class Commodity extends Component{
 		}
 		
 	}
+	_saveLocalStorage(obj){
+		try{
+			localStorage.setItem("currentSelected",JSON.stringify(obj))
+		}catch (e){
+			console.log(e)
+		}
+	}
+	_getLocalStorage(){
+		try{
+			return JSON.parse(localStorage.getItem("currentSelected"))
+		}catch (e){
+			console.log(e)
+		}
+	}
+	handleSubmit(thisIndex,foodIndex){
+		if(this.props.addSelected){
+			let id=this.props.basicData.id;
+			let obj={};
+			let thisData=this.props.data[thisIndex].foods[foodIndex];
+			let alreadySelect=this._getLocalStorage();
+			/*同一商品的数量*/
+			let selectNum=1;
+			/*是否为同种*/
+			let footSame=false;
+			/*如果存储过值*/
+			if(alreadySelect){
+				alreadySelect[id][0].entities.forEach((value,index)=>{
+					/*如果选的是同一个*/
+					if(value.id===thisData.category_id){
+						footSame=true;
+						selectNum=++value.quantity;
+						value.quantity=selectNum;
+						value.view_discount_price=thisData.specfoods[0].price*selectNum;
+				    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
+						obj=alreadySelect;
+					}
+				})
+				if(!footSame){
+					/*且有值*/
+					alreadySelect[id][0].entities.push({
+						"id": thisData.category_id,
+						"sku_id": thisData.specfoods[0].sku_id,
+						"item_id": thisData.item_id,
+						"quantity": selectNum,
+						"name": thisData.specfoods[0].name,
+						"price": thisData.specfoods[0].price,
+						"original_price": null,
+						"packing_fee": 1,
+						"stock": thisData.specfoods[0].stock,
+						"specs": thisData.specfoods[0].specs,
+						"attrs": thisData.attrs,
+						"weight": thisData.specfoods[0].weight,
+						"extra": {},
+						"view_discount_price": thisData.specfoods[0].price*selectNum,
+						"view_original_price": thisData.specfoods[0].price*selectNum
+					})
+					obj=alreadySelect;
+				}
+			}else{
+				obj[id]=[
+					{
+					    "entities": [
+					    	{
+					    	    "id": thisData.category_id,
+					    	    "sku_id": thisData.specfoods[0].sku_id,
+					    	    "item_id": thisData.item_id,
+					    	    "quantity": selectNum,
+					    	    "name": thisData.specfoods[0].name,
+					    	    "price": thisData.specfoods[0].price,
+					    	    "original_price": null,
+					    	    "packing_fee": 1,
+					    	    "stock": thisData.specfoods[0].stock,
+					    	    "specs": thisData.specfoods[0].specs,
+					    	    "attrs": thisData.attrs,
+					    	    "weight": thisData.specfoods[0].weight,
+					    	    "extra": {},
+					    	    "view_discount_price": thisData.specfoods[0].price*selectNum,
+					    	    "view_original_price": thisData.specfoods[0].price*selectNum
+					    	}
+					    ],
+					}
+				];
+			}
+			this._saveLocalStorage(obj);
+			this.props.addSelected(obj);
+		}
+	}
 	render(){
 		/*数据处理*/
 		let data=this.props.data?this.props.data:[];
@@ -142,6 +231,7 @@ class Commodity extends Component{
 		/*主内容*/
 		let listDomMain=data.map((value,index)=>{
 			/*内容*/
+			let thisIndex=index;
 			let listDomDes=value.foods.map((valueDes,index)=>{
 				return(
 				<dd className='commodity_main_list' key={index}>
@@ -165,11 +255,7 @@ class Commodity extends Component{
 									<span>{valueDes.specfoods[0].price}</span>
 								</strong>
 								<div className='food_add'>
-									<span className='food_add_box'>
-										<a href="javascript:void(0)" className='food_add_add'>
-											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" version="1.1"><path fill="none" d="M0 0h44v44H0z"/><path fillRule="evenodd" d="M22 0C9.8 0 0 9.8 0 22s9.8 22 22 22 22-9.8 22-22S34.2 0 22 0zm10 24h-8v8c0 1.1-.9 2-2 2s-2-.9-2-2v-8h-8c-1.1 0-2-.9-2-2s.9-2 2-2h8v-8c0-1.1.9-2 2-2s2 .9 2 2v8h8c1.1 0 2 .9 2 2s-.9 2-2 2z" clipRule="evenodd"/></svg>
-										</a>
-									</span>
+								<Selected num={this.state.num} handleSubmit={this.handleSubmit.bind(this,thisIndex,index)}/>
 								</div>
 							</section>
 						</div>

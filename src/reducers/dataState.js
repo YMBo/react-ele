@@ -12,29 +12,38 @@ export default function(state,action){
 	if(!state){
 		state={
 			loginPart:{islogin:false,name:'',phone:0},
-			allSelected:[]
+			allSelected:{}
 		}
 	}
 	switch(action.type){
 		case LOGIN:
 			return{
+				...state,
 				loginPart:{...action.data}
 			}
 		case LOGOUT:
 			return{
+				...state,
 				loginPart:{islogin:false,name:'',phone:0}
 			}
 		case INIT_SELECTED_GOODS:
 			return{
-				allSelected:[...action.selected]
+				...state,
+				allSelected:{...action.selected}
 			}
 		case ADD_SELECTED_GOODS:
+		console.log(state.allSelected)
 			return{
-				allSelected:[...state.allSelected,action.selected]
+				...state,
+				allSelected:{
+					...state.allSelected,
+					...action.selected
+				}
 			}
 		case DELETE_SELECTED_GOODS:
 			return{
-				allSelected:[...action.selected]
+				...state,
+				allSelected:{...action.selected}
 			}
 		default:
 			return state;
@@ -65,7 +74,7 @@ export const initSelectedGoods=(selected)=>{
 export const addSelectedGoods=(selected)=>{
 	return{
 		type:'ADD_SELECTED_GOODS',
-		selected
+		selected:selected
 	}
 }
 /*删除商品*/

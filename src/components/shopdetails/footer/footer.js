@@ -9,7 +9,7 @@ class Footer extends Component{
 		return(
 			<footer className='shop_footer'>
 				<div className='shop_footer_box'>
-					<span className='shopping_footer  isNumNone' data-quantity='0'></span>
+					<span className='shopping_footer  isNumNone' data-quantity={this.props.num}></span>
 					<div className='shopping_footer_middle'>
 						<p className='shop_price'>
 							<span>¥0</span>
