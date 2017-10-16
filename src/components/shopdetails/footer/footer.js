@@ -9,7 +9,7 @@ class Footer extends Component{
 		return(
 			<footer className='shop_footer'>
 				<div className='shop_footer_box'>
-					<span className={`${this.props.num===0?'isNumNone':null} shopping_footer`} data-quantity={this.props.num}></span>
+					<span className={`${this.props.num===0?'isNumNone':''} shopping_footer`} data-quantity={this.props.num}></span>
 					<div className='shopping_footer_middle'>
 						<p className='shop_price'>
 							<span>¥{this.props.allPirce}</span>
@@ -18,7 +18,7 @@ class Footer extends Component{
 					</div>
 					<a href="javascript:void(0)" className={`shoping_submit 
 						${this.props.allPirce>=this.props.data.float_minimum_order_amount
-						?null:'isdisable'}`}>
+						?'':'isdisable'}`}>
 						{this.props.allPirce>=this.props.data.float_minimum_order_amount
 						?<span>去结算</span>
 						:<span>还差¥{this.props.data.float_minimum_order_amount-this.props.allPirce}起送</span>}

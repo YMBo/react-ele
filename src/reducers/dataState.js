@@ -32,7 +32,6 @@ export default function(state,action){
 				allSelected:{...action.selected}
 			}
 		case ADD_SELECTED_GOODS:
-		console.log(state.allSelected)
 			return{
 				...state,
 				allSelected:{
