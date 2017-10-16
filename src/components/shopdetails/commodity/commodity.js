@@ -10,7 +10,8 @@ class Commodity extends Component{
 		this.state={
 			scroll:null,
 			current:0,
-			num:0
+			num:0,
+			allPirce:0
 		}
 	}
 	componentDidUpdate(){
@@ -144,6 +145,10 @@ class Commodity extends Component{
 	}
 	handleSubmit(thisIndex,foodIndex){
 		if(this.props.addSelected){
+			/*总数量*/
+			let allNum=0;
+			/*总价*/
+			let allPirce=0;
 			let id=this.props.basicData.id;
 			let obj={};
 			let thisData=this.props.data[thisIndex].foods[foodIndex];
@@ -211,8 +216,16 @@ class Commodity extends Component{
 					}
 				];
 			}
+			obj[id][0].entities.forEach((value,index)=>{
+				allNum+=value.quantity;
+				allPirce+=value.view_discount_price;
+			});
 			this._saveLocalStorage(obj);
 			this.props.addSelected(obj);
+			this.setState({
+				num:allNum,
+				allPirce
+			})
 		}
 	}
 	render(){
@@ -283,7 +296,7 @@ class Commodity extends Component{
 						</div>
 					</div>
 				</div>
-				<Footer data={this.props.basicData}/>
+				<Footer allPirce={this.state.allPirce} num={this.state.num} data={this.props.basicData}/>
 			</div>
 		)
 	}
