@@ -1,53 +1,66 @@
 import React,{Component} from 'react';
-import BScroll from 'better-scroll';
 import ListCon from '../listCon/listCon.js'
+import Footer from '../footer/footer.js'
+import Selected from '../selected/selected.js'
 import './commodity.css'
 /*商品页*/
 class Commodity extends Component{
 	constructor(){
 		super()
 		this.state={
-			openMore:false,
 			scroll:null,
-			current:0
+			current:0,
+			num:0,
+			allPirce:0
 		}
 	}
-	/*注意，要更新一下，因为dom的高度发生了变化*/
+	componentWillReceiveProps(){
+		/*初始化*/
+		let id=this.props.basicData.id?this.props.basicData.id:0;
+		let allSelected=this._getLocalStorage();
+		/*总数量*/
+		let allNum=0;
+		/*总价*/
+		let allPirce=0;
+		if(allSelected){
+			if(!allSelected[id]){return;}
+			allSelected[id][0].entities.forEach((value,index)=>{
+				allNum+=value.quantity;
+				allPirce+=value.view_discount_price;
+			});
+			this.setState({
+				num:allNum,
+				allPirce
+			})
+		}
+	}
 	componentDidUpdate(){
-		this.state.scroll.refresh();
 		this._computListHeight();
 	}
 	componentDidMount() {
 		/*初始化*/
-		this.body.style.height=window.screen.height-this.body.offsetTop+'px';
-		let scroll = new BScroll(document.querySelector('.commodity_main'),{//初始化BScroll对象
-			scrollY:true,
-			probeType:3,
-			bounce: false,
-			momentum:true,
-			HWCompositing: true ,
-			click: true
-		});
-		this.setState({
-			scroll
-		});
-		scroll.on('scroll',(pos) => {
-			if(this.isScroll){
-				this._posCalc(this.listHeight,pos.y);
-			}
-		})
-		/*鼠标拖动才会触发*/	
-		scroll.on('scrollStart',(pos) => {
-			this.isScroll=true;
-		})
+		/*为了顶部吸附*/
+		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
+		this.body.style.height=window.screen.height-this.body.offsetTop+headerHeight+'px';
+		this._scrollTogether=this._scrollTogether.bind(this);
+		this.main.addEventListener('scroll',this._scrollTogether);
 	}
 	componentWillUnmount(){
-		this.scroll.destroy();
+		this.main.removeEventListener('scroll',this._scrollTogether)
 	}
-	handleClick(){
-		this.setState({
-			openMore:!this.state.openMore
-		})
+	/*tab点击跳转*/
+	handleClickRun(id){
+		this.isScroll=false;
+		this._animate(this.main,this.main.scrollTop,this.listHeight[id].pos);
+		this._run(id);
+	}
+	_scrollTogether(){
+		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
+		this.main.scrollTop>headerHeight?(document.querySelector('.scrollMain').scrollTop=headerHeight)
+		:(document.querySelector('.scrollMain').scrollTop=this.main.scrollTop);
+		/*tab和列表联动,控制tab*/
+		if(!this.isScroll){return;}
+		this._posCalc(this.listHeight,this.main.scrollTop);
 	}
 	/*计算右侧每一类别对应高度*/
 	_computListHeight(){
@@ -64,7 +77,7 @@ class Commodity extends Component{
 		}
 	}
 	/*是否手动滚动*/
-	isScroll=false;
+	isScroll=true;
 	listHeight=[]
 	/*计算当前分类*/
 	_posCalc(pos,y){
@@ -72,8 +85,8 @@ class Commodity extends Component{
 			this._run(pos[0].index);
 			return;
 		}
-		let prevArr=pos.slice(0,parseInt(pos.length/2));
-		let nextArr=pos.slice(parseInt(pos.length/2));
+		let prevArr=pos.slice(0,parseInt(pos.length/2,10));
+		let nextArr=pos.slice(parseInt(pos.length/2,10));
 		let prevArrIndex=prevArr[prevArr.length-1];
 		let nextArrIndex=nextArr[0];
 		if(prevArrIndex.pos>Math.abs(y)){
@@ -82,7 +95,7 @@ class Commodity extends Component{
 		}else if(nextArrIndex.pos<Math.abs(y)){
 			this._posCalc(nextArr,y);
 			return;
-		}else if(prevArrIndex.pos<=Math.abs(y)+10&&nextArrIndex.pos>Math.abs(y)){
+		}else if(prevArrIndex.pos<=Math.abs(y)&&nextArrIndex.pos>Math.abs(y)){
 			if(prevArrIndex.index===this.state.current){return;}
 			this.setState({
 				current:prevArrIndex.index
@@ -101,16 +114,187 @@ class Commodity extends Component{
 	}
 	/*点击控制*/
 	_run(id){
-		this.state.scroll.scrollToElement('#menu' + id,400);
 		this.setState({
 			current:id
 		})
 	}
-	handleClickRun(id){
+	/*滚动动画*/
+	// 当前值
+	// 目标值
+	_isAnimate=null
+	_animate(obj,now,target){
 		this.isScroll=false;
-		this._run(id);
+		window.cancelAnimationFrame(this._isAnimate)
+		/*是否滚动过头了（虽然过头但是显示正常）*/
+		obj.scrollTop=Math.ceil(now+(target-now)/4);
+		if(obj.scrollHeight-obj.scrollTop<=obj.offsetHeight+4){
+			obj.scrollTop=(obj.scrollHeight-obj.offsetHeight);
+			/*定时器是因为这个最后的滚动还没有完成就会触发滚动事件*/
+			let timer=setTimeout(()=>{
+				this.isScroll=true;
+				clearTimeout(timer)
+			},50);
+			return;
+		}else if(Math.abs(obj.scrollTop-target)<=4){
+			obj.scrollTop=target;
+			let timer=setTimeout(()=>{
+				this.isScroll=true;
+				clearTimeout(timer)
+			},50);
+			return;
+		}else{
+			this._isAnimate=requestAnimationFrame(()=>{
+				this._animate(this.main,obj.scrollTop,target)
+			})
+		}
+		
+	}
+	_saveLocalStorage(obj){
+		try{
+			localStorage.setItem("currentSelected",JSON.stringify(obj))
+		}catch (e){
+			console.log(e)
+		}
+	}
+	_getLocalStorage(){
+		try{
+			return JSON.parse(localStorage.getItem("currentSelected"))
+		}catch (e){
+			console.log(e)
+		}
+	}
+	_filter(para,arr){
+		return arr.filter((value,index)=>{
+			return para===value.item_id
+		})
+	}
+	handleSubmitCut(thisIndex,foodIndex){
+		if(this.props.deleteSelected){
+			/*总数量*/
+			let allNum=0;
+			/*总价*/
+			let allPirce=0;
+			let id=this.props.basicData.id;
+			let thisData=this.props.data[thisIndex].foods[foodIndex];
+			let alreadySelect=this._getLocalStorage();
+			/*同一商品的数量*/
+			let selectNum=0;
+			/*如果存储过值*/
+			if(alreadySelect){
+				alreadySelect[id][0].entities.forEach((value,index)=>{
+					/*如果选的是同一个*/
+					if(value.id===thisData.category_id){
+						selectNum=--value.quantity;
+						if(selectNum<=0){
+							alreadySelect[id][0].entities.splice(index,1)
+						}else{
+							value.quantity=selectNum;
+							value.view_discount_price=thisData.specfoods[0].price*selectNum;
+					    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
+						}
+					}
+				})
+			}
+			alreadySelect[id][0].entities.forEach((value,index)=>{
+				allNum+=value.quantity;
+				allPirce+=value.view_discount_price;
+			});
+			this.props.deleteSelected(alreadySelect);
+			this._saveLocalStorage(alreadySelect);
+			this.setState({
+				num:allNum,
+				allPirce
+			})	
+		}
+	}
+	handleSubmit(thisIndex,foodIndex){
+		if(this.props.addSelected){
+			/*总数量*/
+			let allNum=0;
+			/*总价*/
+			let allPirce=0;
+			let id=this.props.basicData.id;
+			let obj={};
+			let thisData=this.props.data[thisIndex].foods[foodIndex];
+			let alreadySelect=this._getLocalStorage();
+			/*同一商品的数量*/
+			let selectNum=1;
+			/*是否为同种*/
+			let footSame=false;
+			/*如果存储过值*/
+			if(alreadySelect){
+				alreadySelect[id][0].entities.forEach((value,index)=>{
+					/*如果选的是同一个*/
+					if(value.id===thisData.category_id){
+						footSame=true;
+						selectNum=++value.quantity;
+						value.quantity=selectNum;
+						value.view_discount_price=thisData.specfoods[0].price*selectNum;
+				    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
+						obj=alreadySelect;
+					}
+				})
+				if(!footSame){
+					/*且有值*/
+					alreadySelect[id][0].entities.push({
+						"id": thisData.category_id,
+						"sku_id": thisData.specfoods[0].sku_id,
+						"item_id": thisData.item_id,
+						"quantity": selectNum,
+						"name": thisData.specfoods[0].name,
+						"price": thisData.specfoods[0].price,
+						"original_price": null,
+						"packing_fee": 1,
+						"stock": thisData.specfoods[0].stock,
+						"specs": thisData.specfoods[0].specs,
+						"attrs": thisData.attrs,
+						"weight": thisData.specfoods[0].weight,
+						"extra": {},
+						"view_discount_price": thisData.specfoods[0].price*selectNum,
+						"view_original_price": thisData.specfoods[0].price*selectNum
+					})
+					obj=alreadySelect;
+				}
+			}else{
+				obj[id]=[
+					{
+					    "entities": [
+					    	{
+					    	    "id": thisData.category_id,
+					    	    "sku_id": thisData.specfoods[0].sku_id,
+					    	    "item_id": thisData.item_id,
+					    	    "quantity": selectNum,
+					    	    "name": thisData.specfoods[0].name,
+					    	    "price": thisData.specfoods[0].price,
+					    	    "original_price": null,
+					    	    "packing_fee": 1,
+					    	    "stock": thisData.specfoods[0].stock,
+					    	    "specs": thisData.specfoods[0].specs,
+					    	    "attrs": thisData.attrs,
+					    	    "weight": thisData.specfoods[0].weight,
+					    	    "extra": {},
+					    	    "view_discount_price": thisData.specfoods[0].price*selectNum,
+					    	    "view_original_price": thisData.specfoods[0].price*selectNum
+					    	}
+					    ],
+					}
+				];
+			}
+			obj[id][0].entities.forEach((value,index)=>{
+				allNum+=value.quantity;
+				allPirce+=value.view_discount_price;
+			});
+			this._saveLocalStorage(obj);
+			this.props.addSelected(obj);
+			this.setState({
+				num:allNum,
+				allPirce
+			})
+		}
 	}
 	render(){
+		let id=this.props.basicData.id?this.props.basicData.id:0;
+		let allSelected=this._getLocalStorage();
 		/*数据处理*/
 		let data=this.props.data?this.props.data:[];
 		/*列表*/
@@ -118,14 +302,14 @@ class Commodity extends Component{
 			return(<li className={`${this.state.current===index?'active':''}`} key={index} onClick={this.handleClickRun.bind(this,index)}>
 					{value.icon_url!==''?
 					<img alt={value.name} src={`//fuss10.elemecdn.com/${this._formatImg(value.icon_url)}?imageMogr/format/webp/thumbnail/18x/`} />
-					:''
-					}
+					:''}
 					<span>{value.name}</span>
 				</li>)
 		})
 		/*主内容*/
 		let listDomMain=data.map((value,index)=>{
 			/*内容*/
+			let thisIndex=index;
 			let listDomDes=value.foods.map((valueDes,index)=>{
 				return(
 				<dd className='commodity_main_list' key={index}>
@@ -146,14 +330,14 @@ class Commodity extends Component{
 									<span>好评率{100*(valueDes.satisfy_count/valueDes.rating_count).toFixed(2)}%</span>
 								</p>
 								<strong className='food_money'>
-									<span>{valueDes.min_purchase}</span>
+									<span>{valueDes.specfoods[0].price}</span>
 								</strong>
 								<div className='food_add'>
-									<span className='food_add_box'>
-										<a href="javascript:void(0)" className='food_add_add'>
-											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" version="1.1"><path fill="none" d="M0 0h44v44H0z"/><path fillRule="evenodd" d="M22 0C9.8 0 0 9.8 0 22s9.8 22 22 22 22-9.8 22-22S34.2 0 22 0zm10 24h-8v8c0 1.1-.9 2-2 2s-2-.9-2-2v-8h-8c-1.1 0-2-.9-2-2s.9-2 2-2h8v-8c0-1.1.9-2 2-2s2 .9 2 2v8h8c1.1 0 2 .9 2 2s-.9 2-2 2z" clipRule="evenodd"/></svg>
-										</a>
-									</span>
+								<Selected quantity={
+									/*已选中个数*/
+									allSelected[id][0].entities?(this._filter(valueDes.item_id,allSelected[id][0].entities).length===0?0:this._filter(valueDes.item_id,allSelected[id][0].entities)[0].quantity)
+									:[]
+								} handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index)} handleSubmit={this.handleSubmit.bind(this,thisIndex,index)}/>
 								</div>
 							</section>
 						</div>
@@ -161,22 +345,27 @@ class Commodity extends Component{
 				</dd>
 				)
 			})
-			return([
+			return(
 				/*标题*/
-				<ListCon index={index} value={value} />,
-				...listDomDes
-			])
+				<dl key={index}>
+					<ListCon index={index} value={value} />
+					{listDomDes}
+				</dl>
+			)
 		});
 		return(
 			<div className='commodity'  ref={(body) => { this.body = body; }}>
-				<ul className='list_cont' ref={(category)=>{this.category=category}}>
-					{listDomTab}
-				</ul>
-				<div className='commodity_main'>
-					<dl ref={(listHeightDom)=>this.listHeightDom=listHeightDom} className='commodity_main_menu'>
-						{listDomMain}
-					</dl>
+				<div className='commodity_box'>
+					<ul className='list_cont' ref={(category)=>{this.category=category}}>
+						{listDomTab}
+					</ul>
+					<div className='commodity_main' ref={(main)=>{this.main=main}}>
+						<div ref={(listHeightDom)=>this.listHeightDom=listHeightDom} className='commodity_main_menu'>
+							{listDomMain}
+						</div>
+					</div>
 				</div>
+				<Footer allPirce={this.state.allPirce} num={this.state.num} data={this.props.basicData}/>
 			</div>
 		)
 	}

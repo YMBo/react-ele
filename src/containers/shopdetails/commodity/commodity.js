@@ -1,4 +1,6 @@
 import React,{Component} from 'react'
+import { connect } from 'react-redux'
+import {addSelectedGoods,deleteSelectedGoods} from '../../../reducers/dataState.js'
 import Commodity from '../../../components/shopdetails/commodity/commodity.js'
 import 'es6-promise'
 import 'whatwg-fetch'
@@ -22,9 +24,28 @@ class CommoditySmart extends Component{
 	}
 	render(){
 		return(
-			<Commodity data={this.state.data}/>
+			<Commodity basicData={this.props.data} data={this.state.data} deleteSelected={this.props.deleteSelected} addSelected={this.props.addSelected}/>
 		)
 	}
 }
 
-export default CommoditySmart;
+const mapStateToProps=(state)=>{
+	return{
+		contextData:state.allSelected
+	}
+}
+const mapDispatchToProps=(dispatch)=>{
+	return{
+		addSelected:(shopData)=>{
+			dispatch(addSelectedGoods(shopData))
+		},
+		deleteSelected:(shopData)=>{
+			dispatch(deleteSelectedGoods(shopData))
+		}
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(CommoditySmart);

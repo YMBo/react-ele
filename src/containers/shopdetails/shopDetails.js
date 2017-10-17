@@ -34,12 +34,16 @@ class ShopDetails extends Component{
 		.then(response=>response.json())
 		.then(dataJson=>{
 		document.title=dataJson.name;
+		console.log(dataJson)
 			this.setState({
 				headerData:{
+					id:dataJson.id,
 					/*名称*/
 					name:dataJson.name,
 					/*配送费*/
 					piecewise_agent_fee:dataJson.piecewise_agent_fee.description,
+					/*起送价*/
+					float_minimum_order_amount:dataJson.float_minimum_order_amount,
 					/*公告*/
 					promotion_info:dataJson.promotion_info,
 					/*时间*/
@@ -53,16 +57,20 @@ class ShopDetails extends Component{
 					/*所有活动*/
 					allactivities:dataJson.activities,
 					/*头图*/
-					image_path:this._formatImg(dataJson.image_path)
+					image_path:this._formatImg(dataJson.image_path),
 				}
 			})
 		})
 	}
 	render(){
-		return <div>
-				<ListHeader data={this.state.headerData}/>
-				<TabsSmart id={this.props.id}/>
+		return (
+			<div className='scrollBox'>
+				<div className='scrollMain'>
+					<ListHeader data={this.state.headerData}/>
+					<TabsSmart id={this.props.id} data={this.state.headerData}/>
+				</div>
 			</div>
+			)
 	}
 }
 
