@@ -163,6 +163,11 @@ class Commodity extends Component{
 			console.log(e)
 		}
 	}
+	_filter(para,arr){
+		return arr.filter((value,index)=>{
+			return para===value.item_id
+		})
+	}
 	handleSubmitCut(thisIndex,foodIndex){
 		if(this.props.deleteSelected){
 			/*总数量*/
@@ -288,7 +293,8 @@ class Commodity extends Component{
 		}
 	}
 	render(){
-
+		let id=this.props.basicData.id?this.props.basicData.id:0;
+		let allSelected=this._getLocalStorage();
 		/*数据处理*/
 		let data=this.props.data?this.props.data:[];
 		/*列表*/
@@ -327,7 +333,11 @@ class Commodity extends Component{
 									<span>{valueDes.specfoods[0].price}</span>
 								</strong>
 								<div className='food_add'>
-								<Selected num={this.state.num} handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index)} handleSubmit={this.handleSubmit.bind(this,thisIndex,index)}/>
+								<Selected quantity={
+									/*已选中个数*/
+									allSelected[id][0].entities?(this._filter(valueDes.item_id,allSelected[id][0].entities).length===0?0:this._filter(valueDes.item_id,allSelected[id][0].entities)[0].quantity)
+									:[]
+								} handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index)} handleSubmit={this.handleSubmit.bind(this,thisIndex,index)}/>
 								</div>
 							</section>
 						</div>

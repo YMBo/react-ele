@@ -7,6 +7,14 @@ class Selected extends Component{
 			index:0
 		}
 	}
+	componentWillMount(){
+		if( this.props.quantity && this.props.quantity!=0){
+			this.setState({
+				display:true,
+				index:this.props.quantity
+			})
+		}
+	}
 	handleSubmit(){
 		if(!this.state.display){
 			this.setState({
