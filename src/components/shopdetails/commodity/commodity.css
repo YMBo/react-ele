@@ -229,3 +229,19 @@
 		}
 	}
 }
+.category_tip{
+	position: absolute;
+	right: .08rem;
+	top: .08rem;
+	color: #fff;
+	background-image: -webkit-gradient(linear,right top,left top,from(#ff7416),color-stop(98%,#ff3c15));
+	background-image: -webkit-linear-gradient(right,#ff7416,#ff3c15 98%);
+	background-image: linear-gradient(-90deg,#ff7416,#ff3c15 98%);
+	border-radius: .2rem;
+	font-size: .266667rem;
+	font-weight: 700;
+	text-align: center;
+	min-width: .373333rem;
+	padding: 0 .106667rem;
+	line-height: .373333rem;
+}

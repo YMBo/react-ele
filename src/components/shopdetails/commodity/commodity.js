@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import ListCon from '../listCon/listCon.js'
 import Footer from '../footer/footer.js'
 import Selected from '../selected/selected.js'
+import Category from './category.js'
 import './commodity.css'
 /*商品页*/
 class Commodity extends Component{
@@ -11,7 +12,8 @@ class Commodity extends Component{
 			scroll:null,
 			current:0,
 			num:0,
-			allPirce:0
+			allPirce:0,
+			fatherCate:{}
 		}
 	}
 	componentWillReceiveProps(){
@@ -207,8 +209,10 @@ class Commodity extends Component{
 			})	
 		}
 	}
-	handleSubmit(thisIndex,foodIndex){
+	handleSubmit(thisIndex,foodIndex,category_id,item_id){
 		if(this.props.addSelected){
+			/*同一类商品总数量*/
+			let category_num=0;
 			/*总数量*/
 			let allNum=0;
 			/*总价*/
@@ -225,7 +229,7 @@ class Commodity extends Component{
 			if(alreadySelect){
 				alreadySelect[id][0].entities.forEach((value,index)=>{
 					/*如果选的是同一个*/
-					if(value.id===thisData.category_id){
+					if(value.item_id===thisData.item_id){
 						footSame=true;
 						selectNum=++value.quantity;
 						value.quantity=selectNum;
@@ -283,28 +287,48 @@ class Commodity extends Component{
 			obj[id][0].entities.forEach((value,index)=>{
 				allNum+=value.quantity;
 				allPirce+=value.view_discount_price;
+				if(value.id===category_id){
+					category_num=category_num+value.quantity;
+				}
 			});
 			this._saveLocalStorage(obj);
 			this.props.addSelected(obj);
+			let categoryObj={};
+			categoryObj[category_id]={
+				id:category_id,
+				num:category_num
+			}
+			/*fatherCate表示商品每一个类别选中食物总量*/
 			this.setState({
 				num:allNum,
-				allPirce
+				allPirce,
+				fatherCate:{
+					...this.state.fatherCate,
+					...categoryObj
+				}
 			})
 		}
 	}
 	render(){
 		let id=this.props.basicData.id?this.props.basicData.id:0;
 		let allSelected=this._getLocalStorage();
+		let isSave=null;
+		if(allSelected && allSelected[id]){
+			isSave=allSelected;
+		}
 		/*数据处理*/
 		let data=this.props.data?this.props.data:[];
 		/*列表*/
 		let listDomTab=data.map((value,index)=>{
-			return(<li className={`${this.state.current===index?'active':''}`} key={index} onClick={this.handleClickRun.bind(this,index)}>
-					{value.icon_url!==''?
-					<img alt={value.name} src={`//fuss10.elemecdn.com/${this._formatImg(value.icon_url)}?imageMogr/format/webp/thumbnail/18x/`} />
-					:''}
-					<span>{value.name}</span>
-				</li>)
+			return( <Category 
+				value={value} 
+				index={index} 
+				key={index} 
+				type={value.type} 
+				fatherCate={this.state.fatherCate}
+				category_id={value.id}
+				current={this.state.current}
+				handleClickRun={this.handleClickRun.bind(this)} /> )
 		})
 		/*主内容*/
 		let listDomMain=data.map((value,index)=>{
@@ -335,9 +359,9 @@ class Commodity extends Component{
 								<div className='food_add'>
 								<Selected quantity={
 									/*已选中个数*/
-									allSelected[id][0].entities?(this._filter(valueDes.item_id,allSelected[id][0].entities).length===0?0:this._filter(valueDes.item_id,allSelected[id][0].entities)[0].quantity)
+									isSave?(this._filter(valueDes.item_id,allSelected[id][0].entities).length===0?0:this._filter(valueDes.item_id,allSelected[id][0].entities)[0].quantity)
 									:[]
-								} handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index)} handleSubmit={this.handleSubmit.bind(this,thisIndex,index)}/>
+								} handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index)} handleSubmit={this.handleSubmit.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)}/>
 								</div>
 							</section>
 						</div>

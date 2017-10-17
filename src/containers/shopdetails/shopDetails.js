@@ -34,7 +34,6 @@ class ShopDetails extends Component{
 		.then(response=>response.json())
 		.then(dataJson=>{
 		document.title=dataJson.name;
-		console.log(dataJson)
 			this.setState({
 				headerData:{
 					id:dataJson.id,
