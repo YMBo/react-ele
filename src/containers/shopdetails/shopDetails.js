@@ -21,15 +21,8 @@ class ShopDetails extends Component{
 		return imgValue.join('');
 	}
 	componentDidMount(){
-		/*主内容*/
-		fetch(`/api/shopping/v2/menu?restaurant_id=${this.props.id}`)
-		.then(response=>{return response.json()})
-		.then(dataJson=>{
-			
-		})
 		/*{this.props.id}              {this.props.address}*/
 		/*公告*/
-		
 		fetch(`/api/shopping/restaurant/${this.props.id}?extras[]=activities&extras[]=albums&extras[]=license&extras[]=identification&extras[]=qualification`)
 		.then(response=>response.json())
 		.then(dataJson=>{

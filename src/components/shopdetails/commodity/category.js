@@ -29,7 +29,7 @@ class Category extends Component{
 		}
 	}
 	render(){
-		let num=0;
+		let num=0; 
 		if(this.props.fatherCate[this.props.category_id]){
 			if(this.props.category_id === this.props.fatherCate[this.props.category_id].id){
 				num=this.props.fatherCate[this.props.category_id].num

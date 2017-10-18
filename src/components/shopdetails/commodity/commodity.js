@@ -16,23 +16,54 @@ class Commodity extends Component{
 			fatherCate:{}
 		}
 	}
-	componentWillReceiveProps(){
+	isFirst=true
+	componentWillReceiveProps (){
 		/*初始化*/
+		if(!this.isFirst){return;}
 		let id=this.props.basicData.id?this.props.basicData.id:0;
 		let allSelected=this._getLocalStorage();
 		/*总数量*/
 		let allNum=0;
 		/*总价*/
 		let allPirce=0;
+		/*同一类商品个数*/
+		let categoryObj={};
 		if(allSelected){
 			if(!allSelected[id]){return;}
 			allSelected[id][0].entities.forEach((value,index)=>{
 				allNum+=value.quantity;
 				allPirce+=value.view_discount_price;
+				let everyNum={};
+				/*同一商品的数量*/
+				let selectNum=0;
+				/*一类食物的总量*/
+				let same=allSelected[id][0].entities.filter((valueE,indexE)=>{
+					return value.id===valueE.id
+				})
+				same.forEach((value,index)=>{
+					selectNum=selectNum+value.quantity;
+				})
+				everyNum[value.id]={
+					id:value.id,
+					num:selectNum
+				}
+				categoryObj={
+					...categoryObj,
+					...everyNum
+				}
 			});
 			this.setState({
 				num:allNum,
-				allPirce
+				allPirce,
+				fatherCate:{
+					...this.state.fatherCate,
+					...categoryObj
+				}
+			})
+
+			console.log({
+				...this.state.fatherCate,
+				...categoryObj
 			})
 		}
 	}
@@ -170,8 +201,11 @@ class Commodity extends Component{
 			return para===value.item_id
 		})
 	}
-	handleSubmitCut(thisIndex,foodIndex){
+	handleSubmitCut(thisIndex,foodIndex,category_id,item_id){
+		this.isFirst=false
 		if(this.props.deleteSelected){
+			/*同一类商品总数量*/
+			let category_num=0;
 			/*总数量*/
 			let allNum=0;
 			/*总价*/
@@ -181,35 +215,51 @@ class Commodity extends Component{
 			let alreadySelect=this._getLocalStorage();
 			/*同一商品的数量*/
 			let selectNum=0;
+			/*调整后的值*/
+			let adjArr=[]
 			/*如果存储过值*/
-			if(alreadySelect){
-				alreadySelect[id][0].entities.forEach((value,index)=>{
-					/*如果选的是同一个*/
-					if(value.id===thisData.category_id){
-						selectNum=--value.quantity;
-						if(selectNum<=0){
-							alreadySelect[id][0].entities.splice(index,1)
-						}else{
-							value.quantity=selectNum;
-							value.view_discount_price=thisData.specfoods[0].price*selectNum;
-					    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
-						}
-					}
-				})
-			}
+			if(!alreadySelect){return}
 			alreadySelect[id][0].entities.forEach((value,index)=>{
+				/*如果选的是同一个*/
+				if(value.item_id===thisData.item_id){
+					selectNum=--value.quantity;
+					if(selectNum<=0){
+						adjArr=[
+							...alreadySelect[id][0].entities.slice(index+1),
+							...alreadySelect[id][0].entities.slice(0,index)
+						]
+						alreadySelect[id][0].entities=adjArr;
+					}else{
+						value.quantity=selectNum;
+						value.view_discount_price=thisData.specfoods[0].price*selectNum;
+				    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
+					}
+				}
 				allNum+=value.quantity;
 				allPirce+=value.view_discount_price;
-			});
+				if(value.id===category_id){
+					category_num=category_num+value.quantity;
+				}
+			})
 			this.props.deleteSelected(alreadySelect);
 			this._saveLocalStorage(alreadySelect);
+			let categoryObj={};
+			categoryObj[category_id]={
+				id:category_id,
+				num:category_num
+			}
 			this.setState({
 				num:allNum,
-				allPirce
+				allPirce,
+				fatherCate:{
+					...this.state.fatherCate,
+					...categoryObj
+				}
 			})	
 		}
 	}
 	handleSubmit(thisIndex,foodIndex,category_id,item_id){
+		this.isFirst=false
 		if(this.props.addSelected){
 			/*同一类商品总数量*/
 			let category_num=0;
@@ -320,6 +370,7 @@ class Commodity extends Component{
 		let data=this.props.data?this.props.data:[];
 		/*列表*/
 		let listDomTab=data.map((value,index)=>{
+			console.log(this.state.fatherCate)
 			return( <Category 
 				value={value} 
 				index={index} 
@@ -361,7 +412,7 @@ class Commodity extends Component{
 									/*已选中个数*/
 									isSave?(this._filter(valueDes.item_id,allSelected[id][0].entities).length===0?0:this._filter(valueDes.item_id,allSelected[id][0].entities)[0].quantity)
 									:[]
-								} handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index)} handleSubmit={this.handleSubmit.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)}/>
+								} handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)} handleSubmit={this.handleSubmit.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)}/>
 								</div>
 							</section>
 						</div>
