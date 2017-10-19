@@ -41,7 +41,9 @@ export default function(state,action){
 		case DELETE_SELECTED_GOODS:
 			return{
 				...state,
-				allSelected:{...action.selected}
+				allSelected:{
+					...action.selected
+				}
 			}
 		default:
 			return state;

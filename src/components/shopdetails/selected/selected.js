@@ -24,7 +24,7 @@ class Selected extends Component{
 			index:index<=0?0:index
 		})
 		if(this.props.handleSubmitCut){
-			this.props.handleSubmitCut()
+			this.props.handleSubmitCut();
 		}
 	}
 	render(){

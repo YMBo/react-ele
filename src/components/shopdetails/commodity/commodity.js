@@ -16,6 +16,12 @@ class Commodity extends Component{
 			fatherCate:{}
 		}
 	}
+	componentWillMount(){
+		let allSelected=this._getLocalStorage();
+		if(allSelected){
+
+		}
+	}
 	isFirst=true
 	componentWillReceiveProps(){
 		/*初始化*/
@@ -30,6 +36,7 @@ class Commodity extends Component{
 			let allPirce=0;
 			/*同一类商品个数*/
 			let categoryObj={};
+			console.log(1111)
 			if(allSelected){
 				if(!allSelected[id]){return;}
 				allSelected[id][0].entities.forEach((value,index)=>{
@@ -273,8 +280,8 @@ class Commodity extends Component{
 			let selectNum=1;
 			/*是否为同种*/
 			let footSame=false;
-			/*如果存储过值*/
-			if(alreadySelect){
+			/*如果存储过值且存储过当前商家*/
+			if(alreadySelect && alreadySelect[id]){
 				alreadySelect[id][0].entities.forEach((value,index)=>{
 					/*如果选的是同一个*/
 					if(value.item_id===thisData.item_id){
@@ -287,7 +294,7 @@ class Commodity extends Component{
 					}
 				})
 				if(!footSame){
-					/*且有值*/
+					/*如果没有就新增*/
 					alreadySelect[id][0].entities.push({
 						"id": thisData.category_id,
 						"sku_id": thisData.specfoods[0].sku_id,
@@ -308,6 +315,7 @@ class Commodity extends Component{
 					obj=alreadySelect;
 				}
 			}else{
+			/*如果没存储过当前商家*/
 				obj[id]=[
 					{
 					    "entities": [
@@ -339,6 +347,13 @@ class Commodity extends Component{
 					category_num=category_num+value.quantity;
 				}
 			});
+			/*如果没存储过当前商家*/	
+			if(alreadySelect&& !alreadySelect[id]){
+				obj={
+					...alreadySelect,
+					...obj
+				}
+			}
 			this._saveLocalStorage(obj);
 			this.props.addSelected(obj);
 			let categoryObj={};
