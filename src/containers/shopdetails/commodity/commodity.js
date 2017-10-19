@@ -27,10 +27,11 @@ class CommoditySmart extends Component{
 			<Commodity 
 			basicData={this.props.basicData} 
 			data={this.state.data} 
+			contextData={this.props.contextData}
 			deleteSelected={this.props.deleteSelected} 
 			addSelected={this.props.addSelected}
-			initSelected={this.props.initSelectedGoods
-			}/>
+			initSelected={this.props.initSelected}
+			/>
 		)
 	}
 }

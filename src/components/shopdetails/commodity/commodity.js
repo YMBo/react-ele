@@ -19,7 +19,8 @@ class Commodity extends Component{
 	componentWillMount(){
 		let allSelected=this._getLocalStorage();
 		if(allSelected){
-
+			/*初始化redux*/
+			this.props.initSelected(this._getLocalStorage())
 		}
 	}
 	isFirst=true
@@ -29,7 +30,7 @@ class Commodity extends Component{
 		setTimeout(()=>{
 			let id=0;
 			id=this.props.basicData.id?this.props.basicData.id:0;
-			let allSelected=this._getLocalStorage();
+			let allSelected=this.props.contextData;
 			/*总数量*/
 			let allNum=0;
 			/*总价*/
@@ -216,7 +217,7 @@ class Commodity extends Component{
 			let allPirce=0;
 			let id=this.props.basicData.id;
 			let thisData=this.props.data[thisIndex].foods[foodIndex];
-			let alreadySelect=this._getLocalStorage();
+			let alreadySelect=this.props.contextData;
 			/*同一商品的数量*/
 			let selectNum=0;
 			/*调整后的值*/
@@ -254,7 +255,6 @@ class Commodity extends Component{
 				id:category_id,
 				num:category_num
 			}
-			console.log(allPirce/10000)
 			this.setState({
 				num:allNum/10000,
 				allPirce:allPirce/10000,
@@ -277,7 +277,7 @@ class Commodity extends Component{
 			let id=this.props.basicData.id;
 			let obj={};
 			let thisData=this.props.data[thisIndex].foods[foodIndex];
-			let alreadySelect=this._getLocalStorage();
+			let alreadySelect=this.props.contextData;
 			/*同一商品的数量*/
 			let selectNum=1;
 			/*是否为同种*/
@@ -376,7 +376,7 @@ class Commodity extends Component{
 	}
 	render(){
 		let id=this.props.basicData.id?this.props.basicData.id:0;
-		let allSelected=this._getLocalStorage();
+		let allSelected=this.props.contextData;
 		let isSave=null;
 		if(allSelected && allSelected[id]){
 			isSave=allSelected;
