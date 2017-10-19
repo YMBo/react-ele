@@ -36,12 +36,11 @@ class Commodity extends Component{
 			let allPirce=0;
 			/*同一类商品个数*/
 			let categoryObj={};
-			console.log(1111)
 			if(allSelected){
 				if(!allSelected[id]){return;}
 				allSelected[id][0].entities.forEach((value,index)=>{
-					allNum+=value.quantity;
-					allPirce+=value.view_discount_price;
+					allNum+=(value.quantity)*10000;
+					allPirce+=(value.view_discount_price)*10000 ;
 					let everyNum={};
 					/*同一商品的数量*/
 					let selectNum=0;
@@ -62,8 +61,8 @@ class Commodity extends Component{
 					}
 				});
 				this.setState({
-					num:allNum,
-					allPirce,
+					num:allNum/10000,
+					allPirce:allPirce/10000,
 					fatherCate:{
 						...this.state.fatherCate,
 						...categoryObj
@@ -234,14 +233,16 @@ class Commodity extends Component{
 							...alreadySelect[id][0].entities.slice(0,index)
 						]
 						alreadySelect[id][0].entities=adjArr;
+						/*如果没选中了，就让当前价格为0*/
+						value.view_discount_price=0;
 					}else{
 						value.quantity=selectNum;
 						value.view_discount_price=thisData.specfoods[0].price*selectNum;
 				    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
 					}
 				}
-				allNum+=value.quantity;
-				allPirce+=value.view_discount_price;
+				allNum+=(value.quantity)*10000;
+				allPirce+=(value.view_discount_price)*10000 ;
 				if(value.id===category_id){
 					category_num=category_num+value.quantity;
 				}
@@ -253,9 +254,10 @@ class Commodity extends Component{
 				id:category_id,
 				num:category_num
 			}
+			console.log(allPirce/10000)
 			this.setState({
-				num:allNum,
-				allPirce,
+				num:allNum/10000,
+				allPirce:allPirce/10000,
 				fatherCate:{
 					...this.state.fatherCate,
 					...categoryObj
@@ -341,8 +343,8 @@ class Commodity extends Component{
 				];
 			}
 			obj[id][0].entities.forEach((value,index)=>{
-				allNum+=value.quantity;
-				allPirce+=value.view_discount_price;
+				allNum+=(value.quantity)*10000;
+				allPirce+=(value.view_discount_price)*10000 ;
 				if(value.id===category_id){
 					category_num=category_num+value.quantity;
 				}
@@ -363,8 +365,8 @@ class Commodity extends Component{
 			}
 			/*fatherCate表示商品每一个类别选中食物总量*/
 			this.setState({
-				num:allNum,
-				allPirce,
+				num:allNum/10000,
+				allPirce:allPirce/10000,
 				fatherCate:{
 					...this.state.fatherCate,
 					...categoryObj
