@@ -17,55 +17,53 @@ class Commodity extends Component{
 		}
 	}
 	isFirst=true
-	componentWillReceiveProps (){
+	componentWillReceiveProps(){
 		/*初始化*/
 		if(!this.isFirst){return;}
-		let id=this.props.basicData.id?this.props.basicData.id:0;
-		let allSelected=this._getLocalStorage();
-		/*总数量*/
-		let allNum=0;
-		/*总价*/
-		let allPirce=0;
-		/*同一类商品个数*/
-		let categoryObj={};
-		if(allSelected){
-			if(!allSelected[id]){return;}
-			allSelected[id][0].entities.forEach((value,index)=>{
-				allNum+=value.quantity;
-				allPirce+=value.view_discount_price;
-				let everyNum={};
-				/*同一商品的数量*/
-				let selectNum=0;
-				/*一类食物的总量*/
-				let same=allSelected[id][0].entities.filter((valueE,indexE)=>{
-					return value.id===valueE.id
+		setTimeout(()=>{
+			let id=0;
+			id=this.props.basicData.id?this.props.basicData.id:0;
+			let allSelected=this._getLocalStorage();
+			/*总数量*/
+			let allNum=0;
+			/*总价*/
+			let allPirce=0;
+			/*同一类商品个数*/
+			let categoryObj={};
+			if(allSelected){
+				if(!allSelected[id]){return;}
+				allSelected[id][0].entities.forEach((value,index)=>{
+					allNum+=value.quantity;
+					allPirce+=value.view_discount_price;
+					let everyNum={};
+					/*同一商品的数量*/
+					let selectNum=0;
+					/*一类食物的总量*/
+					let same=allSelected[id][0].entities.filter((valueE,indexE)=>{
+						return value.id===valueE.id
+					})
+					same.forEach((value,index)=>{
+						selectNum=selectNum+value.quantity;
+					})
+					everyNum[value.id]={
+						id:value.id,
+						num:selectNum
+					}
+					categoryObj={
+						...categoryObj,
+						...everyNum
+					}
+				});
+				this.setState({
+					num:allNum,
+					allPirce,
+					fatherCate:{
+						...this.state.fatherCate,
+						...categoryObj
+					}
 				})
-				same.forEach((value,index)=>{
-					selectNum=selectNum+value.quantity;
-				})
-				everyNum[value.id]={
-					id:value.id,
-					num:selectNum
-				}
-				categoryObj={
-					...categoryObj,
-					...everyNum
-				}
-			});
-			this.setState({
-				num:allNum,
-				allPirce,
-				fatherCate:{
-					...this.state.fatherCate,
-					...categoryObj
-				}
-			})
-
-			console.log({
-				...this.state.fatherCate,
-				...categoryObj
-			})
-		}
+			}
+		},50)
 	}
 	componentDidUpdate(){
 		this._computListHeight();
@@ -370,7 +368,6 @@ class Commodity extends Component{
 		let data=this.props.data?this.props.data:[];
 		/*列表*/
 		let listDomTab=data.map((value,index)=>{
-			console.log(this.state.fatherCate)
 			return( <Category 
 				value={value} 
 				index={index} 

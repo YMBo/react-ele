@@ -24,7 +24,7 @@ class CommoditySmart extends Component{
 	}
 	render(){
 		return(
-			<Commodity basicData={this.props.data} data={this.state.data} deleteSelected={this.props.deleteSelected} addSelected={this.props.addSelected}/>
+			<Commodity basicData={this.props.basicData} data={this.state.data} deleteSelected={this.props.deleteSelected} addSelected={this.props.addSelected}/>
 		)
 	}
 }

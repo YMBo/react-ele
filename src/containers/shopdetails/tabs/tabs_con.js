@@ -6,7 +6,6 @@ class TabsSmart extends Component{
 		super()
 		this.state={
 			current:false,
-
 		}
 	}
 	handClick(){
@@ -31,7 +30,7 @@ class TabsSmart extends Component{
 		]
 		return(
 			<TabsLi data={data}>
-					<CommoditySmart id={this.props.id} key={0} data={this.props.data}/>
+					<CommoditySmart id={this.props.id} key={0} basicData={this.props.data}/>
 					<div key={1}>2</div>
 					<div key={2}>3</div>
 			</TabsLi>
