@@ -141,6 +141,10 @@ componentDidMount() {
     
 #### 16.商家详情页左右联动添加动画    
 这一块会有些稍微的复杂，不过也就是添加一个动画函数，和在动画发生的时候避免scroll事件的触发    
-  ![效果](https://github.com/YMBo/react-ele/blob/master/preview/16.gif)    
+  ![效果](https://github.com/YMBo/react-ele/blob/master/preview/16.gif)    
+    
+#### 17.购物车功能（还没有动画）    
+这块主要是对数据的处理，注意选`热销`和`优惠`部分的商品时，别的分类的同样食物也会被选中，而且这两类不会被红色圈圈标记，也就是说`优惠`和`热销`其实与下面分类是联动的关系，注意看图    
+![效果](https://github.com/YMBo/react-ele/blob/master/preview/17.gif)    
 
   
