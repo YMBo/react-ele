@@ -265,7 +265,7 @@ class Commodity extends Component{
 			})	
 		}
 	}
-	handleSubmit(thisIndex,foodIndex,category_id,item_id){
+	handleSubmit(thisIndex,foodIndex,category_id,item_id,event){
 		this.isFirst=false
 		if(this.props.addSelected){
 			/*同一类商品总数量*/

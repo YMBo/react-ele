@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import {TheBall} from '../theball/theBall.js'
 class Selected extends Component{
 	constructor(){
 		super()
@@ -10,21 +11,22 @@ class Selected extends Component{
 	componentWillMount(){
 		
 	}
-	handleSubmit(){
+	handleSubmit(event){
+		TheBall.newBall(event)
 		this.setState({
 			index:this.state.index<=0?1:++this.state.index
 		})
 		if(this.props.handleSubmit){
-			this.props.handleSubmit()
+			this.props.handleSubmit(event)
 		}
 	}
-	handleSubmitCut(){
+	handleSubmitCut(event){
 		let index=--this.state.index;
 		this.setState({
 			index:index<=0?0:index
 		})
 		if(this.props.handleSubmitCut){
-			this.props.handleSubmitCut();
+			this.props.handleSubmitCut(event);
 		}
 	}
 	render(){
