@@ -6,6 +6,7 @@ import Bannersmart from './banner.js'
 import H3title from '../../components/index/title/h3title.js'
 import ListItem from './listItem'
 import ReturnTop from '../../components/index/returnTop/returnTop.js'
+import ShoppingCart from '../../components/index/shoppingCart/ShoppingCart.js'
 import { connect } from 'react-redux'
 import { login } from '../../reducers/dataState.js'
 
@@ -30,6 +31,7 @@ class Index extends Component{
 				<H3title/>
 				<ListItem/>
 				<ReturnTop/>
+				<ShoppingCart/>
 			</div>
 		)
 	}

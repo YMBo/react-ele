@@ -10,6 +10,7 @@
 		padding: 30px 20px;
 	}
 	.shoplist_logo{
+		position: relative;
 		width:130px;
 		height: 130px;
 		img{
@@ -17,6 +18,21 @@
 			width: 100%;
 			height: 100%;
 			border-radius: 3px;
+		}
+		.shoplist_logo_num{
+			position: absolute;
+			right: -.186667rem;
+			top: -.186667rem;
+			color: #fff;
+			background-image: -webkit-linear-gradient(right,#ff7416,#ff3c15 98%);
+			background-image: linear-gradient(-90deg,#ff7416,#ff3c15 98%);
+			border-radius: .2rem;
+			font-size: .266667rem;
+			font-weight: 700;
+			text-align: center;
+			min-width: .373333rem;
+			padding: 0 .106667rem;
+			line-height: .373333rem;
 		}
 	}
 	.show_new_logo{

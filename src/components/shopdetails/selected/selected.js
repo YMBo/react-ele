@@ -29,7 +29,7 @@ class Selected extends Component{
 	}
 	render(){
 		let index=0;
-		if( this.props.quantity && this.props.quantity!=0){
+		if( this.props.quantity && this.props.quantity!==0){
 			index=this.props.quantity
 		}
 		return(

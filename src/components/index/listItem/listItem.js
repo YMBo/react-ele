@@ -30,23 +30,13 @@ class ListItem extends Component{
 			/*活动*/
 			activities:[],
 			/*商家id*/
-			restaurant_id:0
+			restaurant_id:0,
+			/*选中的商品数量*/
+			foodsNum:0
 		}
 	}
+
 	componentWillMount(){
-		/*蜂鸟*/
-		if(this.props.data.delivery_mode){
-			this.setState({
-				is_solid:true,
-				text:this.props.data.delivery_mode.text
-			})
-		}
-		/*活动*/
-		if(this.props.data.activities){
-			this.setState({
-				activities:this.props.data.activities
-			})
-		}
 		/*保*/
 		let supportsDOM=this.props.data.supports.map((value,index)=><li key={index}>{value.icon_name}</li>)
 		/*图片*/
@@ -54,6 +44,8 @@ class ListItem extends Component{
 		this.setState({
 			name:this.props.data.name,
 			img:imgValue,
+			is_solid:this.props.data.delivery_mode?true:false,
+			text:this.props.data.delivery_mode?this.props.data.delivery_mode.text:'',
 			float_delivery_fee:this.props.data.float_delivery_fee,
 			float_minimum_order_amount:this.props.data.float_minimum_order_amount,
 			rating:this.props.data.rating,
@@ -62,7 +54,9 @@ class ListItem extends Component{
 			is_premium:this.props.data.is_premium,
 			is_new:this.props.data.is_new,
 			supportsDOM:supportsDOM,
-			restaurant_id:this.props.data.id
+			activities:this.props.data.activities?this.props.data.activities:'',
+			restaurant_id:this.props.data.id,
+			foodsNum:this._getNum()
 		})
 	}
 	handleClick(){
@@ -79,6 +73,23 @@ class ListItem extends Component{
 		imgValue.splice(1,0,'/');
 		return imgValue.join('');
 	}
+	_getLocalStorage(){
+		try{
+			return JSON.parse(localStorage.getItem("currentSelected"))
+		}catch (e){
+			console.log(e)
+		}
+	}
+	_getNum(){
+		let allNum=this._getLocalStorage();
+		let num=0;
+		if( allNum && allNum[this.props.data.id]){
+			allNum[this.props.data.id][0].entities.forEach((value,index)=>{
+				num+=value.quantity;
+			})
+		}
+		return num;
+	}
 	render(){
 		return(
 			<section className='shoplist'>
@@ -86,6 +97,10 @@ class ListItem extends Component{
 					<div className='shoplist_img'>
 						<div className='shoplist_logo'>
 							<img src={`//fuss10.elemecdn.com/${this.state.img}?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/`} alt="" />
+							{this.state.foodsNum===0?null
+							:<span className='shoplist_logo_num'>{this.state.foodsNum}</span>
+							}
+							
 						</div>
 						{this.state.is_new?<div className="show_new_logo"><span>新店</span></div>:null}
 					</div>
