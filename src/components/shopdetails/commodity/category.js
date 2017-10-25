@@ -4,7 +4,17 @@ class Category extends Component{
 	constructor(){
 		super();
 		this.state={
-			display:false
+			display:false,
+			num:0
+		}
+	}
+	componentWillMount(){
+		if(this.props.fatherCate[this.props.category_id]){
+			if(this.props.category_id === this.props.fatherCate[this.props.category_id].id){
+				this.setState({
+					num:this.props.fatherCate[this.props.category_id].num
+				})
+			}
 		}
 	}
 	/*图片格式化*/
@@ -21,25 +31,12 @@ class Category extends Component{
 			this.props.handleClickRun(this.props.index)
 		}
 	}
-	componentWillMount(){
-		if(this.props.type===1){
-			this.setState({
-				display:true
-			})
-		}
-	}
 	render(){
-		let num=0; 
-		if(this.props.fatherCate[this.props.category_id]){
-			if(this.props.category_id === this.props.fatherCate[this.props.category_id].id){
-				num=this.props.fatherCate[this.props.category_id].num
-			}
-		}
 		return(
 			<li className={`${this.props.current===this.props.index?'active':''}`} onClick={this.handleClickRun.bind(this,this.props.index)}>
-				{(this.state.display&&num!==0)?
+				{( (this.props.type===1)&&this.state.num!==0)?
 				<span className="category_tip">
-				{num}
+				{this.state.num}
 				</span>:null}
 				{this.props.value.icon_url!==''?
 				<img alt={this.props.value.name} src={`//fuss10.elemecdn.com/${this._formatImg(this.props.value.icon_url)}?imageMogr/format/webp/thumbnail/18x/`} />

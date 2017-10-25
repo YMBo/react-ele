@@ -16,13 +16,6 @@ class Commodity extends Component{
 			fatherCate:{}
 		}
 	}
-	componentWillMount(){
-		let allSelected=this._getLocalStorage();
-		if(allSelected){
-			/*初始化redux*/
-			this.props.initSelected(this._getLocalStorage())
-		}
-	}
 	isFirst=true
 	componentWillReceiveProps(){
 		/*初始化*/
@@ -30,7 +23,7 @@ class Commodity extends Component{
 		setTimeout(()=>{
 			let id=0;
 			id=this.props.basicData.id?this.props.basicData.id:0;
-			let allSelected=this.props.contextData;
+			let allSelected=this._getLocalStorage();
 			/*总数量*/
 			let allNum=0;
 			/*总价*/
@@ -208,175 +201,169 @@ class Commodity extends Component{
 	}
 	handleSubmitCut(thisIndex,foodIndex,category_id,item_id){
 		this.isFirst=false
-		if(this.props.deleteSelected){
-			/*同一类商品总数量*/
-			let category_num=0;
-			/*总数量*/
-			let allNum=0;
-			/*总价*/
-			let allPirce=0;
-			let id=this.props.basicData.id;
-			let thisData=this.props.data[thisIndex].foods[foodIndex];
-			let alreadySelect=this.props.contextData;
-			/*同一商品的数量*/
-			let selectNum=0;
-			/*调整后的值*/
-			let adjArr=[]
-			/*如果存储过值*/
-			if(!alreadySelect){return}
-			alreadySelect[id][0].entities.forEach((value,index)=>{
-				/*如果选的是同一个*/
-				if(value.item_id===thisData.item_id){
-					selectNum=--value.quantity;
-					if(selectNum<=0){
-						adjArr=[
-							...alreadySelect[id][0].entities.slice(index+1),
-							...alreadySelect[id][0].entities.slice(0,index)
-						]
-						alreadySelect[id][0].entities=adjArr;
-						/*如果没选中了，就让当前价格为0*/
-						value.view_discount_price=0;
-					}else{
-						value.quantity=selectNum;
-						value.view_discount_price=thisData.specfoods[0].price*selectNum;
-				    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
-					}
+		/*同一类商品总数量*/
+		let category_num=0;
+		/*总数量*/
+		let allNum=0;
+		/*总价*/
+		let allPirce=0;
+		let id=this.props.basicData.id;
+		let thisData=this.props.data[thisIndex].foods[foodIndex];
+		let alreadySelect=this._getLocalStorage();;
+		/*同一商品的数量*/
+		let selectNum=0;
+		/*调整后的值*/
+		let adjArr=[]
+		/*如果存储过值*/
+		if(!alreadySelect){return}
+		alreadySelect[id][0].entities.forEach((value,index)=>{
+			/*如果选的是同一个*/
+			if(value.item_id===thisData.item_id){
+				selectNum=--value.quantity;
+				if(selectNum<=0){
+					adjArr=[
+						...alreadySelect[id][0].entities.slice(index+1),
+						...alreadySelect[id][0].entities.slice(0,index)
+					]
+					alreadySelect[id][0].entities=adjArr;
+					/*如果没选中了，就让当前价格为0*/
+					value.view_discount_price=0;
+				}else{
+					value.quantity=selectNum;
+					value.view_discount_price=thisData.specfoods[0].price*selectNum;
+			    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
 				}
-				allNum+=(value.quantity)*10000;
-				allPirce+=(value.view_discount_price)*10000 ;
-				if(value.id===category_id){
-					category_num=category_num+value.quantity;
-				}
-			})
-			this.props.deleteSelected(alreadySelect);
-			this._saveLocalStorage(alreadySelect);
-			let categoryObj={};
-			categoryObj[category_id]={
-				id:category_id,
-				num:category_num
 			}
-			this.setState({
-				num:allNum/10000,
-				allPirce:allPirce/10000,
-				fatherCate:{
-					...this.state.fatherCate,
-					...categoryObj
-				}
-			})	
+			allNum+=(value.quantity)*10000;
+			allPirce+=(value.view_discount_price)*10000 ;
+			if(value.id===category_id){
+				category_num=category_num+value.quantity;
+			}
+		})
+		this._saveLocalStorage(alreadySelect);
+		let categoryObj={};
+		categoryObj[category_id]={
+			id:category_id,
+			num:category_num
 		}
+		this.setState({
+			num:allNum/10000,
+			allPirce:allPirce/10000,
+			fatherCate:{
+				...this.state.fatherCate,
+				...categoryObj
+			}
+		})	
 	}
 	handleSubmit(thisIndex,foodIndex,category_id,item_id,event){
 		this.isFirst=false
-		if(this.props.addSelected){
-			/*同一类商品总数量*/
-			let category_num=0;
-			/*总数量*/
-			let allNum=0;
-			/*总价*/
-			let allPirce=0;
-			let id=this.props.basicData.id;
-			let obj={};
-			let thisData=this.props.data[thisIndex].foods[foodIndex];
-			let alreadySelect=this.props.contextData;
-			/*同一商品的数量*/
-			let selectNum=1;
-			/*是否为同种*/
-			let footSame=false;
-			/*如果存储过值且存储过当前商家*/
-			if(alreadySelect && alreadySelect[id]){
-				alreadySelect[id][0].entities.forEach((value,index)=>{
-					/*如果选的是同一个*/
-					if(value.item_id===thisData.item_id){
-						footSame=true;
-						selectNum=++value.quantity;
-						value.quantity=selectNum;
-						value.view_discount_price=thisData.specfoods[0].price*selectNum;
-				    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
-						obj=alreadySelect;
-					}
-				})
-				if(!footSame){
-					/*如果没有就新增*/
-					alreadySelect[id][0].entities.push({
-						"id": thisData.category_id,
-						"sku_id": thisData.specfoods[0].sku_id,
-						"item_id": thisData.item_id,
-						"quantity": selectNum,
-						"name": thisData.specfoods[0].name,
-						"price": thisData.specfoods[0].price,
-						"original_price": null,
-						"packing_fee": 1,
-						"stock": thisData.specfoods[0].stock,
-						"specs": thisData.specfoods[0].specs,
-						"attrs": thisData.attrs,
-						"weight": thisData.specfoods[0].weight,
-						"extra": {},
-						"view_discount_price": thisData.specfoods[0].price*selectNum,
-						"view_original_price": thisData.specfoods[0].price*selectNum
-					})
+		/*同一类商品总数量*/
+		let category_num=0;
+		/*总数量*/
+		let allNum=0;
+		/*总价*/
+		let allPirce=0;
+		let id=this.props.basicData.id;
+		let obj={};
+		let thisData=this.props.data[thisIndex].foods[foodIndex];
+		let alreadySelect=this._getLocalStorage();
+		/*同一商品的数量*/
+		let selectNum=1;
+		/*是否为同种*/
+		let footSame=false;
+		/*如果存储过值且存储过当前商家*/
+		if(alreadySelect && alreadySelect[id]){
+			alreadySelect[id][0].entities.forEach((value,index)=>{
+				/*如果选的是同一个*/
+				if(value.item_id===thisData.item_id){
+					footSame=true;
+					selectNum=++value.quantity;
+					value.quantity=selectNum;
+					value.view_discount_price=thisData.specfoods[0].price*selectNum;
+			    	   	value.view_original_price=thisData.specfoods[0].price*selectNum;
 					obj=alreadySelect;
 				}
-			}else{
-			/*如果没存储过当前商家*/
-				obj[id]=[
-					{
-					    "entities": [
-					    	{
-					    	    "id": thisData.category_id,
-					    	    "sku_id": thisData.specfoods[0].sku_id,
-					    	    "item_id": thisData.item_id,
-					    	    "quantity": selectNum,
-					    	    "name": thisData.specfoods[0].name,
-					    	    "price": thisData.specfoods[0].price,
-					    	    "original_price": null,
-					    	    "packing_fee": 1,
-					    	    "stock": thisData.specfoods[0].stock,
-					    	    "specs": thisData.specfoods[0].specs,
-					    	    "attrs": thisData.attrs,
-					    	    "weight": thisData.specfoods[0].weight,
-					    	    "extra": {},
-					    	    "view_discount_price": thisData.specfoods[0].price*selectNum,
-					    	    "view_original_price": thisData.specfoods[0].price*selectNum
-					    	}
-					    ],
-					}
-				];
-			}
-			obj[id][0].entities.forEach((value,index)=>{
-				allNum+=(value.quantity)*10000;
-				allPirce+=(value.view_discount_price)*10000 ;
-				if(value.id===category_id){
-					category_num=category_num+value.quantity;
-				}
-			});
-			/*如果没存储过当前商家*/	
-			if(alreadySelect&& !alreadySelect[id]){
-				obj={
-					...alreadySelect,
-					...obj
-				}
-			}
-			this._saveLocalStorage(obj);
-			this.props.addSelected(obj);
-			let categoryObj={};
-			categoryObj[category_id]={
-				id:category_id,
-				num:category_num
-			}
-			/*fatherCate表示商品每一个类别选中食物总量*/
-			this.setState({
-				num:allNum/10000,
-				allPirce:allPirce/10000,
-				fatherCate:{
-					...this.state.fatherCate,
-					...categoryObj
-				}
 			})
+			if(!footSame){
+				/*如果没有就新增*/
+				alreadySelect[id][0].entities.push({
+					"id": thisData.category_id,
+					"sku_id": thisData.specfoods[0].sku_id,
+					"item_id": thisData.item_id,
+					"quantity": selectNum,
+					"name": thisData.specfoods[0].name,
+					"price": thisData.specfoods[0].price,
+					"original_price": null,
+					"packing_fee": 1,
+					"stock": thisData.specfoods[0].stock,
+					"specs": thisData.specfoods[0].specs,
+					"attrs": thisData.attrs,
+					"weight": thisData.specfoods[0].weight,
+					"extra": {},
+					"view_discount_price": thisData.specfoods[0].price*selectNum,
+					"view_original_price": thisData.specfoods[0].price*selectNum
+				})
+				obj=alreadySelect;
+			}
+		}else{
+		/*如果没存储过当前商家*/
+			obj[id]=[
+				{
+				    "entities": [
+				    	{
+				    	    "id": thisData.category_id,
+				    	    "sku_id": thisData.specfoods[0].sku_id,
+				    	    "item_id": thisData.item_id,
+				    	    "quantity": selectNum,
+				    	    "name": thisData.specfoods[0].name,
+				    	    "price": thisData.specfoods[0].price,
+				    	    "original_price": null,
+				    	    "packing_fee": 1,
+				    	    "stock": thisData.specfoods[0].stock,
+				    	    "specs": thisData.specfoods[0].specs,
+				    	    "attrs": thisData.attrs,
+				    	    "weight": thisData.specfoods[0].weight,
+				    	    "extra": {},
+				    	    "view_discount_price": thisData.specfoods[0].price*selectNum,
+				    	    "view_original_price": thisData.specfoods[0].price*selectNum
+				    	}
+				    ],
+				}
+			];
 		}
+		obj[id][0].entities.forEach((value,index)=>{
+			allNum+=(value.quantity)*10000;
+			allPirce+=(value.view_discount_price)*10000 ;
+			if(value.id===category_id){
+				category_num=category_num+value.quantity;
+			}
+		});
+		/*如果没存储过当前商家*/	
+		if(alreadySelect&& !alreadySelect[id]){
+			obj={
+				...alreadySelect,
+				...obj
+			}
+		}
+		this._saveLocalStorage(obj);
+		let categoryObj={};
+		categoryObj[category_id]={
+			id:category_id,
+			num:category_num
+		}
+		/*fatherCate表示商品每一个类别选中食物总量*/
+		this.setState({
+			num:allNum/10000,
+			allPirce:allPirce/10000,
+			fatherCate:{
+				...this.state.fatherCate,
+				...categoryObj
+			}
+		})
 	}
 	render(){
 		let id=this.props.basicData.id?this.props.basicData.id:0;
-		let allSelected=this.props.contextData;
+		let allSelected=this._getLocalStorage();
 		let isSave=null;
 		if(allSelected && allSelected[id]){
 			isSave=allSelected;
@@ -425,7 +412,7 @@ class Commodity extends Component{
 								<Selected quantity={
 									/*已选中个数*/
 									isSave?(this._filter(valueDes.item_id,allSelected[id][0].entities).length===0?0:this._filter(valueDes.item_id,allSelected[id][0].entities)[0].quantity)
-									:[]
+									:0
 								} handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)} handleSubmit={this.handleSubmit.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)}/>
 								</div>
 							</section>

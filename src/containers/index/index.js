@@ -17,6 +17,7 @@ class Index extends Component{
 		if(localstate){
 			this.props.onLogin(localstate)
 		}
+		console.log(this.props.data2)
 	}
 	_getLocal(name){
 		return JSON.parse(localStorage.getItem(name))
@@ -39,7 +40,8 @@ class Index extends Component{
 
 const mapStateToProps=(state)=>{
 	return{
-		data:state.loginPart
+		data:state.loginPart,
+		data2:state
 	}
 }
 const mapDispatchToProps=(dispatch)=>{

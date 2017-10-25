@@ -13,7 +13,6 @@ class ListCon extends Component{
 		})
 	}
 	render(){
-
 		return(
 			<dt id={'menu' +this.props.index}>
 				<div className='commodity_main_menu_title'>
