@@ -377,8 +377,7 @@ class Commodity extends Component{
 				index={index} 
 				key={index} 
 				type={value.type} 
-				fatherCate={this.state.fatherCate}
-				category_id={value.id}
+				nums={this.state.fatherCate[value.id]}
 				current={this.state.current}
 				handleClickRun={this.handleClickRun.bind(this)} /> )
 		})

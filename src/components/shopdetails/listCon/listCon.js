@@ -5,14 +5,29 @@ class ListCon extends Component{
 		super()
 		this.state={
 			openMore:false,
+			name:''
 		}
+	}
+	componentWillMount(){
+		this.setState({
+			name:this.props.value.name
+		})
 	}
 	handleClick(){
 		this.setState({
 			openMore:!this.state.openMore
 		})
 	}
+	shouldComponentUpdate(nextProps,nextStates){
+		if(nextProps.value.name===this.props.value.name){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
 	render(){
+		console.log('刷他娘的')
 		return(
 			<dt id={'menu' +this.props.index}>
 				<div className='commodity_main_menu_title'>

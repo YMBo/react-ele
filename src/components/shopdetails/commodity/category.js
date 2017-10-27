@@ -5,17 +5,16 @@ class Category extends Component{
 		super();
 		this.state={
 			display:false,
-			num:0
 		}
 	}
-	componentWillMount(){
-		if(this.props.fatherCate[this.props.category_id]){
-			if(this.props.category_id === this.props.fatherCate[this.props.category_id].id){
-				this.setState({
-					num:this.props.fatherCate[this.props.category_id].num
-				})
-			}
+	/*优化*/
+	shouldComponentUpdate(nextProps,nextStates){
+		/*如果num或者current改变了就刷新*/
+		/*如果是上一次的选中状态就刷新*/
+		if(  (!this.props.nums&&nextProps.nums)||( (nextProps.current===nextProps.index)&&(nextProps.current!==this.props.current) ) || (this.props.current===this.props.index) || (this.props.nums&&(nextProps.nums.num!==this.props.nums.num)) ){
+			return true;
 		}
+		return false;
 	}
 	/*图片格式化*/
 	_formatImg(src){
@@ -32,11 +31,16 @@ class Category extends Component{
 		}
 	}
 	render(){
+		console.log('刷新了..................................')
+		let num=0;
+		if(this.props.nums){
+			num=this.props.nums.num
+		}
 		return(
 			<li className={`${this.props.current===this.props.index?'active':''}`} onClick={this.handleClickRun.bind(this,this.props.index)}>
-				{( (this.props.type===1)&&this.state.num!==0)?
+				{( (this.props.type===1)&&num!==0)?
 				<span className="category_tip">
-				{this.state.num}
+				{num}
 				</span>:null}
 				{this.props.value.icon_url!==''?
 				<img alt={this.props.value.name} src={`//fuss10.elemecdn.com/${this._formatImg(this.props.value.icon_url)}?imageMogr/format/webp/thumbnail/18x/`} />
