@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import ListCon from '../listCon/listCon.js'
 import Footer from '../footer/footer.js'
-import Selected from '../selected/selected.js'
+import MainList from './mainList.js'
 import Category from './category.js'
 import './commodity.css'
 /*商品页*/
@@ -194,11 +194,6 @@ class Commodity extends Component{
 			console.log(e)
 		}
 	}
-	_filter(para,arr){
-		return arr.filter((value,index)=>{
-			return para===value.item_id
-		})
-	}
 	handleSubmitCut(thisIndex,foodIndex,category_id,item_id){
 		this.isFirst=false
 		/*同一类商品总数量*/
@@ -387,37 +382,11 @@ class Commodity extends Component{
 			let thisIndex=index;
 			let listDomDes=value.foods.map((valueDes,index)=>{
 				return(
-				<dd className='commodity_main_list' key={index}>
-					<div>
-						<div className='commodity_main_list_c'>
-							<span className='commodity_main_list_img'>
-								<img alt={valueDes.name} title={valueDes.name} src={`https://fuss10.elemecdn.com/${this._formatImg(valueDes.image_path)}?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/`} />
-							</span>
-							<section className='commodity_main_list_des'>
-								<header className='commodity_main_list_des_title'>
-									<span>{valueDes.name}</span>
-								</header>
-								<p className='commodity_main_list_des_ev'>
-									{valueDes.description}
-								</p>
-								<p className='food_buy'>
-									<span>月售{valueDes.month_sales}份</span>
-									<span>好评率{100*(valueDes.satisfy_count/valueDes.rating_count).toFixed(2)}%</span>
-								</p>
-								<strong className='food_money'>
-									<span>{valueDes.specfoods[0].price}</span>
-								</strong>
-								<div className='food_add'>
-								<Selected quantity={
-									/*已选中个数*/
-									isSave?(this._filter(valueDes.item_id,allSelected[id][0].entities).length===0?0:this._filter(valueDes.item_id,allSelected[id][0].entities)[0].quantity)
-									:0
-								} handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)} handleSubmit={this.handleSubmit.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)}/>
-								</div>
-							</section>
-						</div>
-					</div>
-				</dd>
+				<MainList isSave={isSave}  key={index} valueDes={valueDes}
+				id={id}
+				handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)} 
+				handleSubmit={this.handleSubmit.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)}
+				/>
 				)
 			})
 			return(

@@ -27,7 +27,6 @@ class ListCon extends Component{
 	}
 
 	render(){
-		console.log('刷他娘的')
 		return(
 			<dt id={'menu' +this.props.index}>
 				<div className='commodity_main_menu_title'>

@@ -1,5 +1,4 @@
 import React,{Component} from 'react'
-import { connect } from 'react-redux'
 import Commodity from '../../../components/shopdetails/commodity/commodity.js'
 import 'es6-promise'
 import 'whatwg-fetch'
