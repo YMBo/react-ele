@@ -53,6 +53,10 @@
 		height: 100%;
 		overflow-y: auto;
 		.commodity_main_menu{
+			-webkit-overflow-scrolling: touch;
+			dl{
+				-webkit-overflow-scrolling: touch;
+			}
 			.commodity_main_menu_more{
 				.popup{
 					position: absolute;

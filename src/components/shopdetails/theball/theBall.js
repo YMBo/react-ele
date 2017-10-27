@@ -23,6 +23,6 @@ export const  TheBall={
 			setTimeout(()=>{
 				document.querySelector('.shopping_footer').classList.remove("animation");
 			},400)
-		},600)
+		},620)
 	}
 }

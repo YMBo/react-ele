@@ -9,26 +9,26 @@ class Selected extends Component{
 		}
 	}
 	componentWillMount(){
-		if( this.props.quantity && this.props.quantity!==0){
+		if( this.props.quantity ){
 			this.setState({
 				index:this.props.quantity
 			})
 		}
 	}
+	componentWillReceiveProps(nextProps){
+		if(  typeof nextProps.quantity==='number' ){
+			this.setState({
+				index:nextProps.quantity
+			})
+		}
+	}
 	handleSubmit(event){
 		TheBall.newBall(event)
-		this.setState({
-			index:this.state.index<=0?1:++this.state.index
-		})
 		if(this.props.handleSubmit){
 			this.props.handleSubmit(event)
 		}
 	}
 	handleSubmitCut(event){
-		let index=--this.state.index;
-		this.setState({
-			index:index<=0?0:index
-		})
 		if(this.props.handleSubmitCut){
 			this.props.handleSubmitCut(event);
 		}

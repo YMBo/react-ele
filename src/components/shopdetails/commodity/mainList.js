@@ -3,15 +3,14 @@ import Selected from '../selected/selected.js'
 
 class MainList extends Component{
 	shouldComponentUpdate(nextProps,nextStates){
-		if(this.props.valueDes.name===nextProps.valueDes.name){
-			return false;
+		/*如果选中的数量有值且没变或者食物名称没变就不render*/
+		if(this.props.alreadyNum !== nextProps.alreadyNum){
+			return true;
 		}
-		return true;
-	}
-	_filter(para,arr){
-		return arr.filter((value,index)=>{
-			return para===value.item_id
-		})
+		if(this.props.valueDes.name!==nextProps.valueDes.name){
+			return true;
+		}
+		return false;
 	}
 	/*图片格式化*/
 	_formatImg(src){
@@ -45,11 +44,7 @@ class MainList extends Component{
 								<span>{this.props.valueDes.specfoods[0].price}</span>
 							</strong>
 							<div className='food_add'>
-							<Selected quantity={
-								/*已选中个数*/
-								this.props.isSave?(this._filter(this.props.valueDes.item_id,this.props.isSave[this.props.id][0].entities).length===0?0:this._filter(this.props.valueDes.item_id,this.props.isSave[this.props.id][0].entities)[0].quantity)
-								:0
-							} handleSubmitCut={this.props.handleSubmitCut} handleSubmit={this.props.handleSubmit}/>
+							<Selected quantity={this.props.alreadyNum} handleSubmitCut={this.props.handleSubmitCut} handleSubmit={this.props.handleSubmit}/>
 							</div>
 						</section>
 					</div>

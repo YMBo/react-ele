@@ -356,6 +356,11 @@ class Commodity extends Component{
 			}
 		})
 	}
+	_filter(para,arr){
+		return arr.filter((value,index)=>{
+			return para===value.item_id
+		})
+	}
 	render(){
 		let id=this.props.basicData.id?this.props.basicData.id:0;
 		let allSelected=this._getLocalStorage();
@@ -382,11 +387,17 @@ class Commodity extends Component{
 			let thisIndex=index;
 			let listDomDes=value.foods.map((valueDes,index)=>{
 				return(
-				<MainList isSave={isSave}  key={index} valueDes={valueDes}
-				id={id}
-				handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)} 
-				handleSubmit={this.handleSubmit.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)}
-				/>
+					<MainList 
+					alreadyNum={isSave?
+						(this._filter(valueDes.item_id,isSave[id][0].entities).length===0
+						?0
+						:this._filter(valueDes.item_id,isSave[id][0].entities)[0].quantity)
+						:0}  
+					key={index} 
+					valueDes={valueDes}
+					handleSubmitCut={this.handleSubmitCut.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)} 
+					handleSubmit={this.handleSubmit.bind(this,thisIndex,index,valueDes.category_id,valueDes.item_id)}
+					/>
 				)
 			})
 			return(
