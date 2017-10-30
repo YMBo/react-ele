@@ -19,14 +19,17 @@ class ListCon extends Component{
 		})
 	}
 	shouldComponentUpdate(nextProps,nextStates){
-		if(nextProps.value.name===this.props.value.name){
+		if(nextStates.openMore!==this.state.openMore){
+			return true;
+		}else if( nextProps.value.name===this.props.value.name){
+	
 			return false;
 		}else{
 			return true;
 		}
 	}
 
-	render(){
+	render(){	console.log('4')
 		return(
 			<dt id={'menu' +this.props.index}>
 				<div className='commodity_main_menu_title'>
@@ -35,7 +38,7 @@ class ListCon extends Component{
 				</div>
 				<div className='commodity_main_menu_more' >
 					<span className='more_icon' key={this.props.index} onClick={this.handleClick.bind(this)}></span>
-					<p className='popup'style={{display:`${this.state.openMore?'block':'none'}`}}>
+					<p className='popup' style={{display:`${this.state.openMore?'block':'none'}`}}>
 						<span>{this.props.value.name} </span>
 						<span>{this.props.value.description}</span>
 					</p>
