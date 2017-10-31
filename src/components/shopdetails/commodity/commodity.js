@@ -425,7 +425,7 @@ class Commodity extends Component{
 		let categoryObj={};
 		categoryObj[lieBid]={
 			id:lieBid,
-			num:--this.state.fatherCate[lieBid].num
+			num:this.state.fatherCate[lieBid].num-1
 		}
 		this.setState({
 			allPirce:allPirce,
@@ -437,13 +437,6 @@ class Commodity extends Component{
 				...categoryObj
 			}
 		})
-		console.log({
-				...this.state.fatherCate,
-				...{lieBid:{
-					...this.state.fatherCate[lieBid],
-					num:--this.state.fatherCate[lieBid].num
-				}}
-			})
 		this._saveLocalStorage(thisFoods);
 	}
 	_filter(para,arr){
