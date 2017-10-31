@@ -375,8 +375,17 @@ class Commodity extends Component{
 	/*页脚的商品整合里的add操作*/
 	handleFooterAdd(index){
 		let thisFoods=this.state.foodsSave;
+		let num=0;
+		let allPirce=0;
 		thisFoods[this.state.id][0].entities[index].quantity++;
+		/*计算选中商品总个数和总价*/
+		thisFoods[this.state.id][0].entities.forEach((value,index)=>{
+			num=num+value.quantity;
+			allPirce=allPirce+(value.quantity*value.price)
+		})
 		this.setState({
+			allPirce:allPirce,
+			num:num,
 			foodsSave:thisFoods
 		})
 		this._saveLocalStorage(thisFoods);
@@ -384,7 +393,9 @@ class Commodity extends Component{
 	/*页脚的商品整合里的cut操作*/
 	handleFooterCut(index){
 		let thisFoods=this.state.foodsSave;
-		let thisFoodsArr=[]
+		let thisFoodsArr=[];
+		let num=0;
+		let allPirce=0;
 		if(thisFoods[this.state.id][0].entities[index].quantity-1===0){
 			thisFoodsArr=[
 				...thisFoods[this.state.id][0].entities.slice(0,index),
@@ -394,7 +405,14 @@ class Commodity extends Component{
 		}else{
 			thisFoods[this.state.id][0].entities[index].quantity--;
 		}
+		/*计算选中商品总个数和总价*/
+		thisFoods[this.state.id][0].entities.forEach((value,index)=>{
+			num=num+value.quantity;
+			allPirce=allPirce+(value.quantity*value.price)
+		})
 		this.setState({
+			allPirce:allPirce,
+			num:num,
 			foodsSave:thisFoods
 		})
 		this._saveLocalStorage(thisFoods);
