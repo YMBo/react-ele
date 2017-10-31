@@ -31,6 +31,7 @@ class Category extends Component{
 		}
 	}
 	render(){
+		console.log('刷新次数.....')
 		let num=0;
 		if(this.props.nums){
 			num=this.props.nums.num

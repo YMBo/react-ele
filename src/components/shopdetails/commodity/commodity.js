@@ -373,7 +373,7 @@ class Commodity extends Component{
 		})
 	}
 	/*页脚的商品整合里的add操作*/
-	handleFooterAdd(index){
+	handleFooterAdd(index,lieBid){
 		let thisFoods=this.state.foodsSave;
 		let num=0;
 		let allPirce=0;
@@ -386,7 +386,15 @@ class Commodity extends Component{
 		this.setState({
 			allPirce:allPirce,
 			num:num,
-			foodsSave:thisFoods
+			foodsSave:thisFoods,
+			/*类别数量控制*/
+			fatherCate:{
+				...this.state.fatherCate,
+				...{lieBid:{
+					...this.state.fatherCate[lieBid],
+					num:++this.state.fatherCate[lieBid].num
+				}}
+			}
 		})
 		this._saveLocalStorage(thisFoods);
 	}
@@ -407,7 +415,6 @@ class Commodity extends Component{
 		}else{
 			thisFoods[this.state.id][0].entities[index].quantity--;
 		}
-		thisCate[lieBid]={id:lieBid,num:--this.state.fatherCate[lieBid].num}
 		/*计算选中商品总个数和总价*/
 		thisFoods[this.state.id][0].entities.forEach((value,index)=>{
 			num=num+value.quantity;
@@ -420,7 +427,10 @@ class Commodity extends Component{
 			/*类别数量控制*/
 			fatherCate:{
 				...this.state.fatherCate,
-				...thisCate
+				...{lieBid:{
+					...this.state.fatherCate[lieBid],
+					num:--this.state.fatherCate[lieBid].num
+				}}
 			}
 		})
 		this._saveLocalStorage(thisFoods);
