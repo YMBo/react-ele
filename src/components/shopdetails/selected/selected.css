@@ -1,0 +1,66 @@
+.food_add{
+	position: absolute;
+	right: 0;
+	bottom: -.066667rem;
+	.food_add_box_s{
+		display: inline-block;
+		text-align: center;
+		color: #666;
+		vertical-align: middle;
+		font-size: .373333rem;
+		min-width: .4rem;
+		max-width: 2em;
+		overflow: hidden;
+	}
+	.food_add_box{
+		display: inline-block;
+		font-size: .346667rem;
+		white-space: nowrap;
+		a{
+			display: inline-block;
+			padding: .093333rem;
+			vertical-align: middle;
+			text-decoration: none;
+			svg{
+				width: 40px;
+				height: 40px;
+				vertical-align: middle;
+				fill: #3190e8;
+			}
+		}
+	}
+}
+.food_buy{
+	margin: .173333rem 0!important;
+	color: #666;
+	font-size: .293333rem;
+	line-height: 1;
+
+	span{
+		vertical-align: middle;
+		&:not(:first-child){
+			margin-left: .106667rem;
+			vertical-align: middle;
+		};
+	}
+}
+.food_money{
+		position: absolute;
+		bottom: 0;
+		font-weight: 700;
+		font-size: .426667rem;
+		line-height: .426667rem;
+		color: #f60;
+		padding-bottom: .093333rem;
+		display: flex;
+		align-items: baseline;
+		color: #f60;
+		&:before{
+			font-weight: 400;
+			content: "\A5";
+			font-size: .32rem;
+			color: #f60;
+			margin-right: .053333rem;
+			display: inline-block;
+		};
+}

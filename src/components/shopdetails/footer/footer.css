@@ -2,6 +2,135 @@
 .shop_footer{
 	font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
 	font-size: .426667rem;
+	
+	.footer_all_tip_list{
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		background-color: #fff;
+		transition: transform .3s ease;
+		transform: translate3d(0,100%,0);
+		bottom: 1.28rem;
+		z-index: 11;
+		.footer_all_tip_mj{
+			background-color: #fffad6;
+			border-top: 1PX solid #f9e8a3;
+			opacity: .96;
+			line-height: .533333rem;
+			font-size: .266667rem;
+			text-align: center;
+		}
+		.footer_all_tip_main{
+			overflow: auto;
+			-webkit-overflow-scrolling: touch;
+			max-height: 8rem;
+			.footer_all_tip_main_list{
+				display: flex;
+				align-items: center;
+				padding: .2rem .333333rem .2rem 0;
+				min-height: 1.466667rem;
+				margin-left: .333333rem;
+				.entityList-entityname_3{
+					flex: 3;
+					text-align: right;
+					position: inherit;
+					.entityList-entityname_3_1{
+						display: inline-block;
+						font-size: .346667rem;
+						white-space: nowrap;
+					}
+				}
+				.entityList-entityname_2{
+					flex: 2.5;
+					color: #f60;
+					text-align: right;
+					white-space: nowrap;
+					font-weight: 700;
+					.entityList-entityname_2_1:before{
+						content: "\A5";
+						font-size: .266667rem;
+						color: currentColor;
+					}
+				}
+				.entityList-entityname_1{
+					flex: 5.5;
+					line-height: normal;
+					.entityList-entityname_1_1{
+						display: inline-block;
+						font-style: normal;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						vertical-align: middle;
+						max-width: 4.666667rem;
+					}
+				}
+				&:not(:last-child){
+					border-bottom: 1PX solid #eee;
+				};
+			}
+			ul{
+				padding: 0;
+				list-style: none;
+				flex: none;
+			}
+		}
+		.footer_all_tip_title{
+			display: flex;
+			align-items: center;
+			padding: 0 .333333rem;
+			border-bottom: 1PX solid #ddd;
+			background-color: #eceff1;
+			color: #666;
+			height: 1.066667rem;
+			.aleady_click{
+				flex: none;
+				display: flex;
+				align-items: center;
+				padding-left: .4rem;
+				color: #666;
+				text-decoration: none;
+				font-size: .346667rem;
+				svg{
+					width: .306667rem;
+					height: .346667rem;
+					fill: #ddd;
+					margin-right: .08rem;
+				}
+			}
+			.aleady_foods{
+				display: flex;
+				flex:1;
+				align-items: center;
+				.aleady_foods_title{
+					padding-left: .133333rem;
+					border-left: .093333rem solid #2395ff;
+					flex: none;
+				}
+			}
+		}
+		&.footer_all_tip_list_on{
+			transform: translateZ(0);
+		}
+	}
+	.footer_all_list_cover{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color:#000;
+		opacity: .4;
+		transition: opacity .3s;
+		z-index: 10;
+		&.footer_all_list_cover_leave{
+			opacity: 0;
+		};
+		&.footer_all_list_cover_enter{
+			opacity: .4;
+		}
+	}
 	.shop_footer_box{
 		position: fixed;
 		right: 0;
@@ -13,6 +142,7 @@
 		background-color: rgba(61,61,63,.9);
 		-webkit-backdrop-filter: blur(.266667rem);
 		height: 1.28rem;
+		z-index: 11;
 		.shoping_submit{
 			height: 100%;
 			width: 2.8rem;

@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import './selected.css'
 import {TheBall} from '../theball/theBall.js'
 class Selected extends Component{
 	constructor(){

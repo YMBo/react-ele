@@ -13,13 +13,18 @@ class Commodity extends Component{
 			current:0,
 			num:0,
 			allPirce:0,
-			fatherCate:{}
+			/*商家id*/
+			id:0,
+			fatherCate:{},
+			/*商家商品信息的存储*/
+			foodsSave:{}
 		}
 	}
 	isFirst=true
 	componentWillReceiveProps(){
 		/*初始化*/
 		if(!this.isFirst){return;}
+		this.isFirst=false;
 		setTimeout(()=>{
 			let id=0;
 			id=this.props.basicData.id?this.props.basicData.id:0;
@@ -57,10 +62,17 @@ class Commodity extends Component{
 				this.setState({
 					num:allNum/10000,
 					allPirce:allPirce/10000,
+					foodsSave:allSelected,
+					id:id,
+					/*每个类别选择情况*/
 					fatherCate:{
 						...this.state.fatherCate,
 						...categoryObj
 					}
+				})
+			}else{
+				this.setState({
+					id:id
 				})
 			}
 		},50)
@@ -202,9 +214,9 @@ class Commodity extends Component{
 		let allNum=0;
 		/*总价*/
 		let allPirce=0;
-		let id=this.props.basicData.id;
+		let id=this.state.id;
 		let thisData=this.props.data[thisIndex].foods[foodIndex];
-		let alreadySelect=this._getLocalStorage();;
+		let alreadySelect=this.state.foodsSave;
 		/*同一商品的数量*/
 		let selectNum=0;
 		/*调整后的值*/
@@ -244,6 +256,7 @@ class Commodity extends Component{
 		this.setState({
 			num:allNum/10000,
 			allPirce:allPirce/10000,
+			foodsSave:alreadySelect,
 			fatherCate:{
 				...this.state.fatherCate,
 				...categoryObj
@@ -258,10 +271,11 @@ class Commodity extends Component{
 		let allNum=0;
 		/*总价*/
 		let allPirce=0;
-		let id=this.props.basicData.id;
+		let id=this.state.id;
 		let obj={};
+		/*thisIndex表示类别*/
 		let thisData=this.props.data[thisIndex].foods[foodIndex];
-		let alreadySelect=this._getLocalStorage();
+		let alreadySelect=this.state.foodsSave;
 		/*同一商品的数量*/
 		let selectNum=1;
 		/*是否为同种*/
@@ -340,6 +354,7 @@ class Commodity extends Component{
 				...obj
 			}
 		}
+
 		this._saveLocalStorage(obj);
 		let categoryObj={};
 		categoryObj[category_id]={
@@ -350,11 +365,39 @@ class Commodity extends Component{
 		this.setState({
 			num:allNum/10000,
 			allPirce:allPirce/10000,
+			foodsSave:obj,
 			fatherCate:{
 				...this.state.fatherCate,
 				...categoryObj
 			}
 		})
+	}
+	/*页脚的商品整合里的add操作*/
+	handleFooterAdd(index){
+		let thisFoods=this.state.foodsSave;
+		thisFoods[this.state.id][0].entities[index].quantity+1;
+		this.setState({
+			foodsSave:thisFoods
+		})
+		this._saveLocalStorage(thisFoods);
+	}
+	/*页脚的商品整合里的cut操作*/
+	handleFooterCut(index){
+		let thisFoods=this.state.foodsSave;
+		let thisFoodsArr=[]
+		if(thisFoods[this.state.id][0].entities[index].quantity-1===0){
+			thisFoodsArr=[
+				...thisFoods[this.state.id][0].entities.slice(0,index),
+				...thisFoods[this.state.id][0].entities.slice(index+1)
+			]
+			thisFoods[this.state.id][0].entities=thisFoodsArr;
+		}else{
+			thisFoods[this.state.id][0].entities[index].quantity-1;
+		}
+		this.setState({
+			foodsSave:thisFoods
+		})
+		this._saveLocalStorage(thisFoods);
 	}
 	_filter(para,arr){
 		return arr.filter((value,index)=>{
@@ -362,10 +405,12 @@ class Commodity extends Component{
 		})
 	}
 	render(){
-		let id=this.props.basicData.id?this.props.basicData.id:0;
-		let allSelected=this._getLocalStorage();
+		let id=this.state.id;
+		let allSelected=this.state.foodsSave;
 		let isSave=null;
+		/*如果商家的商品的选中信息存在*/
 		if(allSelected && allSelected[id]){
+			/*选中的商品*/
 			isSave=allSelected;
 		}
 		/*数据处理*/
@@ -420,7 +465,14 @@ class Commodity extends Component{
 						</div>
 					</div>
 				</div>
-				<Footer allPirce={this.state.allPirce} num={this.state.num} data={this.props.basicData}/>
+				<Footer 
+				allPirce={this.state.allPirce} 
+				num={this.state.num} 
+				mainFoods={isSave?isSave[id][0].entities:[]} 
+				data={this.props.basicData}
+				handleFooterAdd={this.handleFooterAdd.bind(this)}
+				handleFooterCut={this.handleFooterCut.bind(this)}
+				/>
 			</div>
 		)
 	}

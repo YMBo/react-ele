@@ -29,7 +29,7 @@ class ListCon extends Component{
 		}
 	}
 
-	render(){	console.log('4')
+	render(){
 		return(
 			<dt id={'menu' +this.props.index}>
 				<div className='commodity_main_menu_title'>
