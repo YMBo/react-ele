@@ -383,6 +383,11 @@ class Commodity extends Component{
 			num=num+value.quantity;
 			allPirce=allPirce+(value.quantity*value.price)
 		})
+		let categoryObj={};
+		categoryObj[lieBid]={
+			id:lieBid,
+			num:this.state.fatherCate[lieBid].num+1
+		}
 		this.setState({
 			allPirce:allPirce,
 			num:num,
@@ -390,10 +395,7 @@ class Commodity extends Component{
 			/*类别数量控制*/
 			fatherCate:{
 				...this.state.fatherCate,
-				...{lieBid:{
-					...this.state.fatherCate[lieBid],
-					num:++this.state.fatherCate[lieBid].num
-				}}
+				...categoryObj
 			}
 		})
 		this._saveLocalStorage(thisFoods);
@@ -420,6 +422,11 @@ class Commodity extends Component{
 			num=num+value.quantity;
 			allPirce=allPirce+(value.quantity*value.price)
 		})
+		let categoryObj={};
+		categoryObj[lieBid]={
+			id:lieBid,
+			num:--this.state.fatherCate[lieBid].num
+		}
 		this.setState({
 			allPirce:allPirce,
 			num:num,
@@ -427,12 +434,16 @@ class Commodity extends Component{
 			/*类别数量控制*/
 			fatherCate:{
 				...this.state.fatherCate,
+				...categoryObj
+			}
+		})
+		console.log({
+				...this.state.fatherCate,
 				...{lieBid:{
 					...this.state.fatherCate[lieBid],
 					num:--this.state.fatherCate[lieBid].num
 				}}
-			}
-		})
+			})
 		this._saveLocalStorage(thisFoods);
 	}
 	_filter(para,arr){
