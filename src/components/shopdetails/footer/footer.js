@@ -23,12 +23,12 @@ class Footer extends Component{
 		}
 	}
 	handleFooterAdd(index){
-		/*增加对应数量*/
-		this.props.handleFooterAdd(index)
+		/*增加对应数量,第一个参数为索引，第二个参数为类别id*/
+		this.props.handleFooterAdd(index,this.props.mainFoods[index].id)
 	}
 	handleFooterCut(index){
 		/*减少数量*/
-		this.props.handleFooterCut(index)
+		this.props.handleFooterCut(index,this.props.mainFoods[index].id)
 	}
 	handleClick(){
 		this.cover.removeAttribute('style');

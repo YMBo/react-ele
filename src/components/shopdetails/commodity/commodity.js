@@ -390,12 +390,14 @@ class Commodity extends Component{
 		})
 		this._saveLocalStorage(thisFoods);
 	}
-	/*页脚的商品整合里的cut操作*/
-	handleFooterCut(index){
+	/*页脚的商品整合里的cut操作,第二个参数是点击食物的类别id*/
+	handleFooterCut(index,lieBid){
 		let thisFoods=this.state.foodsSave;
 		let thisFoodsArr=[];
 		let num=0;
 		let allPirce=0;
+		/*当前类别计数*/
+		let thisCate={};
 		if(thisFoods[this.state.id][0].entities[index].quantity-1===0){
 			thisFoodsArr=[
 				...thisFoods[this.state.id][0].entities.slice(0,index),
@@ -405,6 +407,7 @@ class Commodity extends Component{
 		}else{
 			thisFoods[this.state.id][0].entities[index].quantity--;
 		}
+		thisCate[lieBid]={id:lieBid,num:--this.state.fatherCate[lieBid].num}
 		/*计算选中商品总个数和总价*/
 		thisFoods[this.state.id][0].entities.forEach((value,index)=>{
 			num=num+value.quantity;
@@ -413,7 +416,12 @@ class Commodity extends Component{
 		this.setState({
 			allPirce:allPirce,
 			num:num,
-			foodsSave:thisFoods
+			foodsSave:thisFoods,
+			/*类别数量控制*/
+			fatherCate:{
+				...this.state.fatherCate,
+				...thisCate
+			}
 		})
 		this._saveLocalStorage(thisFoods);
 	}
