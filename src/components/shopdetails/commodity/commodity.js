@@ -375,7 +375,7 @@ class Commodity extends Component{
 	/*页脚的商品整合里的add操作*/
 	handleFooterAdd(index){
 		let thisFoods=this.state.foodsSave;
-		thisFoods[this.state.id][0].entities[index].quantity+1;
+		thisFoods[this.state.id][0].entities[index].quantity++;
 		this.setState({
 			foodsSave:thisFoods
 		})
@@ -392,7 +392,7 @@ class Commodity extends Component{
 			]
 			thisFoods[this.state.id][0].entities=thisFoodsArr;
 		}else{
-			thisFoods[this.state.id][0].entities[index].quantity-1;
+			thisFoods[this.state.id][0].entities[index].quantity--;
 		}
 		this.setState({
 			foodsSave:thisFoods
