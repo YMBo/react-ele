@@ -16,10 +16,12 @@ class Footer extends Component{
 	componentWillUnmount(){
 		this.cover.removeEventListener("webkitTransitionEnd", this._transitionEndCover, false); 
 	}
-	_transitionEndCover(){
-		if(!this.state.showList){
-			this.cover.style.display='none';
-			this.main.style.opacity=0;
+	componentWillReceiveProps(nextProps){
+		/*如果是删除按钮吧所有的商品删除就会更新*/
+		if(nextProps.mainFoods.length===0 && this.props.mainFoods.length!==0){
+			this.setState({
+				showList:!this.state.showList
+			})
 		}
 	}
 	handleFooterAdd(index){
@@ -30,7 +32,15 @@ class Footer extends Component{
 		/*减少数量*/
 		this.props.handleFooterCut(index,this.props.mainFoods[index].id)
 	}
+	_transitionEndCover(){
+		if(!this.state.showList){
+			this.cover.style.display='none';
+			this.main.style.opacity=0;
+		}
+	}
 	handleClick(){
+		/*如果没有加入购物车的商品就跳过*/
+		if(this.props.mainFoods.length===0){return;}
 		this.cover.removeAttribute('style');
 		this.main.style.opacity=1;
 		this.setState({
@@ -38,6 +48,7 @@ class Footer extends Component{
 		})
 	}
 	render(){
+		
 		let list=this.props.mainFoods.map((value,index)=>{
 			return(
 				<li className='footer_all_tip_main_list' key={index}>
