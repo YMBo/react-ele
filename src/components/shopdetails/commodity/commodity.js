@@ -430,14 +430,45 @@ class Commodity extends Component{
 		this.setState({
 			allPirce:allPirce,
 			num:num,
+			/*所有购物车的商品集合*/
 			foodsSave:thisFoods,
-			/*类别数量控制*/
+			/*按类别的id、num对的集合*/
 			fatherCate:{
 				...this.state.fatherCate,
 				...categoryObj
 			}
 		})
 		this._saveLocalStorage(thisFoods);
+	}
+	/*清空购物车*/
+	emptyAllFodds(){
+		let thisShopping={};
+		/*清空主内容和购物车*/
+		thisShopping[this.state.id]=[{entities:[]}];
+		/*清空类别，左侧aside*/
+		let fatherCate={...this.state.fatherCate}
+		/*fatherCate[value].num=0;循环里不这么做的原因是在category组件里我设置了传进去的值变化才更新，这里是对象，所以要新建一个对象*/
+		for(let  value in fatherCate){
+			fatherCate[value]={
+				...fatherCate[value],
+				num:0
+			}
+		}
+		this.setState({
+			allPirce:0,
+			num:0,
+			foodsSave:{
+				...this.state.foodsSave,
+				...thisShopping
+			},
+			/*类别*/
+			fatherCate:fatherCate
+		})
+		/*存商家的购物车信息*/
+		this._saveLocalStorage({
+				...this.state.foodsSave,
+				...thisShopping
+		});
 	}
 	_filter(para,arr){
 		return arr.filter((value,index)=>{
@@ -512,6 +543,7 @@ class Commodity extends Component{
 				data={this.props.basicData}
 				handleFooterAdd={this.handleFooterAdd.bind(this)}
 				handleFooterCut={this.handleFooterCut.bind(this)}
+				emptyAllFodds={this.emptyAllFodds.bind(this)}
 				/>
 			</div>
 		)

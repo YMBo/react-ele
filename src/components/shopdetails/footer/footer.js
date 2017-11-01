@@ -47,6 +47,10 @@ class Footer extends Component{
 			showList:!this.state.showList
 		})
 	}
+	/*清空*/
+	emptyAllFodds(){
+		this.props.emptyAllFodds();
+	}
 	render(){
 		
 		let list=this.props.mainFoods.map((value,index)=>{
@@ -79,7 +83,7 @@ class Footer extends Component{
 							</div>
 							<a href="javascript:void(0)" className='aleady_click'>
 								<svg viewBox="0 0 24 32" version="1.1"><path fill="#bbb" fillRule="evenodd" d="M21.5 10h-19c-1.1 0-1.918.896-1.819 1.992l1.638 18.016C2.419 31.104 3.4 32 4.5 32h15c1.1 0 2.081-.896 2.182-1.992l1.637-18.016A1.798 1.798 0 0 0 21.5 10zM8 28H5L4 14h4v14zm6 0h-4V14h4v14zm5 0h-3V14h4l-1 14zm2-24h-2.941l-.353-2.514C17.592.669 16.823 0 15.998 0H8c-.825 0-1.593.668-1.708 1.486L5.94 4H3a3 3 0 0 0-3 3v1h24V7a3 3 0 0 0-3-3zM8.24 2h7.52l.279 2H7.96l.28-2z"/></svg>
-								<span>清空</span>
+								<span onClick={this.emptyAllFodds.bind(this)}>清空</span>
 							</a>
 						</div>
 						<div className='footer_all_tip_main'>
