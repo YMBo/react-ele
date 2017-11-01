@@ -147,8 +147,9 @@ componentDidMount() {
 这块主要是对数据的处理，注意选`热销`和`优惠`部分的商品时，别的分类的同样食物也会被选中，而且这两类不会被红色圈圈标记，也就是说`优惠`和`热销`其实与下面分类是联动的关系，注意看图    
 ![效果](https://github.com/YMBo/react-ele/blob/master/preview/17.gif)    
     
-#### 18.添加抛物线动画    
-这个部分原理：点击添加时，新建一个div和一个子div，然后父级元素运动轨迹从上到下，子div轨迹从做到右，这样就形成了一个抛物线    
-![效果](https://github.com/YMBo/react-ele/blob/master/preview/18.gif)
+#### 18.添加抛物线动画、数据的处理、列表、主内容、购物车之间的联动    
+动画部分原理：点击添加时，新建一个div和一个子div，然后父级元素运动轨迹从上到下，子div轨迹从做到右，这样就形成了一个抛物线    
+联动：数据处理，利用数据驱动    
+![效果](https://github.com/YMBo/react-ele/blob/master/preview/19.gif)
 
   
