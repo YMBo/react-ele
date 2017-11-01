@@ -148,7 +148,7 @@ componentDidMount() {
 ![效果](https://github.com/YMBo/react-ele/blob/master/preview/17.gif)    
     
 #### 18.添加抛物线动画、数据的处理、列表、主内容、购物车之间的联动    
-动画部分原理：点击添加时，新建一个div和一个子div，然后父级元素运动轨迹从上到下，子div轨迹从做到右，这样就形成了一个抛物线    
+动画部分原理：点击添加时，新建一个div和一个子div，然后父级元素运动轨迹从上到下，子div轨迹从做到右，这样就形成了一个抛物线    
 联动：数据处理，利用数据驱动    
 ![效果](https://github.com/YMBo/react-ele/blob/master/preview/19.gif)
 
