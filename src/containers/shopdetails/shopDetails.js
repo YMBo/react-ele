@@ -27,6 +27,7 @@ class ShopDetails extends Component{
 		.then(response=>response.json())
 		.then(dataJson=>{
 		document.title=dataJson.name;
+		console.log(dataJson.activities)
 			this.setState({
 				headerData:{
 					id:dataJson.id,
@@ -37,7 +38,7 @@ class ShopDetails extends Component{
 					/*起送价*/
 					float_minimum_order_amount:dataJson.float_minimum_order_amount,
 					/*公告*/
-					promotion_info:dataJson.promotion_info,
+					promotion_info:dataJson.promotion_info.length===0?"欢迎光临，用餐高峰期请提前下单，谢谢。":dataJson.promotion_info,
 					/*时间*/
 					order_lead_time:dataJson.order_lead_time,
 					/*快递*/

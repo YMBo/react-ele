@@ -1,0 +1,125 @@
+.activityPage_cover{
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: auto;
+	z-index: 100;
+	.activityPage_cover_box{
+		padding-top: 1.173333rem;
+		height: 100%;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+		.activityPage_close{
+			position: fixed;
+			left: 0;
+			right: 0;
+			bottom: .666667rem;
+			margin: auto;
+			width: 1.2rem;
+			height: 1.2rem;
+			border: 1PX solid #888;
+			border-radius: 50%;
+			svg{
+				fill: #fff;
+				width: 100%;
+				height: 100%;
+				-webkit-transform: scale(.3);
+				transform: scale(.3);
+			}
+		}
+		.activityPage_main{
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			border: .8rem solid transparent;
+			border-top-width: 1.066667rem;
+			border-bottom-width: 2.4rem;
+			overflow: auto;
+			background-color: #262626;
+			color: #fff;
+			-webkit-backdrop-filter: saturate(500%) blur(.666667rem);
+			backdrop-filter: saturate(500%) blur(.666667rem);
+			h2{
+				text-align: center;
+				font-size: 1.5em;
+				margin: 0;
+				font-weight: 400;
+			}
+			.activityPage_main_list{
+				margin-bottom: .186667rem;
+				font-size: 0;
+				.activityPage_main_list_div{
+					line-height: .48rem;
+					display: flex;
+					font-size: .346667rem;
+					.activity-logo{
+						margin-top: .04rem;
+						margin-right: .16rem;
+						font-size: .293333rem;
+						font-style: normal;
+						height: .373333rem;
+						width: .373333rem;
+						display: inline-block;
+						box-sizing: border-box;
+						text-align: center;
+						border-radius: .053333rem;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						color: #fff;
+					}
+					.activity-des{
+						-webkit-box-flex: 1;
+						-webkit-flex: 1;
+						-ms-flex: 1;
+						flex: 1;
+						font-size: .293333rem;
+					}
+				}
+			}
+			.activityPage_main_title{
+				text-align: center;
+				margin: .8rem 0 .533333rem;
+				background-image: -webkit-gradient(linear,left top,right top,from(#555));
+				background-image: -webkit-linear-gradient(left,#555);
+				background-image: linear-gradient(90deg,#555);
+				background-position: 50%;
+				background-size: 100% 1PX;
+				background-repeat: no-repeat;
+				font-weight:400;
+				span{
+					font-size: .32rem;
+					padding: .133333rem .266667rem;
+					border-radius: .666667rem;
+					border: 1PX solid #555;
+					background-color: #262626;
+				}
+			}
+			.activityPage_star{
+				position: relative;
+				display: inline-block;
+				transform: scale(2);
+				.start_cover{
+					position: absolute;
+					left: 0;
+					top: 0;
+					overflow:hidden;
+				}
+				svg{
+					width: 1.493333rem;
+					height: .266667rem;
+					-webkit-box-flex: 0;
+					-webkit-flex: none;
+					-ms-flex: none;
+					flex: none;
+				}
+			}
+		}
+	}
+}

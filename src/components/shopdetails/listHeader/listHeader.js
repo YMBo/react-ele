@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import ActivityPage from './activityPage/activityPage.js'
 import './listHeader.css'
 
 class ListHeader extends Component{
@@ -7,8 +8,14 @@ class ListHeader extends Component{
 		this.state={
 			curName:'',
 			curColor:'',
-			description:''
+			description:'',
+			activity:false
 		}
+	}
+	handleActivity(){
+		this.setState({
+			activity:!this.state.activity
+		})
 	}
 	render(){
 		let cutName,cutColor,description='';
@@ -19,6 +26,7 @@ class ListHeader extends Component{
 		}
 		return(
 			<div className='shoplist_header'>
+				{this.state.activity?<ActivityPage handleActivity={this.handleActivity.bind(this)}/>:null}
 				<div className='shoplist_header_bg' style={{backgroundImage:`url('//fuss10.elemecdn.com/${this.props.data.image_path?this.props.data.image_path:''}?imageMogr/format/webp/thumbnail/!40p/blur/50x40/')`}}>
 				</div>
 				<nav>
@@ -57,7 +65,7 @@ class ListHeader extends Component{
 						</i>
 						<span className='activity_cut_main'>{description}</span>
 					</div>
-					<div className='activity_cut_more'>
+					<div className='activity_cut_more' onClick={this.handleActivity.bind(this)}>
 						{this.props.data.activitiesNum}个活动
 					</div>
 				</div>
