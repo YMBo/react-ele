@@ -6,6 +6,7 @@
 	bottom: 0;
 	overflow: auto;
 	z-index: 100;
+	transition: all .3s;
 	.activityPage_cover_box{
 		padding-top: 1.173333rem;
 		height: 100%;
@@ -122,4 +123,19 @@
 			}
 		}
 	}
+}
+.shoplist_header_cover-enter {
+	opacity: 0;
+}
+
+.shoplist_header_cover-enter.shoplist_header_cover-enter-active {
+	opacity: 1;
+}
+
+.shoplist_header_cover-leave {
+	opacity: 1;
+}
+
+.shoplist_header_cover-leave.shoplist_header_cover-leave-active {
+	opacity: 0;
 }

@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import ActivityPage from './activityPage/activityPage.js'
 import './listHeader.css'
 
@@ -26,7 +27,16 @@ class ListHeader extends Component{
 		}
 		return(
 			<div className='shoplist_header'>
-				{this.state.activity?<ActivityPage handleActivity={this.handleActivity.bind(this)}/>:null}
+				<ReactCSSTransitionGroup 
+				transitionName='shoplist_header_cover'
+				transitionEnterTimeout={500}
+				transitionLeaveTimeout={500}>
+					{this.state.activity?<ActivityPage 
+					promotion_info={this.props.data.promotion_info} 
+					allactivities={this.props.data.allactivities} 
+					rating={this.props.data.rating}
+					handleActivity={this.handleActivity.bind(this)}/>:null}
+				</ReactCSSTransitionGroup>
 				<div className='shoplist_header_bg' style={{backgroundImage:`url('//fuss10.elemecdn.com/${this.props.data.image_path?this.props.data.image_path:''}?imageMogr/format/webp/thumbnail/!40p/blur/50x40/')`}}>
 				</div>
 				<nav>

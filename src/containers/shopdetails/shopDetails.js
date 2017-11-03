@@ -26,8 +26,8 @@ class ShopDetails extends Component{
 		fetch(`/api/shopping/restaurant/${this.props.id}?extras[]=activities&extras[]=albums&extras[]=license&extras[]=identification&extras[]=qualification`)
 		.then(response=>response.json())
 		.then(dataJson=>{
+			console.log()
 		document.title=dataJson.name;
-		console.log(dataJson.activities)
 			this.setState({
 				headerData:{
 					id:dataJson.id,
@@ -51,6 +51,8 @@ class ShopDetails extends Component{
 					allactivities:dataJson.activities,
 					/*头图*/
 					image_path:this._formatImg(dataJson.image_path),
+					/*评分*/
+					rating:dataJson.rating
 				}
 			})
 		})
