@@ -1,12 +1,12 @@
 import React,{Component} from 'react'
 
 class Evaluate extends Component{
-	
-	
-
 	render(){
+		let dom=this.props.evaluateData.map((value,index)=>{
+			return value.rated_at
+		})
 		return (
-			<div>你好</div>
+			<div>{dom}</div>
 		)
 	}
 }

@@ -1,9 +1,6 @@
 // action types
 const LOGIN='LOGIN';
 const LOGOUT='LOGOUT';
-/*选中商品*/
-const ADD_SELECTED_GOODS='ADD_SELECTED_GOODS';
-const DELETE_SELECTED_GOODS='DELETE_SELECTED_GOODS';
 
 //reducer
 export default function(state,action){

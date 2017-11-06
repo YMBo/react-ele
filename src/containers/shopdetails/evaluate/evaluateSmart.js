@@ -8,13 +8,21 @@ class EvaluateSmart extends Component{
 	constructor(){
 		super();
 		this.state={
-			evaluateData:null
+			evaluateData:[]
 		}
 	}
-	
+	componentDidMount(){
+		fetch(`/api/ugc/v2/restaurants/${this.props.id}/ratings?has_content=true&offset=0&limit=10`)
+		.then(response=>{return response.json()})
+		.then(dataJson=>{
+			this.setState({
+				evaluateData:dataJson
+			})
+		})
+	}
 	render(){
 		return(
-			<Evaluate/>
+			<Evaluate evaluateData={this.state.evaluateData}/>
 		)
 	}
 }

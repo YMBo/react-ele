@@ -32,7 +32,7 @@ class TabsSmart extends Component{
 		return(
 			<TabsLi data={data}>
 					<CommoditySmart  key={0} id={this.props.id} basicData={this.props.data}/>
-					<EvaluateSmart key={1}/>
+					<EvaluateSmart key={1} id={this.props.id}/>
 					<div key={2}>3</div>
 			</TabsLi>
 		)
