@@ -8,7 +8,8 @@ class EvaluateSmart extends Component{
 	constructor(){
 		super();
 		this.state={
-			evaluateData:[]
+			evaluateData:[],
+			tags:[]
 		}
 	}
 	componentDidMount(){
@@ -18,11 +19,19 @@ class EvaluateSmart extends Component{
 			this.setState({
 				evaluateData:dataJson
 			})
-		})
+		});
+		/*tags*/
+		fetch(`/api/ugc/v2/restaurants/${this.props.id}/ratings/tags`)
+		.then(response=>{return response.json()})
+		.then(dataJson=>{
+			this.setState({
+				tags:dataJson
+			})
+		});
 	}
 	render(){
 		return(
-			<Evaluate evaluateData={this.state.evaluateData}/>
+			<Evaluate tags={this.state.tags} evaluateData={this.state.evaluateData}/>
 		)
 	}
 }

@@ -3,7 +3,6 @@
 	align-items: center;
 }
 .tabs_body{
-	display: flex;
 }
 .tabs_border{
 	position: relative;

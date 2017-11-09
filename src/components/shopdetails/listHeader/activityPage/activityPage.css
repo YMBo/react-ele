@@ -46,6 +46,9 @@
 			color: #fff;
 			-webkit-backdrop-filter: saturate(500%) blur(.666667rem);
 			backdrop-filter: saturate(500%) blur(.666667rem);
+			.activityPage_main_star{
+				transform: scale(2);
+			}
 			h2{
 				text-align: center;
 				font-size: 1.5em;
@@ -100,25 +103,6 @@
 					border-radius: .666667rem;
 					border: 1PX solid #555;
 					background-color: #262626;
-				}
-			}
-			.activityPage_star{
-				position: relative;
-				display: inline-block;
-				transform: scale(2);
-				.start_cover{
-					position: absolute;
-					left: 0;
-					top: 0;
-					overflow:hidden;
-				}
-				svg{
-					width: 1.493333rem;
-					height: .266667rem;
-					-webkit-box-flex: 0;
-					-webkit-flex: none;
-					-ms-flex: none;
-					flex: none;
 				}
 			}
 		}

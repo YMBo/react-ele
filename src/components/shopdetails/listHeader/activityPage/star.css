@@ -1,0 +1,19 @@
+
+.activityPage_star{
+	position: relative;
+	display: inline-block;
+	.start_cover{
+		position: absolute;
+		left: 0;
+		top: 0;
+		overflow:hidden;
+	}
+	svg{
+		width: 1.493333rem;
+		height: .266667rem;
+		-webkit-box-flex: 0;
+		-webkit-flex: none;
+		-ms-flex: none;
+		flex: none;
+	}
+}
