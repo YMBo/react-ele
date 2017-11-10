@@ -10,6 +10,7 @@
 }
 .commodity{
 	overflow: hidden;
+	height: 100%;
 	.commodity_box{
 		height: 100%;
 		padding-bottom: 1.28rem;

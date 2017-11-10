@@ -84,7 +84,9 @@ class Commodity extends Component{
 		/*初始化*/
 		/*为了顶部吸附*/
 		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
-		this.body.style.height=window.screen.height-this.body.offsetTop+headerHeight+'px';
+		for(let i=0;i<document.querySelectorAll('.scrollBoxL').length;i++){
+			document.querySelectorAll('.scrollBoxL')[i].style.height=window.screen.height-this.body.offsetTop+headerHeight+'px';
+		}
 		this._scrollTogether=this._scrollTogether.bind(this);
 		this.main.addEventListener('scroll',this._scrollTogether);
 	}
@@ -407,7 +409,6 @@ class Commodity extends Component{
 		let num=0;
 		let allPirce=0;
 		/*当前类别计数*/
-		let thisCate={};
 		if(thisFoods[this.state.id][0].entities[index].quantity-1===0){
 			thisFoodsArr=[
 				...thisFoods[this.state.id][0].entities.slice(0,index),

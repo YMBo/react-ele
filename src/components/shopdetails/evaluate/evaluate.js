@@ -8,53 +8,156 @@ class Evaluate extends Component{
 	constructor(){
 		super()
 		this.state={
-			current:0
+			current:{
+				index:0,
+				/*数据*/
+				data:[],
+				/*是否第一次加载*/
+				flag:false
+			}
 		}
 	}
-	handleClickTags(index){
-		/*标签跳转*/
-		this.setState({
-			current:index
+	componentDidMount(){
+		let name='全部';
+		this._getData(name,(json)=>{
+			this.handleClickTags[name]=json;
+			this.setState({
+				current:{
+					index:0,
+					data:json
+				}
+			})
 		})
+
+		/*初始化*/
+		/*为了顶部吸附*/
+
+		this._scrollTogether=this._scrollTogether.bind(this);
+		this.body.addEventListener('scroll',this._scrollTogether);
+	}
+	componentWillUnmount(){
+		this.body.removeEventListener('scroll',this._scrollTogether)
+	}
+	_scrollTogether(){
+		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
+		this.body.scrollTop>headerHeight?(document.querySelector('.scrollMain').scrollTop=headerHeight)
+		:(document.querySelector('.scrollMain').scrollTop=this.body.scrollTop);
+	}
+	handleClickTags(index,name){
+		/*标签跳转*/
+		if(index===this.state.current.index){
+			return;
+		}else{
+			/*如果有值,避免重复请求*/
+			if(this.handleClickTags[name]){
+				this.setState({
+					current:{
+						index:index,
+						data:this.handleClickTags[name]
+					}
+				})
+			}else{
+				this._getData(name,(json)=>{
+					this.handleClickTags[name]=json;
+					this.setState({
+						current:{
+							index:index,
+							data:json
+						}
+					})
+				})
+			}
+		}
+	}
+	_getData(name,fun){
+		fetch(`/api/ugc/v2/restaurants/${this.props.id}/ratings?has_content=true&tag_name=${name}&offset=0&limit=10`)
+		.then(response=>{return response.json()})
+		.then(dataJson=>{
+			fun(dataJson)
+		});
+	}
+	_formatImg(src){
+		let png=/png/g.test(src);
+		src=`${src}${png?'.png':'.jpeg'}`;
+		let imgValue=src.split('');
+		imgValue.splice(3,0,'/');
+		imgValue.splice(1,0,'/');
+		return imgValue.join('');
 	}
 	render(){
 		let tags=this.props.tags.map((value,index)=>{
 			return <EvaluateTab 
 				handleClickTags={this.handleClickTags.bind(this)} 
 				value={value} 
-				current={this.state.current}
+				currentIndex={this.state.current.index}
 				key={index} 
 				index={index}/>
 		})
-		let dom=this.props.evaluateData.map((value,index)=>{
-			return value.rated_at
+		let mainDom=this.state.current.data.map((value,index)=>{
+			return (
+				<li key={index} className='evaluate_body_li'>
+					<div className='evaluate_body_li_box'>
+						<img className="evaluate_body_li_img" src="https://fuss10.elemecdn.com/c/f5/d0b0f2fc83f3ac3e4a0cfae891256png.png?imageMogr/format/webp/thumbnail/!60x60r/gravity/Center/crop/60x60/" alt={value.username}/>
+						<div className='evaluate_body_li_main'>
+							<div className='evaluate_body_li_main_1'>
+								<h3>{value.username}</h3>
+								<small>{value.rated_at}</small>
+							</div>
+						</div>
+						<Star rating={value.rating_star}/>
+						{value.rating_text.length!==0?
+						<div className="evaluate_body_li_main_pl">{value.rating_text}</div>
+						:null
+						}
+						<ul className='evaluate_body_li_main_exm'>
+							{value.item_ratings.map((value2,index)=>{
+								if(value2.image_hash.length===0){
+									return null
+								}
+								return (
+									<li key={index}>
+										<img  src={`//fuss10.elemecdn.com/${this._formatImg(value2.image_hash)}?imageMogr/format/webp/`}  alt={value2.food_name}/>
+									</li>
+								)
+							})}
+						</ul>
+						<div>
+							<ul className='evaluate_body_li_main_word'>
+								{value.item_ratings.map((value,index)=>{
+									return <li key={index}>{value.food_name}</li>
+								})}
+							</ul>
+						</div>
+					</div>
+				</li>
+			)
 		})
 		return (
-			<div>
+			<div className='box'  ref={(body) => { this.body = body; }}>
 				<section className='evaluate_title'>
 					<div className='evaluate_title_num'>
-						<strong className='evaluate_title_source'>4.7</strong>
+						<strong className='evaluate_title_source'>{Number(this.props.pj.overall_score).toFixed(1)}</strong>
 						<p className='evaluate_title_2'>综合评价</p>
-						<p className='evaluate_title_3'>高于周边商家58.8%</p>
+						<p className='evaluate_title_3'>高于周边商家{Number(this.props.pj.compare_rating).toFixed(3)*100}%</p>
 					</div>
 					<div className='evaluate_score'>
 						<div className='evaluate_score_0'>
 							<span>服务态度</span>
 							<span className='evaluate_star_0'>
 								<Star rating={4.5}/>
-								<span className="evaluate_star_1">4.8</span>
+								<span className="evaluate_star_1">{Number(this.props.pj.service_score).toFixed(1)}</span>
 							</span>
 						</div>
 						<div className='evaluate_score_0'>
-							<span>服务态度</span>
+							<span>菜品评价</span>
 							<span className='evaluate_star_0'>
 								<Star rating={4.5}/>
-								<span className="evaluate_star_1">4.8</span>
+								<span className="evaluate_star_1">{Number(this.props.pj.food_score).toFixed(1)}</span>
 							</span>
 						</div>
 						<div className="evaluate_score_0">
 							<span>送达时间</span>
-							<span className="evaluate_star_0">32分钟</span>
+							<span className="evaluate_star_0">{this.props.pj.deliver_time}分钟</span>
 						</div>
 					</div>
 				</section>
@@ -65,7 +168,7 @@ class Evaluate extends Component{
 						</ul>
 					</div>
 					<ul>
-						<li></li>
+						{mainDom}
 					</ul>
 				</section>
 			</div>

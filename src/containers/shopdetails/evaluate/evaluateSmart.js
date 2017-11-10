@@ -9,10 +9,21 @@ class EvaluateSmart extends Component{
 		super();
 		this.state={
 			evaluateData:[],
-			tags:[]
+			tags:[],
+			pj:{}
 		}
 	}
 	componentDidMount(){
+		https://restapi.ele.me/ugc/v2/restaurants/1961716/ratings/scores
+		/*头评价*/
+		fetch(`/api/ugc//v2/restaurants/${this.props.id}/ratings/scores`)
+		.then(response=>{return response.json()})
+		.then(dataJson=>{
+			this.setState({
+				pj:dataJson
+			})
+		});
+
 		fetch(`/api/ugc/v2/restaurants/${this.props.id}/ratings?has_content=true&offset=0&limit=10`)
 		.then(response=>{return response.json()})
 		.then(dataJson=>{
@@ -31,7 +42,7 @@ class EvaluateSmart extends Component{
 	}
 	render(){
 		return(
-			<Evaluate tags={this.state.tags} evaluateData={this.state.evaluateData}/>
+			<Evaluate pj={this.state.pj} tags={this.state.tags} evaluateData={this.state.evaluateData} id={this.props.id}/>
 		)
 	}
 }

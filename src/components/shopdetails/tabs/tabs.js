@@ -25,7 +25,7 @@ class TabsLi extends Component{
 				{/*注意这个api*/}
 				<div className='tabs_body'>
 					{React.Children.map(this.props.children,(child)=>{
-					    return <div style={{display:`${Number(child.key)===Number(this.state.current)?'block ':'none'}`}}>{child}</div>
+					    return <div   className='scrollBoxL' style={{display:`${Number(child.key)===Number(this.state.current)?'block ':'none'}`}}>{child}</div>
 					})}
 				</div>
 			</div>

@@ -1,3 +1,10 @@
+::-webkit-scrollbar {/*隐藏滚轮*/
+display: none;
+}
+.box{
+	overflow-y: auto;
+	height: 100%;
+}
 .evaluate_title{
 	background-color: #fff;
 	margin-bottom: .266667rem;
@@ -71,6 +78,84 @@
 	background-color: #fff;
 	padding: .266667rem .32rem 0;
 	font-size: .36rem;
+	.evaluate_body_li{
+		padding: .4rem 0;
+		border-bottom: 1PX solid #ddd;
+		list-style: none;
+		.evaluate_body_li_main_word{
+			list-style: none;
+			li{
+				display: inline-block;
+				    font-size: .293333rem;
+				    color: #6d7885;
+				    border: 1px solid #eee;
+				    padding: .106667rem .266667rem;
+				    padding: 1.066667vw 2.666667vw;
+				    margin: .093333rem;
+				    margin: .933333vw;
+				    border-radius: .053333rem;
+				    border-radius: .533333vw;
+				    max-width: 1.6rem;
+				    max-width: 16vw;
+				    white-space: nowrap;
+				    overflow: hidden;
+				    text-overflow: ellipsis;
+			}
+		}
+		.evaluate_body_li_box{
+			position: relative;
+			padding-left: 1.2rem;
+			.evaluate_body_li_main_pl{
+				color: #333;
+				font-size: .373333rem;
+				margin: .213333rem 0;
+				margin: 2.133333vw 0;
+			}
+			.evaluate_body_li_main_exm{
+					list-style: none;
+					li{
+						display: inline-block;
+						margin: .133333rem;
+						margin: 1.333333vw;
+						img{
+							width: 1.893333rem;
+							width: 18.933333vw;
+							height: 1.893333rem;
+							height: 18.933333vw;
+						}
+					}
+				}
+			.evaluate_body_li_main{
+				font-size: .346667rem;
+				
+				.evaluate_body_li_main_1{
+					display: flex;
+					align-items: center;
+					h3{
+						font-size: .346667rem;
+						margin-top: 0;
+						color: #333;
+						margin-right: .16rem;
+						margin-right: 1.6vw;
+					}
+					small{
+						font-size: .293333rem;
+						color: #bbb;
+					}
+				}
+			}
+			.evaluate_body_li_img{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: .8rem;
+				width: 8vw;
+				height: .8rem;
+				height: 8vw;
+				border-radius: 50%;
+			}
+		}
+	}
 	.evaluate_body_title{
 		padding-bottom: .266667rem;
 		border-bottom: 1px solid #ddd;
