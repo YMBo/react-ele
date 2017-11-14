@@ -10,7 +10,7 @@ class Evaluate extends Component{
 		this.state={
 			current:{
 				index:0,
-				/*数据*/
+				/*当前数据*/
 				data:[],
 				/*是否第一次加载*/
 				flag:false
@@ -19,8 +19,9 @@ class Evaluate extends Component{
 	}
 	componentDidMount(){
 		let name='全部';
-		this._getData(name,(json)=>{
-			this.handleClickTags[name]=json;
+		/*第一次数据获取*/
+		this._getData(name,0,(json)=>{
+			this._saveData[name]={data:json}
 			this.setState({
 				current:{
 					index:0,
@@ -39,26 +40,42 @@ class Evaluate extends Component{
 		this.body.removeEventListener('scroll',this._scrollTogether)
 	}
 	_scrollTogether(){
+		/*联动*/
 		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
 		this.body.scrollTop>headerHeight?(document.querySelector('.scrollMain').scrollTop=headerHeight)
 		:(document.querySelector('.scrollMain').scrollTop=this.body.scrollTop);
+		/*数据获取*/
+		let name=this.props.tags[this.state.current.index].name;
+		let page=this._saveData[name].page?this._saveData[name].page:1;
+		if(this.body.scrollHeight-this.body.scrollTop<this.body.clientHeight+10){
+			this._scrollGetData(name,page);
+		}
 	}
+	/*存储四个标签的数据,无限加载的flag*/
+	/*格式为
+		this.name:{
+			page:
+			data:
+		}
+	*/
+	_saveData(){this.flag=false;}
 	handleClickTags(index,name){
 		/*标签跳转*/
 		if(index===this.state.current.index){
 			return;
 		}else{
 			/*如果有值,避免重复请求*/
-			if(this.handleClickTags[name]){
+			if(this._saveData[name]){
 				this.setState({
 					current:{
 						index:index,
-						data:this.handleClickTags[name]
+						data:this._saveData[name].data
 					}
 				})
 			}else{
-				this._getData(name,(json)=>{
-					this.handleClickTags[name]=json;
+				/*第一页*/
+				this._getData(name,0,(json)=>{
+					this._saveData[name]={data:json,page:0};
 					this.setState({
 						current:{
 							index:index,
@@ -69,8 +86,31 @@ class Evaluate extends Component{
 			}
 		}
 	}
-	_getData(name,fun){
-		fetch(`/api/ugc/v2/restaurants/${this.props.id}/ratings?has_content=true&tag_name=${name}&offset=0&limit=10`)
+	/*加载更多*/
+	_scrollGetData(name,page){
+		if(this._saveData.flag){
+			/*正在请求*/
+			return;
+		}
+		this._saveData.flag=true;
+		if(this._scrollGetData.timer){ clearTimeout(this._scrollGetData.timer)}
+		this._scrollGetData.timer=setTimeout(()=>{
+			this._getData(name,page,(json)=>{
+				this._saveData[name].data=[...this._saveData[name].data,...json];
+				this.setState({
+					current:{
+						index:this.state.current.index,
+						data:this._saveData[name].data
+					}
+				});
+				this._saveData[name].page++;
+				this._saveData.flag=false;
+			})
+
+		},300)
+	}
+	_getData(name,page,fun){
+		fetch(`/api/ugc/v2/restaurants/${this.props.id}/ratings?has_content=true&tag_name=${name}&offset=${page}&limit=10`)
 		.then(response=>{return response.json()})
 		.then(dataJson=>{
 			fun(dataJson)

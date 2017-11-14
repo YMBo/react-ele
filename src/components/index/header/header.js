@@ -39,7 +39,6 @@ class Header extends Component{
 				getAddress:true
 			});
 			this._bodyoverflow()
-			console.log('yo')
 		}else if(window.history.state.page==='home'){
 		    	this.setState({
 		    		getAddress:false
