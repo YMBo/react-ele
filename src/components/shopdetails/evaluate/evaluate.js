@@ -110,7 +110,7 @@ class Evaluate extends Component{
 		},300)
 	}
 	_getData(name,page,fun){
-		fetch(`/api/ugc/v2/restaurants/${this.props.id}/ratings?has_content=true&tag_name=${name}&offset=${page}&limit=10`)
+		fetch(`/api/ugc/v2/restaurants/${this.props.id}/ratings?has_content=true&tag_name=${name}&offset=${page}0&limit=10`)
 		.then(response=>{return response.json()})
 		.then(dataJson=>{
 			fun(dataJson)
