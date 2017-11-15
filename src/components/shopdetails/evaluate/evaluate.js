@@ -1,5 +1,4 @@
 import React,{Component} from 'react'
-import ActivityPage from '../listHeader/activityPage/activityPage.js'
 import Star from '../listHeader/activityPage/star.js'
 import EvaluateTab from './evaluateTab.js'
 import './evaluate.css'

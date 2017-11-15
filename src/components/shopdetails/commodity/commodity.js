@@ -35,8 +35,7 @@ class Commodity extends Component{
 			let allPirce=0;
 			/*同一类商品个数*/
 			let categoryObj={};
-			if(allSelected){
-				if(!allSelected[id]){return;}
+			if(allSelected&&allSelected[id]){
 				allSelected[id][0].entities.forEach((value,index)=>{
 					allNum+=(value.quantity)*10000;
 					allPirce+=(value.view_discount_price)*10000 ;

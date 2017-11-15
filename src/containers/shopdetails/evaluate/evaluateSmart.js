@@ -14,7 +14,6 @@ class EvaluateSmart extends Component{
 		}
 	}
 	componentDidMount(){
-		https://restapi.ele.me/ugc/v2/restaurants/1961716/ratings/scores
 		/*头评价*/
 		fetch(`/api/ugc//v2/restaurants/${this.props.id}/ratings/scores`)
 		.then(response=>{return response.json()})

@@ -1,10 +1,5 @@
 import React,{Component} from 'react'
-
-			/* rating-tags-on*/
 class EvaluateTab extends Component{
-	constructor(){
-		super()
-	}
 	handleClick(){
 		this.props.handleClickTags(this.props.index,this.props.value.name)
 	}
