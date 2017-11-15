@@ -186,3 +186,17 @@ display: none;
 		}
 	}
 }
+.img_preview-enter {
+	opacity: 0.01;
+}
+.img_preview-enter.img_preview-enter-active {
+	opacity: 1;
+	transition: opacity 500ms ease-in;
+}
+ .img_preview-leave {
+	opacity: 1;
+}
+.img_preview-leave.img_preview-leave-active {
+	opacity: 0.01;
+	transition: opacity 300ms ease-in;
+}

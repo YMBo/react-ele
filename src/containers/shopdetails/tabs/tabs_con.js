@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import TabsLi from '../../../components/shopdetails/tabs/tabs.js'
 import CommoditySmart from '../commodity/commodity.js'
 import EvaluateSmart from '../evaluate/evaluateSmart.js'
+import ShopInformationSmart from '../shopInformation/shopInformationSmart.js'
 class TabsSmart extends Component{
 	constructor(){
 		super()
@@ -33,7 +34,7 @@ class TabsSmart extends Component{
 			<TabsLi data={data}>
 					<CommoditySmart  key={0} id={this.props.id} basicData={this.props.data}/>
 					<EvaluateSmart key={1} id={this.props.id}/>
-					<div key={2}>3</div>
+					<ShopInformationSmart key={2} />
 			</TabsLi>
 		)
 	}

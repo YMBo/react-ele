@@ -84,7 +84,7 @@ class Commodity extends Component{
 		/*为了顶部吸附*/
 		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
 		for(let i=0;i<document.querySelectorAll('.scrollBoxL').length;i++){
-			document.querySelectorAll('.scrollBoxL')[i].style.height=window.screen.height-this.body.offsetTop+headerHeight+'px';
+			document.querySelectorAll('.scrollBoxL')[i].style.height=window.screen.availHeight-this.body.offsetTop+headerHeight+'px';
 		}
 		this._scrollTogether=this._scrollTogether.bind(this);
 		this.main.addEventListener('scroll',this._scrollTogether);

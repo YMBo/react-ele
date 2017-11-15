@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import Star from './star.js'
+import ActivitiesList from '../../activitiesList/activitiesList.js'
 import './activityPage.css'
 
 class ActivityPage extends Component{
@@ -9,10 +10,7 @@ class ActivityPage extends Component{
 	render(){
 		let activitiesDOM=this.props.allactivities.map((value,index)=>
 			<li className='activityPage_main_list' key={index} >
-				<div className='activityPage_main_list_div'>
-					<span className="activity-logo" style={{color:'rgb(255, 255, 255)',backgroundColor:`#${value.icon_color}`}}>{value.icon_name}</span>
-					<span className="activity-des">{value.description}</span>
-				</div>
+				<ActivitiesList key={index} value={value}/>
 			</li>);
 		return (
 			<div ref={(cover)=>this.cover=cover} className='activityPage_cover'>

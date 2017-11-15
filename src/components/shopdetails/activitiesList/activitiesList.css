@@ -1,0 +1,28 @@
+.activityPage_main_list_div{
+	line-height: .48rem;
+	display: flex;
+	font-size: .346667rem;
+	.activity-logo{
+		margin-top: .04rem;
+		margin-right: .16rem;
+		font-size: .293333rem;
+		font-style: normal;
+		height: .373333rem;
+		width: .373333rem;
+		display: inline-block;
+		box-sizing: border-box;
+		text-align: center;
+		border-radius: .053333rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+	}
+	.activity-des{
+		-webkit-box-flex: 1;
+		-webkit-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+		font-size: .293333rem;
+	}
+}
