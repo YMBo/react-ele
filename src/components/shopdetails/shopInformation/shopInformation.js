@@ -3,12 +3,16 @@ import ActivitiesList from '../activitiesList/activitiesList.js'
 import './shopInformation.css'
 
 class ShopInformation extends Component{
-	constructor(){
-		super();
-	}
 	componentDidMount(){
 		this._scrollTogether=this._scrollTogether.bind(this);
 		this.body.addEventListener('scroll',this._scrollTogether);
+	}
+	shouldComponentUpdate(nextProps,nextState){
+		if(nextProps.dataJson.activities&&!this.props.dataJson.activities){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	componentWillUnmount(){
 		this.body.removeEventListener('scroll',this._scrollTogether)
@@ -20,22 +24,26 @@ class ShopInformation extends Component{
 		:(document.querySelector('.scrollMain').scrollTop=this.body.scrollTop);
 	}
 	render(){
+		let data=this.props.dataJson;
+		let active=data.activities?data.activities:[];
+		let activeDom=active.map((value,index)=>{
+			return (
+				<ActivitiesList key={index} value={{icon_name:value.icon_name,icon_color:value.icon_color,description:value.description}}/>
+			)
+		})
 		return(
 			<div ref={(body) => { this.body = body; }}className='shop_info'>
 				<section className='section'>
 					<h3 className="section-title">活动与服务</h3>
 					<div className="activity-2iOA8_0">
-						<ActivitiesList  value={{icon_name:'666',icon_color:'ccc',description:'55555'}}/>
-						<ActivitiesList  value={{icon_name:'666',icon_color:'ccc',description:'55555'}}/>
-						<ActivitiesList  value={{icon_name:'666',icon_color:'ccc',description:'55555'}}/>
+						{activeDom}
 					</div>
 				</section>
 
 				<section className="section">
 					<h3 className="section-title">商家信息</h3>
 					<ul className="section_information_list">
-						<li>太平洋咖啡以谦卑感恩、卓越品质、诚信务实、创意无限作为品牌的核心价值，力求发展成为中国咖啡消费者最喜爱的、最具影响力的咖啡连锁品牌。主张中西文化交融且带有浓浓书卷气息的太平洋咖啡自进入内地以来，受到越来越多顾客的喜爱和称赞。太平洋咖啡也将与更多追求品味的有识之士一同分享咖啡殿堂里
-						</li>
+						<li>{data.description||'暂无简介'}</li>
 						<li>
 							<span>商家电话</span>
 							<span>
@@ -45,11 +53,11 @@ class ShopInformation extends Component{
 						</li>
 						<li>
 							<span>地址</span>
-							<span>北京市东城区崇文门外大街18号1幢F1-37号商铺</span>
+							<span>{data.address||''}</span>
 						</li>
 						<li>
 							<span>营业时间</span>
-							<span>10:00-21:30</span>
+							<span>{data.opening_hours?data.opening_hours.join(','):''}</span>
 						</li>
 					</ul>
 				</section>

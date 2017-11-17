@@ -34,7 +34,7 @@ class TabsSmart extends Component{
 			<TabsLi data={data}>
 					<CommoditySmart  key={0} id={this.props.id} basicData={this.props.data}/>
 					<EvaluateSmart key={1} id={this.props.id}/>
-					<ShopInformationSmart key={2} />
+					<ShopInformationSmart key={2} id={this.props.id}/>
 			</TabsLi>
 		)
 	}

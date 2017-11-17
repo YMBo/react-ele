@@ -177,7 +177,7 @@ class Evaluate extends Component{
 					<div className='evaluate_title_num'>
 						<strong className='evaluate_title_source'>{Number(this.props.pj.overall_score).toFixed(1)}</strong>
 						<p className='evaluate_title_2'>综合评价</p>
-						<p className='evaluate_title_3'>高于周边商家{Number(this.props.pj.compare_rating).toFixed(3)*100}%</p>
+						<p className='evaluate_title_3'>高于周边商家{Number(this.props.pj.compare_rating*100).toFixed(1)}%</p>
 					</div>
 					<div className='evaluate_score'>
 						<div className='evaluate_score_0'>
