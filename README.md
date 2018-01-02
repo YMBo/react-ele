@@ -2,9 +2,9 @@
 react仿饿了么app    
 技术：`react`+`react-router`+`redux`+`create-react-app`+`fetch`    
 
-git clone git@github.com:YMBo/react-ele.git    
-npm install    
-npm start    
+>git clone git@github.com:YMBo/react-ele.git    
+>npm install    
+>npm start    
     
 虽然用的`create-react-app`但是我觉得还是有必要记录一下webpack的热更新（HMR）    
 [webpack热更新(HMR)](https://ymbo.github.io/2018/01/02/webpack%E7%83%AD%E6%9B%B4%E6%96%B0-HMR/)    
