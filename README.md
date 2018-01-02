@@ -1,7 +1,7 @@
 # react-ele
 react仿饿了么app    
 技术：`react`+`react-router`+`redux`+`create-react-app`+`fetch`    
-```markdown
+
 git clone git@github.com:YMBo/react-ele.git    
 npm install    
 npm start    
