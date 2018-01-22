@@ -1,11 +1,14 @@
 # react-ele
 react仿饿了么app    
 技术：`react`+`react-router`+`redux`+`create-react-app`+`fetch`    
-```markdown
-git clone git@github.com:YMBo/react-ele.git    
-npm install    
-npm start    
-```
+
+>git clone git@github.com:YMBo/react-ele.git    
+>npm install    
+>npm start    
+
+虽然用的`create-react-app`但是我觉得还是有必要记录一下webpack的热更新（HMR）    
+[webpack热更新(HMR)](https://ymbo.github.io/2018/01/02/webpack%E7%83%AD%E6%9B%B4%E6%96%B0-HMR/)    
+
 ******************************************************
 ### 一、准备阶段：    
 因为用的是`create-react-app`创建的项目，在项目中用到了less、rem，所以添加在`webpack`中添加这两个功能    
