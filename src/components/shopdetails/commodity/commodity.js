@@ -21,6 +21,8 @@ class Commodity extends Component{
 		}
 	}
 	isFirst=true
+	currentScroll=0
+	currentMainScroll=0
 	componentWillReceiveProps(){
 		/*初始化*/
 		if(!this.isFirst){return;}
@@ -87,10 +89,13 @@ class Commodity extends Component{
 			document.querySelectorAll('.scrollBoxL')[i].style.height=document.body.clientHeight-this.body.offsetTop+headerHeight+'px';
 		}
 		this._scrollTogether=this._scrollTogether.bind(this);
+		this._getHandleClient=this._getHandleClient.bind(this);
 		this.main.addEventListener('scroll',this._scrollTogether);
+		this.main.addEventListener('touchstart',this._getHandleClient);
 	}
 	componentWillUnmount(){
 		this.main.removeEventListener('scroll',this._scrollTogether)
+		this.main.removeEventListener('touchstart',this._getHandleClient)
 	}
 	/*tab点击跳转*/
 	handleClickRun(id){
@@ -98,10 +103,17 @@ class Commodity extends Component{
 		this._animate(this.main,this.main.scrollTop,this.listHeight[id].pos);
 		this._run(id);
 	}
+	_getHandleClient(){
+		this.currentScroll=this.main.scrollTop;
+		this.currentMainScroll=document.querySelector('.scrollMain').scrollTop;
+	}
 	_scrollTogether(){
 		let headerHeight=document.querySelector('.shoplist_header').offsetHeight;
-		this.main.scrollTop>headerHeight?(document.querySelector('.scrollMain').scrollTop=headerHeight)
-		:(document.querySelector('.scrollMain').scrollTop=this.main.scrollTop);
+		const scrollMain=document.querySelector('.scrollMain').scrollTop;
+		if(scrollMain!==headerHeight){
+			document.querySelector('.scrollMain').scrollTop=this.currentMainScroll+(this.main.scrollTop-this.currentScroll)
+		}
+
 		/*tab和列表联动,控制tab*/
 		if(!this.isScroll){return;}
 		this._posCalc(this.listHeight,this.main.scrollTop);
