@@ -51,7 +51,7 @@ class Search extends Component{
 			<div className='search_Box'  style={this.state.support? {position: 'sticky',top: '-1px',zIndex: 999}:{height:this.state.height===0?null:this.state.height}}>
 				<div ref={(div)=>{this.searchDOM=div;}}  className='search' style={this.state.support? null : this.state.css}>
 					<a className='search_content'>
-						<i className='search_icon'></i><span className='search_placeholder'>搜索商家、商品名称</span>
+						<i className='search_icon'></i><span className='search_placeholder'>搜索商家、商品名称@</span>
 					</a>
 				</div>
 			</div>
